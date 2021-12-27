@@ -1,18 +1,14 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from 'react';
+import axios from 'axios';
 
-const Main = () => {
-  const [temp, setTemp] = useState({
-    test: "123",
-    arr: [1, 2, 3],
-  });
+function Main() {
   function fetchData() {
-    axios.get("/api/test1").then((response) => console.log(response));
+    axios.get('/api/test1').then((response) => console.log(response));
   }
   useEffect(() => {
     fetchData();
   }, []);
   return <div>Main</div>;
-};
+}
 
 export default Main;
