@@ -1,20 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const Main = () => {
+  const [temp, setTemp] = useState({
+    test: "123",
+    arr: [1, 2, 3],
+  });
   function fetchData() {
-    axios({
-      url: "/",
-      method: "post",
-      data: {
-        test: "123",
-        arr: [1, 2, 3],
-      },
-      baseURL: "http://localhost:8081/",
-      withCredentials: true,
-    }).then((response) => {
-      console.log(response);
-    });
+    axios.get("/api/test1").then((response) => console.log(response));
   }
   useEffect(() => {
     fetchData();
