@@ -2,13 +2,12 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 
 function Main() {
-  function fetchData() {
-    axios.get('/api/test1').then((response) => console.log(response));
+  function fetchLogout() {
+    axios.get('/api/logout').then((response) => console.log(response));
   }
-  useEffect(() => {
-    fetchData();
-  }, []);
-  return <div>Main</div>;
+  return <div>Main
+    <button onClick={fetchLogout}>로그아웃</button>
+  </div>;
 }
 
 export default Main;
