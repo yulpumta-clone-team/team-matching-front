@@ -2,13 +2,14 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@hooks/*": ["./hooks/*"],
+      "@api/*": ["./api/*"],
       "@components/*": ["./components/*"],
+      "@hooks/*": ["./hooks/*"],
       "@layouts/*": ["./layouts/*"],
       "@pages/*": ["./pages/*"],
+      "@recoil/*": ["./recoil/*"],
       "@utils/*": ["./utils/*"],
-      "@typings/*": ["./typings/*"],
-      "@recoil/*": ["./recoil/*"]
+      "@typings/*": ["./typings/*"]
     }
   }
 }
