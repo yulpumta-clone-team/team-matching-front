@@ -1,9 +1,9 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "../../pages/LogIn";
-import Main from "../../pages/Main";
-import SingUp from "../../pages/SignUp";
-import Navigation from "../Navigation";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navigation from '@components/Navigation';
+import Login from '@pages/LogIn';
+import Main from '@pages/Main';
+import SingUp from '@pages/SignUp';
 
 function App() {
   return (
