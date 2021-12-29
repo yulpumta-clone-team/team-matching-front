@@ -5,9 +5,18 @@ function Main() {
   function fetchLogout() {
     axios.get('/api/logout').then((response) => console.log(response));
   }
-  return <div>Main
-    <button onClick={fetchLogout}>로그아웃</button>
-  </div>;
+  function fetchTest() {
+    axios.get('/api/test').then((response) => console.log(response));
+  }
+  useEffect(() => {
+    fetchTest();
+  }, []);
+  return (
+    <div>
+      Main
+      <button onClick={fetchLogout}>로그아웃</button>
+    </div>
+  );
 }
 
 export default Main;

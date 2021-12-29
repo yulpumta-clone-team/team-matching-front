@@ -4,7 +4,6 @@ import Navigation from '@components/Navigation';
 import Login from '@pages/LogIn';
 import Main from '@pages/Main';
 import SingUp from '@pages/SignUp';
-import OauthCallback from '@pages/OauthCallback';
 
 function App() {
   return (
@@ -14,7 +13,6 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SingUp />} />
-        <Route path="/oauth2/*" element={<OauthCallback />} />
       </Routes>
     </Router>
   );

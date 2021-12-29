@@ -51,8 +51,9 @@ function Login() {
         <button>로그인</button>
         <span>{errors?.extraError?.message}</span>
       </form>
-      <button onClick={oauthGithub}>깃허브</button>
-      <button onClick={oauthGoogle}>구글</button>
+      <a href="/oauth2/authorization/github">github</a>
+      <br />
+      <a href="/oauth2/authorization/google">google</a>
     </div>
   );
 }
