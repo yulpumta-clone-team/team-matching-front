@@ -23,12 +23,12 @@ function Login() {
   const onValid = (data: UserValidation) => {
     setError('extraError', { message: 'Server offLine.' });
   };
-  const oauthGithub = useCallback(() => {
-    navigate('/oauth2/authorization/github');
-  }, []);
-  const oauthGoogle = useCallback(() => {
-    navigate('/oauth2/authorization/google');
-  }, []);
+  const oauthGithub = () => {
+    window.location.href = '/oauth2/authorization/github';
+  };
+  const oauthGoogle = () => {
+    window.location.href = '/oauth2/authorization/google';
+  };
   // if (isLoading) return <Loading />;
 
   // if (error) return 'An error has occurred: ';
@@ -51,9 +51,9 @@ function Login() {
         <button>로그인</button>
         <span>{errors?.extraError?.message}</span>
       </form>
-      <a href="/oauth2/authorization/github">github</a>
+      <button onClick={oauthGithub}>Github</button>
       <br />
-      <a href="/oauth2/authorization/google">google</a>
+      <button onClick={oauthGoogle}>Google</button>
     </div>
   );
 }
