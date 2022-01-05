@@ -24,10 +24,11 @@ function Login() {
     setError('extraError', { message: 'Server offLine.' });
   };
   const oauthGithub = () => {
-    window.location.href = '/oauth2/authorization/github';
+    window.location.href = 'http://localhost:8081/oauth2/authorization/github';
+    // window.location.href = GIT_OAUTH_URL
   };
   const oauthGoogle = () => {
-    window.location.href = '/oauth2/authorization/google';
+    window.location.href = 'http://localhost:8081/oauth2/authorization/google';
   };
   // if (isLoading) return <Loading />;
 
