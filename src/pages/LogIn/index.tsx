@@ -25,12 +25,8 @@ function Login() {
   const onValid = (data: UserValidation) => {
     setError('extraError', { message: 'Server offLine.' });
   };
-  const oauthGithub = () => {
-    window.location.href = OauthURL.github;
-  };
-  const oauthGoogle = () => {
-    window.location.href = OauthURL.google;
-  };
+  const oauthGithub = OauthURL.github;
+  const oauthGoogle = OauthURL.google;
   // if (isLoading) return <Loading />;
 
   // if (error) return 'An error has occurred: ';
@@ -53,9 +49,9 @@ function Login() {
         <button>로그인</button>
         <span>{errors?.extraError?.message}</span>
       </form>
-      <button onClick={oauthGithub}>Github</button>
+      <a href={oauthGithub}>Github</a>
       <br />
-      <button onClick={oauthGoogle}>Google</button>
+      <a href={oauthGoogle}>Google</a>
     </div>
   );
 }
