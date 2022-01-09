@@ -1,6 +1,7 @@
 import { fetchLogin } from '@api/userAction';
 import Loading from '@components/Loading';
 import { UserValidation } from '@typings/userValidation';
+import { OauthURL } from '@utils/global';
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
@@ -11,6 +12,7 @@ function Login() {
   // const { isLoading, error, data, isFetching } = useQuery('userData', () =>
   //   fetch('/api/users').then((res) => res.json()),
   // );
+  console.log(OauthURL.github, OauthURL.google);
   const {
     register,
     handleSubmit,
@@ -24,11 +26,10 @@ function Login() {
     setError('extraError', { message: 'Server offLine.' });
   };
   const oauthGithub = () => {
-    window.location.href = 'http://localhost:8081/oauth2/authorization/github';
-    // window.location.href = GIT_OAUTH_URL
+    window.location.href = OauthURL.github;
   };
   const oauthGoogle = () => {
-    window.location.href = 'http://localhost:8081/oauth2/authorization/google';
+    window.location.href = OauthURL.google;
   };
   // if (isLoading) return <Loading />;
 
