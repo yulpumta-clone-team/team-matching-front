@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import MarkdownEditor from '@components/mdEditor';
+import MarkdwonViewer from '@components/mdViewer';
 
 function Main() {
   function fetchLogout() {
@@ -13,8 +15,9 @@ function Main() {
   }, []);
   return (
     <div>
-      Main
       <button onClick={fetchLogout}>로그아웃</button>
+      <MarkdownEditor />
+      <MarkdwonViewer />
     </div>
   );
 }
