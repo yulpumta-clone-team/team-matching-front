@@ -6,26 +6,17 @@ import Main from "pages/Main";
 import SignUp from "pages/SignUp";
 import Auth from "hoc/auth";
 
-function App() {
+const App = () => {
   return (
     <Router>
       <Navigation />
       <Routes>
-        <Route
-          path="/"
-          element={<Auth SpecificComponent={Main} option={true} />}
-        />
-        <Route
-          path="/login"
-          element={<Auth SpecificComponent={Login} option={true} />}
-        />
-        <Route
-          path="/signup"
-          element={<Auth SpecificComponent={SignUp} option={true} />}
-        />
+        <Route path="/" element={<Auth SpecificComponent={Main} option={true} />} />
+        <Route path="/login" element={<Auth SpecificComponent={Login} option={true} />} />
+        <Route path="/signup" element={<Auth SpecificComponent={SignUp} option={true} />} />
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;

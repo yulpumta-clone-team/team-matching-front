@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 
-function MarkdownEditor() {
+const MarkdownEditor = () => {
   const editorRef = useRef(null);
   const onChangeEditorTextHandler = () => {
     console.log(editorRef.current?.getInstance().getMarkdown());
@@ -26,6 +26,6 @@ function MarkdownEditor() {
       <button onClick={handleSubmit}>버튼</button>
     </div>
   );
-}
+};
 
 export default MarkdownEditor;
