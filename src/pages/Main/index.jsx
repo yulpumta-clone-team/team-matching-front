@@ -1,4 +1,4 @@
-import MarkdownEditor from "components/MdEditor/idex";
+import MarkdownEditor from "components/MdEditor";
 import MarkdwonViewer from "components/MdViewer";
 import React from "react";
 
