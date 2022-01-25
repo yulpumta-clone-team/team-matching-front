@@ -10,7 +10,8 @@ export default function AuthHOC({ SpecificComponent, option, adminRoute = null }
   // option: true => 로그인 유저만
   // option: false => 로그인 하면 출입 불가능한 곳(회원가입 등...)
   function AuthenticationCheck(props) {
-    const [cookies, setCookie] = useCookies(['name']);
+    const [cookies] = useCookies(['token']);
+    console.log(cookies);
     const dispatch = useDispatch();
     useEffect(() => {
       dispatch(auth()).then((response) => {

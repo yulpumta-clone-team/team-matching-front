@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@toast-ui/react-editor": "^3.1.2",
     "axios": "^0.25.0",
+    "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-cookie": "^4.1.1",
     "react-dom": "^17.0.2",
@@ -19,6 +20,7 @@
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.4.1",
     "styled-component": "^2.8.0",
+    "styled-components": "^5.3.3",
     "styled-reset": "^4.3.4",
     "web-vitals": "^2.1.4"
   },

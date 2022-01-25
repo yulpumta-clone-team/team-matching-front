@@ -8,8 +8,10 @@ const userReducer = (state = initState, action) => {
   // type마다 다른 것을 switch로 처리
   switch (action.type) {
     case LOGIN_USER:
+      console.log(action.payload);
       return { ...state };
     case SIGNUP_USER:
+      console.log(action.payload);
       return { ...state };
     case AUTH_USER:
       console.log(action.payload);

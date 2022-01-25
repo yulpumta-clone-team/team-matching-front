@@ -1,8 +1,13 @@
 import React from 'react';
+import { useCookies } from 'react-cookie';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { OAUTH_URL } from 'utils/oauth';
+import { loginUser } from '_actions/user_action';
 
 function Login() {
+  const dispatch = useDispatch();
+  const [cookies, setCookie] = useCookies(['token']);
   const {
     register,
     handleSubmit,
@@ -18,6 +23,11 @@ function Login() {
       setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
     }
     // fetch
+    console.log(data);
+    setCookie('token', 'thisistoken', {
+      secure: true,
+    });
+    // dispatch(loginUser(data));
     setError('extraError', { message: 'Server offLine.' });
   };
   return (
@@ -27,7 +37,7 @@ function Login() {
           {...register('email', {
             required: 'Email is required',
             pattern: {
-              value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9].com$/,
+              value: /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i,
               message: '이메일 형식으로 입력해주세요.',
             },
           })}
