@@ -2,7 +2,7 @@ import React from 'react';
 import { useCookies } from 'react-cookie';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { OAUTH_URL } from 'utils/oauth';
+import { OAUTH_URL } from 'utils/route';
 import { loginUser } from '_actions/user_action';
 
 function Login() {
