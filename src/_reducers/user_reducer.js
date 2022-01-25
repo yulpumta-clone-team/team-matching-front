@@ -1,7 +1,7 @@
-import { AUTH_USER, LOGIN_USER, SIGNUP_USER } from "_constants/userTypes";
+import { AUTH_USER, LOGIN_USER, SIGNUP_USER } from '_types/userTypes';
 
 const initState = {
-  userName: "",
+  userName: '',
 };
 
 const userReducer = (state = initState, action) => {
@@ -12,6 +12,7 @@ const userReducer = (state = initState, action) => {
     case SIGNUP_USER:
       return { ...state };
     case AUTH_USER:
+      console.log(action.payload);
       return {
         ...state,
       };

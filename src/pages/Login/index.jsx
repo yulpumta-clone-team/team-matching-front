@@ -1,7 +1,8 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { OAUTH_URL } from 'utils/oauth';
 
-const Login = () => {
+function Login() {
   const {
     register,
     handleSubmit,
@@ -14,35 +15,38 @@ const Login = () => {
   const onValid = async (data) => {
     const { password, verifiedPassword } = data;
     if (password !== verifiedPassword) {
-      setError("verifiedPassword", { message: "Password is not same" }, { shouldFocus: true });
+      setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
     }
     // fetch
-    setError("extraError", { message: "Server offLine." });
+    setError('extraError', { message: 'Server offLine.' });
   };
   return (
     <div>
-      <form style={{ display: "flex", flexDirection: "column" }} onSubmit={handleSubmit(onValid)}>
+      <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(onValid)}>
         <input
-          {...register("email", {
-            required: "Email is required",
+          {...register('email', {
+            required: 'Email is required',
             pattern: {
               value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9].com$/,
-              message: "이메일 형식으로 입력해주세요.",
+              message: '이메일 형식으로 입력해주세요.',
             },
           })}
           placeholder="email"
         />
         <span>{errors?.email?.message}</span>
-        <input {...register("password", { required: "비빌번호를 입력해주세요." })} placeholder="password" />
+        <input
+          {...register('password', { required: '비빌번호를 입력해주세요.' })}
+          placeholder="password"
+        />
         <span>{errors?.password?.message}</span>
         <button>로그인</button>
         <span>{errors?.extraError?.message}</span>
       </form>
-      <a href={"http://localhost:8081/oauth2/authorization/github"}>Github</a>
+      <a href={OAUTH_URL.GITHUB}>Github</a>
       <br />
-      <a href={"http://localhost:8081/oauth2/authorization/google"}>Google</a>
+      <a href={OAUTH_URL.GOOGLE}>Google</a>
     </div>
   );
-};
+}
 
 export default Login;

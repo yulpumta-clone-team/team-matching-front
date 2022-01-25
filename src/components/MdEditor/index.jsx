@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
-import "@toast-ui/editor/dist/toastui-editor.css";
-import { Editor } from "@toast-ui/react-editor";
+import React, { useRef } from 'react';
+import '@toast-ui/editor/dist/toastui-editor.css';
+import { Editor } from '@toast-ui/react-editor';
 
-const MarkdownEditor = () => {
+function MarkdownEditor() {
   const editorRef = useRef(null);
   const onChangeEditorTextHandler = () => {
     console.log(editorRef.current?.getInstance().getMarkdown());
@@ -19,13 +19,13 @@ const MarkdownEditor = () => {
         previewStyle="vertical"
         height="600px"
         initialEditType="markdown"
-        useCommandShortcut={true}
+        useCommandShortcut
         ref={editorRef}
         onChange={onChangeEditorTextHandler}
       />
       <button onClick={handleSubmit}>버튼</button>
     </div>
   );
-};
+}
 
 export default MarkdownEditor;

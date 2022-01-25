@@ -1,14 +1,14 @@
-import MarkdownEditor from "components/MdEditor";
-import MarkdwonViewer from "components/MdViewer";
-import React from "react";
+import MarkdownEditor from 'components/MdEditor';
+import MarkdownViewer from 'components/MdViewer';
+import React from 'react';
 
-const Main = () => {
+function Main() {
   return (
     <div>
       <MarkdownEditor />
-      <MarkdwonViewer />
+      <MarkdownViewer />
     </div>
   );
-};
+}
 
 export default Main;
