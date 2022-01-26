@@ -1,17 +1,19 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import '@toast-ui/editor/dist/toastui-editor.css';
-import { Editor } from '@toast-ui/react-editor';
+import { Editor, Viewer } from '@toast-ui/react-editor';
 
 function MarkdownEditor({ mdValue }) {
   const editorRef = useRef(null);
   const onChangeEditorTextHandler = () => {
-    console.log(editorRef.current?.getInstance().getMarkdown());
+    console.log(editorRef.current?.getInstance().getHTML());
   };
   const handleSubmit = () => {
-    const submitContent = editorRef.current?.getInstance().getHTML();
+    const submitContent = editorRef.current?.getInstance().getMarkdown();
     // setInitialValue(submitContent);
     console.log(typeof submitContent, submitContent);
+    const removeone = submitContent.replace(/\n/g, '\\n');
+    console.log(removeone);
   };
   return (
     <div>
@@ -25,6 +27,7 @@ function MarkdownEditor({ mdValue }) {
         onChange={onChangeEditorTextHandler}
       />
       <button onClick={handleSubmit}>버튼</button>
+      <Viewer initialValue={mdValue} />
     </div>
   );
 }
