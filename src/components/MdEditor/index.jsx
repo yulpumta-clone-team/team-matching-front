@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
 
-function MarkdownEditor() {
+function MarkdownEditor({ mdValue }) {
   const editorRef = useRef(null);
   const onChangeEditorTextHandler = () => {
     console.log(editorRef.current?.getInstance().getMarkdown());
@@ -15,7 +16,7 @@ function MarkdownEditor() {
   return (
     <div>
       <Editor
-        initialValue="여기에 작성해주세요."
+        initialValue={mdValue}
         previewStyle="vertical"
         height="600px"
         initialEditType="markdown"
@@ -27,5 +28,9 @@ function MarkdownEditor() {
     </div>
   );
 }
+
+MarkdownEditor.propTypes = {
+  mdValue: PropTypes.string.isRequired,
+};
 
 export default MarkdownEditor;

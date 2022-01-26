@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Viewer } from '@toast-ui/react-editor';
 
-function MarkdownViewer() {
-  const [initialValue, setInitialValue] = useState(
-    '<p>여기에 작성해주세요.</p><h2>아아</h2><h1>아</h1><p><strong>ㅇ</strong></p>',
-  );
+function MarkdownViewer({ mdValue }) {
+  const [initialValue, setInitialValue] = useState(mdValue);
   return <Viewer initialValue={initialValue} />;
 }
+
+MarkdownViewer.propTypes = {
+  mdValue: PropTypes.string.isRequired,
+};
 
 export default MarkdownViewer;

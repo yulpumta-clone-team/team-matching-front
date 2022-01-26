@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function UserProfile(props) {
-  return <div>UserProfile</div>;
+  return (
+    <div>
+      <Link to="./edit" state={{ userId: 'temp' }}>
+        Edit
+      </Link>
+      MyProfile
+    </div>
+  );
 }
 
 UserProfile.propTypes = {};

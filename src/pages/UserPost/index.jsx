@@ -4,8 +4,11 @@ import { useParams } from 'react-router-dom';
 
 function UserPost(props) {
   const { userId } = useParams();
-  console.log(userId);
-  return <div>UserPost</div>;
+  return (
+    <div>
+      <h1>{userId}</h1> UserPost
+    </div>
+  );
 }
 
 UserPost.propTypes = {};
