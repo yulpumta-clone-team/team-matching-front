@@ -32,7 +32,7 @@ function App() {
           path={`${TEAM_BOARD}/:teamId`}
           element={<Auth SpecificComponent={TeamPost} option />}
         />
-        <Route path="/callback" component={Callback} />
+        <Route path={`${process.env.REACT_APP_SERVER_API}/oauth/redirect`} component={Callback} />
       </Routes>
     </Router>
   );

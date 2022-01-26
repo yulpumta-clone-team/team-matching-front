@@ -26,7 +26,7 @@ function SignUp() {
           {...register('email', {
             required: 'Email is required',
             pattern: {
-              value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9].com$/,
+              value: /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i,
               message: '이메일 형식으로 입력해주세요.',
             },
           })}
@@ -49,7 +49,10 @@ function SignUp() {
         />
         <span>{errors?.nickname?.message}</span>
         <input
-          {...register('password', { required: '4자리 이상 비밀번호를 입력해주세요.' })}
+          {...register('password', {
+            required: '4자리 이상 비밀번호를 입력해주세요.',
+            minLength: 4,
+          })}
           placeholder="password"
         />
         <span>{errors?.password?.message}</span>

@@ -1,5 +1,6 @@
 - git submodule update --remote
 - ./gradlew build
+- cd build/libs
 - java -jar demo-0.0.1-SNAPSHOT.jar
 
 # 📌 To Do
@@ -11,5 +12,6 @@
   - http://yoonbumtae.com/?p=3000
   - https://github.com/callicoder/spring-boot-react-oauth2-social-login-demo
   - https://rrecoder.tistory.com/148
+  - http://devhyun.com/blog/post/15
 
 # ✅ Done
