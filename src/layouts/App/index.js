@@ -42,7 +42,7 @@ function App() {
           path={`${TEAM_BOARD}/:teamId/edit`}
           element={<Auth SpecificComponent={EditTeamProfile} option />}
         />
-        <Route path={`${process.env.REACT_APP_SERVER_API}/oauth/redirect`} component={Callback} />
+        {/* <Route path={`${process.env.REACT_APP_SERVER_API}/oauth/redirect`} component={Callback} /> */}
       </Routes>
     </Router>
   );
