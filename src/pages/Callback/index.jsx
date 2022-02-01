@@ -2,23 +2,20 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import qs from 'qs';
 import Loader from 'pages/Loader';
-// import { PropTypes as RouterPropTypes } from 'react-router';
+import { useCookies } from 'react-cookie';
 
 function Callback({ history, location }) {
-  const authUri = `${process.env.REACT_APP_SERVER_API}login/oauth2/code`;
+  const [cookies, setCookie] = useCookies(['token']);
   useEffect(() => {
     async function getToken() {
-      const { code } = qs.parse(location.search, {
-        ignoreQueryPrefix: true,
-      });
-      console.log(authUri);
       try {
-        const { token } = await axios.post(authUri, {
-          code,
+        const response = await axios.get('/callback', {
+          withCredentials: true,
         });
-        console.log(token);
+        console.log(response);
+        console.log(cookies);
+        // setCookie
         history.push('/');
       } catch (error) {
         console.log(error.meesage);
@@ -27,7 +24,7 @@ function Callback({ history, location }) {
     }
 
     getToken();
-  }, [location, history, authUri]);
+  }, [cookies, history]);
   return <Loader />;
 }
 

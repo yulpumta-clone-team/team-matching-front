@@ -20,19 +20,19 @@ function App() {
     <Router>
       <Navigation />
       <Routes>
-        <Route path={HOME} element={<Auth SpecificComponent={Main} option />} />
+        <Route path={HOME} element={<Auth SpecificComponent={Main} option={null} />} />
+        <Route path={USER_BOARD} element={<Auth SpecificComponent={UserBoard} option={null} />} />
+        <Route path={TEAM_BOARD} element={<Auth SpecificComponent={TeamBoard} option={null} />} />
         <Route path={PROFILE} element={<Auth SpecificComponent={UserProfile} option />} />
-        <Route path={USER_BOARD} element={<Auth SpecificComponent={UserBoard} option />} />
-        <Route path={TEAM_BOARD} element={<Auth SpecificComponent={TeamBoard} option />} />
-        <Route path={LOGIN} element={<Auth SpecificComponent={Login} option />} />
-        <Route path={SIGN_UP} element={<Auth SpecificComponent={SignUp} option />} />
+        <Route path={LOGIN} element={<Auth SpecificComponent={Login} option={false} />} />
+        <Route path={SIGN_UP} element={<Auth SpecificComponent={SignUp} option={false} />} />
         <Route
           path={`${USER_BOARD}/:userId`}
-          element={<Auth SpecificComponent={UserPost} option />}
+          element={<Auth SpecificComponent={UserPost} option={null} />}
         />
         <Route
           path={`${TEAM_BOARD}/:teamId`}
-          element={<Auth SpecificComponent={TeamPost} option />}
+          element={<Auth SpecificComponent={TeamPost} option={null} />}
         />
         <Route
           path={`${PROFILE}/edit`}
@@ -42,7 +42,7 @@ function App() {
           path={`${TEAM_BOARD}/:teamId/edit`}
           element={<Auth SpecificComponent={EditTeamProfile} option />}
         />
-        {/* <Route path={`${process.env.REACT_APP_SERVER_API}/oauth/redirect`} component={Callback} /> */}
+        <Route path={`${process.env.REACT_APP_SERVER_API}`} component={Callback} />
       </Routes>
     </Router>
   );
