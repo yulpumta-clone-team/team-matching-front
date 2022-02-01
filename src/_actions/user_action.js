@@ -19,8 +19,7 @@ export function registerUser(dataTosubmit) {
 }
 
 export function auth() {
-  const request = axios.get('/').then((response) => response.payload);
-  console.log(request);
+  const request = axios.get('/', { withCreadentials: true }).then((response) => response.headers);
   return {
     type: AUTH_USER,
     payload: request,

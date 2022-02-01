@@ -1,0 +1,40 @@
+{
+  "data": {
+    "slogan": "각오",
+    "content": "자기소개",
+    "img": "string",
+    "hope_session": "프론트앤드",
+    "skills": ["react", "ts"],
+    "status": false,
+    "porfolio": "string",
+    "job": "student",
+    "createdAt": "time",
+    "updatedAt": "time",
+    "comments": [
+      {
+        "user_id": "901929312",
+        "commment_id": "1",
+        "nickname": "front_temp",
+        "isLike": false,
+        "content": "연습용 댓글입니다.",
+        "img": "string",
+        "createdAt": "string",
+        "updateAt": "tring",
+        "isSecret": false,
+        "replies": []
+      },
+      {
+        "user_id": "134124131",
+        "commment_id": "2",
+        "nickname": "server_temp",
+        "isLike": false,
+        "content": "안녕하세요",
+        "img": "string",
+        "createdAt": "string",
+        "updateAt": "tring",
+        "isSecret": false,
+        "replies": []
+      }
+    ]
+  }
+}

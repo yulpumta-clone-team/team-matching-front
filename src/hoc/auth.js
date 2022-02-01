@@ -12,9 +12,11 @@ export default function AuthHOC({ SpecificComponent, option, adminRoute = null }
   function AuthenticationCheck(props) {
     const [cookies] = useCookies(['token']);
     console.log(cookies);
+
     const dispatch = useDispatch();
     useEffect(() => {
       dispatch(auth()).then((response) => {
+        console.log(response);
         const { isAdmin, isAuth } = response.payload;
         // 로그인 하지 않은 상태
         if (!isAuth) {
