@@ -15,6 +15,7 @@
     "react/button-has-type": "off",
     "react/jsx-props-no-spreading": "off",
     "import/no-extraneous-dependencies": "off",
-    "default-param-last": "off"
+    "default-param-last": "off",
+    "react/forbid-prop-types": "off"
   }
 }
