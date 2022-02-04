@@ -3,9 +3,11 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Loader from 'pages/Loader';
+import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
-function Callback({ history, location }) {
+function Callback() {
+  const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(['token']);
   useEffect(() => {
     async function getToken() {
@@ -16,21 +18,18 @@ function Callback({ history, location }) {
         console.log(response);
         console.log(cookies);
         // setCookie
-        history.push('/');
+        navigate('/');
       } catch (error) {
         console.log(error.meesage);
-        history.push('/login');
+        navigate('/login');
       }
     }
 
     getToken();
-  }, [cookies, history]);
+  }, [cookies, navigate]);
   return <Loader />;
 }
 
-Callback.propTypes = {
-  history: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-};
+Callback.propTypes = {};
 
 export default Callback;
