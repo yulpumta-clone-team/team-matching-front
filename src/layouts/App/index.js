@@ -16,6 +16,7 @@ import EditUserProfile from 'pages/EditUserProfile';
 import EditTeamProfile from 'pages/EditTeamPost';
 
 function App() {
+  console.log(process.env.REACT_APP_SERVER_API);
   return (
     <Router>
       <Navigation />
@@ -42,7 +43,7 @@ function App() {
           path={`${TEAM_BOARD}/:teamId/edit`}
           element={<Auth SpecificComponent={EditTeamProfile} option />}
         />
-        <Route path={`${process.env.REACT_APP_SERVER_API}/callback`} component={Callback} />
+        <Route path="/callback" element={<Callback />} />
       </Routes>
     </Router>
   );
