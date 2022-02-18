@@ -17,7 +17,7 @@ export const mockTeams = [
   {
     user_id: '123123123',
     team_id: '11111111',
-    name: '임시팀명11111',
+    name: '코넥트',
     session: '희망기간',
     img: 'stirng',
     read: 0,
@@ -27,7 +27,7 @@ export const mockTeams = [
   {
     user_id: '456456456',
     team_id: '22222222',
-    name: '임시팀명123123',
+    name: '애플팀플',
     session: '희망기간',
     img: 'stirng',
     read: 0,
@@ -37,7 +37,7 @@ export const mockTeams = [
   {
     user_id: '789789789',
     team_id: '33333333',
-    name: '임시팀명999999999',
+    name: '윈도우팀플',
     session: '희망기간',
     img: 'stirng',
     read: 0,

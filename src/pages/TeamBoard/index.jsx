@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect } from 'react';
+/* eslint-disable camelcase */
+import React, { useEffect } from 'react';
 import { TEAM_BOARD } from 'utils/route';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTeamArr, getTeamDetail } from '_actions/team_action';
+import { getTeamArr } from '_actions/team_action';
 
 function TeamBoard() {
   const dispatch = useDispatch();
@@ -10,10 +11,14 @@ function TeamBoard() {
   useEffect(() => {
     dispatch(getTeamArr());
   }, []);
-  console.log(teamArray);
   return (
     <ul>
-      <li>
+      {teamArray.map(({ team_id, name }) => (
+        <li key={team_id}>
+          <Link to={`${TEAM_BOARD}/${team_id}`}>{name}</Link>
+        </li>
+      ))}
+      {/* <li>
         <Link to={`${TEAM_BOARD}/asdf`}>asdf</Link>
       </li>
       <li>
@@ -27,7 +32,7 @@ function TeamBoard() {
       </li>
       <li>
         <Link to={`${TEAM_BOARD}/asdf`}>asdf</Link>
-      </li>
+      </li> */}
     </ul>
   );
 }
