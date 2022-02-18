@@ -1,19 +1,18 @@
-export const mockTeam = [
-  {
-    team_id: '123123123',
-    name: 'string',
-    content: 'string',
-    session: 'stirng',
-    img: 'stirng',
-    read: 'int',
-    job: 'string',
-    comment_cnt: 0,
-    like_cnt: 0,
-    createdAt: 'time',
-    updatedAt: 'time',
-    comment: [],
-  },
-];
+export const mockTeam = {
+  team_id: '123123123',
+  name: '코넥트',
+  content:
+    '# 임시 데이터\n# 이런식으로하면 됩니다.\n\n### 알겠습니다\n\n안녕하세요. **프론트**입니다.',
+  session: 'stirng',
+  img: 'stirng',
+  read: 'int',
+  job: 'string',
+  comment_cnt: 0,
+  like_cnt: 0,
+  createdAt: 'time',
+  updatedAt: 'time',
+  comment: [],
+};
 export const mockTeams = [
   {
     user_id: '123123123',

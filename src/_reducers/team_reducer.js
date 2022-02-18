@@ -1,7 +1,7 @@
 import { GET_TEAM_DETAIL, GET_TEAM__ARR } from '_types/teamTypes';
 
 const initState = {
-  teamElement: '',
+  teamElement: null,
   teamArray: [],
 };
 

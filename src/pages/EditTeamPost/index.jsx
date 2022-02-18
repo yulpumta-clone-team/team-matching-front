@@ -1,19 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import MarkdownEditor from 'components/MdEditor';
 
-function EditTeamProfile(props) {
+function EditTeamProfile() {
   const location = useLocation();
-  const { teamId, mdValue } = location.state;
+  const { teamId, content } = location.state;
   console.log(teamId);
   return (
     <div>
-      <MarkdownEditor mdValue={mdValue} />
+      <MarkdownEditor mdValue={content} />
     </div>
   );
 }
-
-EditTeamProfile.propTypes = {};
 
 export default EditTeamProfile;

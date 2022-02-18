@@ -1,24 +1,41 @@
+/* eslint-disable camelcase */
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import MarkdownViewer from 'components/MdViewer';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTeamArr } from '_actions/team_action';
+import { getTeamArr, getTeamDetail } from '_actions/team_action';
+import Loader from 'pages/Loader';
 
 function TeamPost() {
   const dispatch = useDispatch();
   const { teamElement } = useSelector((state) => state.team);
-  console.log(teamElement);
-  const { teamId } = useParams();
+  const { id } = useParams();
   useEffect(() => {
-    dispatch(getTeamArr(teamId));
+    dispatch(getTeamDetail(id));
   }, []);
-  const mdValue = `<h1>팀명: ${teamId}</h1><p>여기에 작성해주세요.</p><h2>아아</h2><h1>아</h1><p><strong>ㅇ</strong></p>`;
+  if (!teamElement) {
+    return <Loader />;
+  }
+  const {
+    team_id,
+    name,
+    content,
+    session,
+    img,
+    read,
+    job,
+    comment_cnt,
+    like_cnt,
+    createdAt,
+    updatedAt,
+    comment,
+  } = teamElement;
   return (
     <div>
-      <Link to="./edit" state={{ teamId, mdValue }}>
+      <Link to="./edit" state={{ team_id, content }}>
         Edit
       </Link>
-      <MarkdownViewer mdValue={mdValue} />
+      <MarkdownViewer mdValue={content} />
     </div>
   );
 }

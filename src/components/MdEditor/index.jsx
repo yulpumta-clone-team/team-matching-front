@@ -4,9 +4,10 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor, Viewer } from '@toast-ui/react-editor';
 
 function MarkdownEditor({ mdValue }) {
+  console.log(mdValue);
   const editorRef = useRef(null);
   const onChangeEditorTextHandler = () => {
-    console.log(editorRef.current?.getInstance().getHTML());
+    // console.log(editorRef.current?.getInstance().getHTML());
   };
   const handleSubmit = () => {
     const submitContent = editorRef.current?.getInstance().getMarkdown();
