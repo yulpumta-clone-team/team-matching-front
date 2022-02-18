@@ -37,11 +37,11 @@ function App() {
         />
         <Route
           path={`${PROFILE}/edit`}
-          element={<Auth SpecificComponent={EditUserProfile} option />}
+          element={<Auth SpecificComponent={EditUserProfile} option={null} />}
         />
         <Route
           path={`${TEAM_BOARD}/:teamId/edit`}
-          element={<Auth SpecificComponent={EditTeamProfile} option />}
+          element={<Auth SpecificComponent={EditTeamProfile} option={null} />}
         />
         <Route path="/callback" element={<Callback />} />
       </Routes>
