@@ -1,9 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useCallback, useEffect } from 'react';
 import { TEAM_BOARD } from 'utils/route';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTeamArr, getTeamDetail } from '_actions/team_action';
 
-function TeamBoard(props) {
+function TeamBoard() {
+  const dispatch = useDispatch();
+  const { teamArray } = useSelector((state) => state.team);
+  useEffect(() => {
+    dispatch(getTeamArr());
+  }, []);
+  console.log(teamArray);
   return (
     <ul>
       <li>
@@ -24,7 +31,5 @@ function TeamBoard(props) {
     </ul>
   );
 }
-
-TeamBoard.propTypes = {};
 
 export default TeamBoard;

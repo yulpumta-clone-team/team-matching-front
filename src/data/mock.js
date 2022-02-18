@@ -1,0 +1,48 @@
+export const mockTeam = [
+  {
+    team_id: '123123123',
+    name: 'string',
+    content: 'string',
+    session: 'stirng',
+    img: 'stirng',
+    read: 'int',
+    job: 'string',
+    comment_cnt: 0,
+    like_cnt: 0,
+    createdAt: 'time',
+    updatedAt: 'time',
+    comment: [],
+  },
+];
+export const mockTeams = [
+  {
+    user_id: '123123123',
+    team_id: '11111111',
+    name: '임시팀명11111',
+    session: '희망기간',
+    img: 'stirng',
+    read: 0,
+    comment_cnt: 0,
+    like_cnt: 0,
+  },
+  {
+    user_id: '456456456',
+    team_id: '22222222',
+    name: '임시팀명123123',
+    session: '희망기간',
+    img: 'stirng',
+    read: 0,
+    comment_cnt: 0,
+    like_cnt: 0,
+  },
+  {
+    user_id: '789789789',
+    team_id: '33333333',
+    name: '임시팀명999999999',
+    session: '희망기간',
+    img: 'stirng',
+    read: 0,
+    comment_cnt: 0,
+    like_cnt: 0,
+  },
+];
