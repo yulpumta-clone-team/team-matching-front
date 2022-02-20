@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes, { objectOf } from 'prop-types';
+import PropTypes from 'prop-types';
 import { TEAM_BOARD } from 'utils/route';
 import { CardTitle, CardWrapper, ImgContainer, SessionContainer } from './style';
 

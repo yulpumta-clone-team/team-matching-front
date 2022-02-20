@@ -20,7 +20,7 @@ const Container = styled.div`
   }
 `;
 
-function UpperButton(props) {
+function UpperButton() {
   const [show, setShow] = useState(false);
   const handleScroll = () => {
     // const scrollY = window.scrollY;
