@@ -14,10 +14,12 @@ export function getTeamDetail(dataTosubmit) {
   };
 }
 
-export function getTeamArr(dataTosubmit) {
+export function getTeamArr(dataTosubmit, page = 1) {
   // const request = axios.post('../data/team.json', dataTosubmit).then((response) => response.data);
   // console.log(request);
-  const request = mockTeams;
+  // let request = [];
+  const request = [...mockTeams, ...mockTeams];
+
   return {
     type: GET_TEAM__ARR,
     payload: request,
