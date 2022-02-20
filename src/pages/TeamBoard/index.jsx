@@ -3,6 +3,7 @@ import TeamCard from 'components/TeamCard';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTeamArr } from '_actions/team_action';
+import { BoardWrapper } from './style';
 
 function TeamBoard() {
   const dispatch = useDispatch();
@@ -12,13 +13,12 @@ function TeamBoard() {
   }, []);
   console.log(teamArray);
   return (
-    <ul>
+    <BoardWrapper>
       {teamArray.length !== 0 &&
-        teamArray.map((teamElement) => {
-          console.log(teamElement);
-          return <TeamCard teamInfo={teamElement} />;
-        })}
-    </ul>
+        teamArray.map((teamElement) => (
+          <TeamCard key={teamElement.team_id} teamInfo={teamElement} />
+        ))}
+    </BoardWrapper>
   );
 }
 
