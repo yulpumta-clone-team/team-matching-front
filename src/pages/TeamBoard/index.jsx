@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import TeamCard from 'components/TeamCard';
+import UpperButton from 'components/UpperButton';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTeamArr } from '_actions/team_action';
@@ -18,6 +19,7 @@ function TeamBoard() {
         teamArray.map((teamElement) => (
           <TeamCard key={teamElement.team_id} teamInfo={teamElement} />
         ))}
+      <UpperButton />
     </BoardWrapper>
   );
 }
