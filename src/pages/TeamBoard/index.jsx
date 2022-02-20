@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
+import TeamCard from 'components/TeamCard';
 import React, { useEffect } from 'react';
-import { TEAM_BOARD } from 'utils/route';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTeamArr } from '_actions/team_action';
 
@@ -11,28 +10,14 @@ function TeamBoard() {
   useEffect(() => {
     dispatch(getTeamArr());
   }, []);
+  console.log(teamArray);
   return (
     <ul>
-      {teamArray.map(({ team_id, name }) => (
-        <li key={team_id}>
-          <Link to={`${TEAM_BOARD}/${team_id}`}>{name}</Link>
-        </li>
-      ))}
-      {/* <li>
-        <Link to={`${TEAM_BOARD}/asdf`}>asdf</Link>
-      </li>
-      <li>
-        <Link to={`${TEAM_BOARD}/ddd`}>ddd</Link>
-      </li>
-      <li>
-        <Link to={`${TEAM_BOARD}/aaa`}>aaa</Link>
-      </li>
-      <li>
-        <Link to={`${TEAM_BOARD}/123`}>123</Link>
-      </li>
-      <li>
-        <Link to={`${TEAM_BOARD}/asdf`}>asdf</Link>
-      </li> */}
+      {teamArray.length !== 0 &&
+        teamArray.map((teamElement) => {
+          console.log(teamElement);
+          return <TeamCard teamInfo={teamElement} />;
+        })}
     </ul>
   );
 }
