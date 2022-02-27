@@ -6,15 +6,15 @@ function useInfiniteScroll() {
   function handleScroll() {
     const left = document.documentElement.scrollTop + window.innerHeight;
     if (
-      (left <= document.documentElement.scrollHeight + 1) &
-      (left >= document.documentElement.scrollHeight - 1)
+      (left <= document.documentElement.scrollHeight + 10) &
+      (left >= document.documentElement.scrollHeight - 10)
     ) {
       setPage((p) => p + 1);
     }
   }
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    // return window.removeEventListener("scroll", handleScroll);
+    // return window.removeEventListener('scroll', handleScroll);
   }, []);
   return page;
 }
