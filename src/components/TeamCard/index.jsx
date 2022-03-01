@@ -6,9 +6,11 @@ import { TEAM_BOARD } from 'utils/route';
 import { CardTitle, CardWrapper, ImgContainer, SessionContainer } from './style';
 
 function TeamCard({ teamInfo }) {
-  const { user_id, team_id, name, session, img, read, comment_cnt, like_cnt } = teamInfo;
+
+  const { user_id, team_id, name, session, img, read, comment_cnt, like_cnt, idx } = teamInfo;
   return (
     <CardWrapper>
+      <h1>{idx}</h1>
       <Link to={`${TEAM_BOARD}/${team_id}`}>{name}</Link>
       <CardTitle>{name}</CardTitle>
       <ImgContainer>
@@ -24,6 +26,7 @@ function TeamCard({ teamInfo }) {
 
 TeamCard.propTypes = {
   teamInfo: PropTypes.shape({
+    idx: PropTypes.number.isRequired,
     user_id: PropTypes.number.isRequired,
     team_id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
