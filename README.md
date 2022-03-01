@@ -18,4 +18,3 @@
 
 - [x] react router dom v6 :id prevent refresh
 - [x] http-proxy-middleware 작동하는지 확인
-- [x] pr 방식으로 레포지토리 업데이트
