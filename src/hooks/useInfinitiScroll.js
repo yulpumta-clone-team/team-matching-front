@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-
 function useInfiniteScroll({ fetchData }) {
   const [page, setPage] = useState(1);
   const target = useRef(null);

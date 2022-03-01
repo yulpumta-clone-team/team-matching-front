@@ -38,7 +38,6 @@ function UpperButton() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
   return (
     <Container show={show} onClick={() => moveToTop()}>
       ⬆️
