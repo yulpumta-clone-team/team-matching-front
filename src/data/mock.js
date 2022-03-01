@@ -104,4 +104,14 @@ export const mockTeams = [
     comment_cnt: 0,
     like_cnt: 0,
   },
+  {
+    user_id: 3010101010101111,
+    team_id: 10,
+    name: '10',
+    session: '희망기간',
+    img: 'stirng',
+    read: 0,
+    comment_cnt: 0,
+    like_cnt: 0,
+  },
 ];
