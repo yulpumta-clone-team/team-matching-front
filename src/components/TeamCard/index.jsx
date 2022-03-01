@@ -6,7 +6,6 @@ import { TEAM_BOARD } from 'utils/route';
 import { CardTitle, CardWrapper, ImgContainer, SessionContainer } from './style';
 
 function TeamCard({ teamInfo }) {
-
   const { user_id, team_id, name, session, img, read, comment_cnt, like_cnt, idx } = teamInfo;
   return (
     <CardWrapper>
