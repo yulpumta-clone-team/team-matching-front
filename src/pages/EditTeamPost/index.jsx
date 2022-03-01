@@ -14,7 +14,6 @@ function EditTeamProfile() {
     navigate(-1);
   };
   const handleSubmit = (e) => {
-    // const result = editorRef.current?.getInstance().getMarkdown();
     e.preventDefault();
     console.log(userName);
     console.log(teamName);
