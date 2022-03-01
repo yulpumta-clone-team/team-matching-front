@@ -11,14 +11,6 @@ function MarkdownEditor({ mdValue }) {
     // const result = editorRef.current?.getInstance().getMarkdown();
     console.log(editorRef.current?.getInstance().getMarkdown());
   };
-  // const handleSubmit = () => {
-  //   const submitContent = editorRef.current?.getInstance().getMarkdown();
-  //   // setInitialValue(submitContent);
-
-  //   console.log(typeof submitContent, submitContent);
-  //   const removeOne = submitContent.replace(/\n/g, '\\n');
-  //   console.log(removeOne);
-  // };
   return (
     <>
       <div>

@@ -8,7 +8,6 @@ import Loader from 'pages/Loader';
 import { Board, Button, Box, Box2, Box3 } from './stylep';
 
 function TeamPost() {
-  // const history = useHistory();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onClickback = () => {

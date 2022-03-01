@@ -41,10 +41,6 @@ function EditTeamProfile() {
     setName({ name });
     setTeam({ team_name });
   };
-  // const markdownSave = () => {
-  //   const submitContent = editorRef.current?.getInstance().getMarkdown();
-  //   setInitialValue(submitContent);
-  // };
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -71,9 +67,6 @@ function EditTeamProfile() {
           <Box2>
             <input type="submit" value="저장" />
           </Box2>
-          {/* <div>
-            <button onClick={handleSubmit}> Save </button>
-          </div> */}
         </Board>
       </div>
     </form>
