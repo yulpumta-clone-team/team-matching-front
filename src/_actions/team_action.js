@@ -18,6 +18,7 @@ export function getTeamDetail(dataTosubmit) {
   };
 }
 
+
 export async function getTeamArr(count) {
   // const request = axios.post('../data/team.json', dataTosubmit).then((response) => response.data);
   // console.log(request);
