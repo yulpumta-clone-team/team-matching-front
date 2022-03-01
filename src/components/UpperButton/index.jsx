@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -34,7 +34,11 @@ function UpperButton() {
   const moveToTop = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   };
-  window.addEventListener('scroll', handleScroll);
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <Container show={show} onClick={() => moveToTop()}>
       ⬆️
