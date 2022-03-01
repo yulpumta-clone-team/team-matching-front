@@ -1,10 +1,10 @@
 export const mockTeam = {
-  team_id: '123123123',
+  team_name: '코넥트팀',
   name: '코넥트',
   content:
     '# 임시 데이터\n# 이런식으로하면 됩니다.\n\n### 알겠습니다\n\n안녕하세요. **프론트**입니다.',
-  session: 'stirng',
-  img: 'stirng',
+  session: 'string',
+  img: 'string',
   read: 'int',
   job: 'string',
   comment_cnt: 0,
