@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import { mockTeam, mockTeams } from 'data/mock';
+import { mockTeam, mockTeams } from 'data/mockTeam';
 import { FETCH_MORE_TEAM_ARR, GET_TEAM_DETAIL, GET_TEAM__ARR } from '_types/teamTypes';
 
 const fakeFetch = () =>
@@ -26,13 +26,6 @@ export async function getTeamArr(count) {
   console.log('getTeamArr', count);
   return {
     type: GET_TEAM__ARR,
-    payload: mockTeams,
-  };
-}
-
-export async function fetchMoreTeamArr(count) {
-  return {
-    type: FETCH_MORE_TEAM_ARR,
     payload: mockTeams,
   };
 }

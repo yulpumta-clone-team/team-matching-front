@@ -24,7 +24,7 @@ function App() {
         <Route path={HOME} element={<Auth SpecificComponent={Main} option={null} />} />
         <Route path={USER_BOARD} element={<Auth SpecificComponent={UserBoard} option={null} />} />
         <Route path={TEAM_BOARD} element={<Auth SpecificComponent={TeamBoard} option={null} />} />
-        <Route path={PROFILE} element={<Auth SpecificComponent={UserProfile} option />} />
+        <Route path={PROFILE} element={<Auth SpecificComponent={UserProfile} option={null} />} />
         <Route path={LOGIN} element={<Auth SpecificComponent={Login} option={false} />} />
         <Route path={SIGN_UP} element={<Auth SpecificComponent={SignUp} option={false} />} />
         <Route

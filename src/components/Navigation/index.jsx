@@ -40,6 +40,9 @@ function Navigation() {
           <li>
             <Link to={SIGN_UP}>Sign Up</Link>
           </li>
+          <li>
+            <Link to={PROFILE}>User Profile</Link>
+          </li>
         </ul>
       )}
     </nav>
