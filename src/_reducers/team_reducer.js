@@ -12,8 +12,6 @@ const userReducer = (state = initState, action) => {
       return { ...state, teamElement: action.payload };
     case GET_TEAM__ARR:
       return { ...state, teamArray: action.payload };
-    case FETCH_MORE_TEAM_ARR:
-      return { ...state };
     default:
       return state;
   }
