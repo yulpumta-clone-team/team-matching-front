@@ -1,30 +1,37 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { USER_BOARD } from 'utils/route';
+import React, { useEffect, useState } from 'react';
+import UserCard from 'components/UserCard';
+import UpperButton from 'components/UpperButton';
+import { useDispatch, useSelector } from 'react-redux';
+import Loader from 'pages/Loader';
+import { getUserArr } from '_actions/user_action';
+import useInfiniteScroll from 'hooks/useInfinitiScroll';
 
-function UserBoard(props) {
+// 임시로 만든 id발급
+import uuid from 'react-uuid';
+
+import { BoardWrapper } from './style';
+
+function UserBoard() {
+  const dispatch = useDispatch();
+  const { userArray } = useSelector((state) => state.user);
+  const [userList, setUserList] = useState(userArray);
+  const fetchData = async () => {
+    const { payload } = await dispatch(getUserArr(page));
+    setUserList((prev) => [...prev, ...payload]);
+  };
+  const [page, target, loading] = useInfiniteScroll({ fetchData });
   return (
-    <ul>
-      <li>
-        <Link to={`${USER_BOARD}/asdf`}>asdf</Link>
-      </li>
-      <li>
-        <Link to={`${USER_BOARD}/ddd`}>ddd</Link>
-      </li>
-      <li>
-        <Link to={`${USER_BOARD}/aaa`}>aaa</Link>
-      </li>
-      <li>
-        <Link to={`${USER_BOARD}/123`}>123</Link>
-      </li>
-      <li>
-        <Link to={`${USER_BOARD}/asdf`}>asdf</Link>
-      </li>
-    </ul>
+    <>
+      <BoardWrapper>
+        {userList.length !== 0 &&
+          userList.map((userElement, idx) => (
+            <UserCard key={uuid()} userInfo={{ ...userElement, idx }} />
+          ))}
+      </BoardWrapper>
+      <div ref={target}>{loading && <Loader />}</div>
+      <UpperButton />
+    </>
   );
 }
-
-UserBoard.propTypes = {};
 
 export default UserBoard;

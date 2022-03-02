@@ -1,7 +1,15 @@
-import { AUTH_USER, LOGIN_USER, SIGNUP_USER } from '_types/userTypes';
+import {
+  AUTH_USER,
+  GET_USER_DETAIL,
+  GET_USER__ARR,
+  LOGIN_USER,
+  SIGNUP_USER,
+} from '_types/userTypes';
 
 const initState = {
   userName: '',
+  userElement: null,
+  userArray: [],
 };
 
 const userReducer = (state = initState, action) => {
@@ -15,9 +23,11 @@ const userReducer = (state = initState, action) => {
       return { ...state };
     case AUTH_USER:
       console.log(action.payload);
-      return {
-        ...state,
-      };
+      return { ...state };
+    case GET_USER_DETAIL:
+      return { ...state, userElement: action.payload };
+    case GET_USER__ARR:
+      return { ...state, userArray: action.payload };
     default:
       return state;
   }
