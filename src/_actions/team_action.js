@@ -29,10 +29,3 @@ export async function getTeamArr(count) {
     payload: mockTeams,
   };
 }
-
-export async function fetchMoreTeamArr(count) {
-  return {
-    type: FETCH_MORE_TEAM_ARR,
-    payload: mockTeams,
-  };
-}
