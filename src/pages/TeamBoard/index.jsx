@@ -1,7 +1,6 @@
-/* eslint-disable camelcase */
+import React, { useState } from 'react';
 import TeamCard from 'components/TeamCard';
 import UpperButton from 'components/UpperButton';
-import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTeamArr } from '_actions/team_action';
 import Loader from 'pages/Loader';

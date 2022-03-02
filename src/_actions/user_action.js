@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { mockTeams } from 'data/mockTeam';
-import { mockUser } from 'data/mockUser';
+
+import { mockUser, mockUsers } from 'data/mockUser';
 import { GET_USER_DETAIL, GET_USER__ARR, LOGIN_USER, SIGNUP_USER } from '_types/userTypes';
 
 const fakeFetch = () =>
@@ -43,6 +43,6 @@ export async function getUserArr(count) {
   await fakeFetch();
   return {
     type: GET_USER__ARR,
-    payload: mockTeams,
+    payload: mockUsers,
   };
 }
