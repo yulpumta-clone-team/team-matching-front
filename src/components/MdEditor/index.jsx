@@ -34,4 +34,4 @@ MarkdownEditor.propTypes = {
   mdValue: PropTypes.string.isRequired,
 };
 
-export default MarkdownEditor;
+export default React.memo(MarkdownEditor);
