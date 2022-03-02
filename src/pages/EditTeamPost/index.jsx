@@ -21,9 +21,9 @@ function EditTeamProfile() {
   };
   const { team_name, content, name, img, like_cnt } = location.state;
   // console.log(team_name);
-  const [userName, setName] = useState({ name });
-  const [teamName, setTeam] = useState({ team_name });
-  const [userImg, setImg] = useState({ img });
+  const [userName, setName] = useState(name);
+  const [teamName, setTeam] = useState(team_name);
+  const [userImg, setImg] = useState(img);
   const onNameChange = (e) => {
     // console.log(e.target.name, e.target.value);
     setName(e.target.value);
@@ -37,8 +37,8 @@ function EditTeamProfile() {
     setImg(e.target.value);
   };
   const resetVal = () => {
-    setName({ name });
-    setTeam({ team_name });
+    setName(name);
+    setTeam(team_name);
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -46,17 +46,17 @@ function EditTeamProfile() {
         <button onClick={onClickback}>back</button>
         <Board>
           <Box3>
-            <input name="사진" onChange={onImgChange} value={userImg.img} />
+            <input name="사진" onChange={onImgChange} value={userImg} />
           </Box3>
           <div>
             <MarkdownEditor mdValue={content} />
           </div>
           <Box2>
             <div>
-              이름 <input name="이름" onChange={onNameChange} value={userName.name} />
+              이름 <input name="이름" onChange={onNameChange} value={userName} />
             </div>
             <div>
-              팀이름 <input name="팀이름" onChange={onTeamChange} value={teamName.team_name} />
+              팀이름 <input name="팀이름" onChange={onTeamChange} value={teamName} />
             </div>
           </Box2>
           <div>
@@ -72,4 +72,4 @@ function EditTeamProfile() {
   );
 }
 
-export default EditTeamProfile;
+export default React.memo(EditTeamProfile);
