@@ -15,12 +15,13 @@ function TeamBoard() {
   const dispatch = useDispatch();
   const { teamArray } = useSelector((state) => state.team);
   const [teamList, setTeamList] = useState(teamArray);
-  const fetchData = async () => {
+  const fetchData = async (page) => {
+    setLoading(true);
     const { payload } = await dispatch(getTeamArr(page));
     setTeamList((prev) => [...prev, ...payload]);
+    setLoading(false);
   };
-  const [page, target, loading] = useInfiniteScroll({ fetchData });
-
+  const [target, loading, setLoading] = useInfiniteScroll({ fetchData });
   return (
     <>
       <BoardWrapper>

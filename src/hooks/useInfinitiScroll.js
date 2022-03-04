@@ -4,12 +4,12 @@ function useInfiniteScroll({ fetchData }) {
   const [page, setPage] = useState(1);
   const target = useRef(null);
   const [loading, setLoading] = useState(false);
-  const fetchMore = useCallback(async () => {
+
+  const fetchMore = () => {
     setLoading(true);
     setPage((prev) => prev + 1);
-    await fetchData();
     setLoading(false);
-  }, [page]);
+  };
 
   const handleObsever = useCallback(
     async ([entry], observer) => {
@@ -17,9 +17,9 @@ function useInfiniteScroll({ fetchData }) {
         // console.log('화면에서 제외됨');
         return;
       }
-      // console.log('화면에서 노출됨', page);
+      // console.log('화면에서 노출됨');
       observer.unobserve(entry.target);
-      await fetchMore();
+      !loading && fetchMore();
       observer.observe(target.current);
     },
     [loading],
@@ -38,7 +38,10 @@ function useInfiniteScroll({ fetchData }) {
     }
     return () => observer.current && observer.disconnect();
   }, [target]);
-  return [page, target, loading];
+  useEffect(() => {
+    fetchData(page);
+  }, [page]);
+  return [target, loading, setLoading];
 }
 
 export default useInfiniteScroll;

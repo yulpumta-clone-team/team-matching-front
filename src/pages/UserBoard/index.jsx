@@ -15,11 +15,13 @@ function UserBoard() {
   const dispatch = useDispatch();
   const { userArray } = useSelector((state) => state.user);
   const [userList, setUserList] = useState(userArray);
-  const fetchData = async () => {
+  const fetchData = async (page) => {
+    setLoading(true);
     const { payload } = await dispatch(getUserArr(page));
     setUserList((prev) => [...prev, ...payload]);
+    setLoading(false);
   };
-  const [page, target, loading] = useInfiniteScroll({ fetchData });
+  const [target, loading, setLoading] = useInfiniteScroll({ fetchData });
   return (
     <>
       <BoardWrapper>
