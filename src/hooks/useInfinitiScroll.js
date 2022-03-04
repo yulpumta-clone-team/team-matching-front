@@ -14,10 +14,10 @@ function useInfiniteScroll({ fetchData }) {
   const handleObsever = useCallback(
     async ([entry], observer) => {
       if (!entry.isIntersecting || !target) {
-        console.log('화면에서 제외됨');
+        // console.log('화면에서 제외됨');
         return;
       }
-      console.log('화면에서 노출됨', page);
+      // console.log('화면에서 노출됨', page);
       observer.unobserve(entry.target);
       await fetchMore();
       observer.observe(target.current);

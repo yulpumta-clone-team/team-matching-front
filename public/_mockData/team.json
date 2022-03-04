@@ -1,0 +1,20 @@
+{
+  "status": "000",
+  "isSuccess": true,
+  "code": 1000,
+  "message": "요청 성공",
+  "data": {
+    "team_name": "코넥트팀",
+    "name": "코넥트",
+    "content": "# 임시 데이터\n# 이런식으로하면 됩니다.\n\n### 알겠습니다\n\n안녕하세요. **프론트**입니다.",
+    "session": "string",
+    "img": "string",
+    "read": "int",
+    "job": "string",
+    "comment_cnt": 0,
+    "like_cnt": 0,
+    "createdAt": "time",
+    "updatedAt": "time",
+    "comment": []
+  }
+}

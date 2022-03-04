@@ -1,12 +1,5 @@
 import axios from 'axios';
-
-import { mockUser, mockUsers } from 'data/mockUser';
 import { GET_USER_DETAIL, GET_USER__ARR, LOGIN_USER, SIGNUP_USER } from '_types/userTypes';
-
-const fakeFetch = () =>
-  new Promise((resolve) => {
-    setTimeout(resolve, 100);
-  });
 
 export function loginUser(dataTosubmit) {
   const request = axios.post('/api/login', dataTosubmit).then((response) => response.data);
@@ -25,24 +18,21 @@ export function registerUser(dataTosubmit) {
   };
 }
 
-export function getUserDetail(dataTosubmit) {
-  // const request = axios.post('../data/team.json', dataTosubmit).then((response) => response.data);
-  // console.log(request);
-  const request = mockUser;
+export async function getUserDetail(dataTosubmit) {
+  console.log('UserDetail ID: ', dataTosubmit);
+  const { data } = await axios.get('../_mockData/user.json').then((response) => response.data);
   return {
     // request변수로 받은 data를 reducer로 넘겨주기
     type: GET_USER_DETAIL,
-    payload: request,
+    payload: data,
   };
 }
 
 export async function getUserArr(count) {
-  // const request = axios.post('../data/team.json', dataTosubmit).then((response) => response.data);
-  // console.log(request);
-  // let request = [];
-  await fakeFetch();
+  console.log('UserBoard page count: ', count);
+  const { data } = await axios.get('../_mockData/users.json').then((response) => response.data);
   return {
     type: GET_USER__ARR,
-    payload: mockUsers,
+    payload: data,
   };
 }
