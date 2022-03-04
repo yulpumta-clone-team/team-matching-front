@@ -8,7 +8,7 @@ function Main() {
     <div>
       <h1>Main</h1>
       <button onClick={openModal}>Open Modal</button>
-      <Modal show={showModal} onCloseModal={onCloseModal}>
+      <Modal show={showModal} onCloseModal={onCloseModal} isPopOver={false}>
         <div>
           <h1>this is modal</h1>
           <p>modal content</p>

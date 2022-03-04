@@ -1,11 +1,18 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import useModal from 'hooks/useModal';
 import { HOME, PROFILE, TEAM_BOARD, USER_BOARD } from 'utils/route';
+import Modal from 'components/Modal';
 import { Ul } from './style';
 
 function LoginNav({ myData }) {
   console.log('Login naviogation:', myData);
+  const { nickname, img } = myData;
+  const [showModal, onCloseModal, openModal] = useModal();
   return (
     <Ul>
       <li>
@@ -20,6 +27,26 @@ function LoginNav({ myData }) {
       <li>
         <Link to={PROFILE}>User Profile</Link>
       </li>
+      <li onClick={openModal}>
+        <img src={img} alt="profile" />
+        <span>{nickname}</span>
+      </li>
+      <Modal show={showModal} onCloseModal={onCloseModal} isPopOver>
+        <ul>
+          <li>
+            <Link to={HOME}>내 작성글</Link>
+          </li>
+          <li>
+            <Link to={USER_BOARD}>내 관심글</Link>
+          </li>
+          <li>
+            <Link to={TEAM_BOARD}>프로필 설정</Link>
+          </li>
+          <li>
+            <button>로그아웃</button>
+          </li>
+        </ul>
+      </Modal>
     </Ul>
   );
 }
