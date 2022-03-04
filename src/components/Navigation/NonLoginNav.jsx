@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { HOME, LOGIN, PROFILE, SIGN_UP, TEAM_BOARD, USER_BOARD } from 'utils/route';
+import { Ul } from './style';
 
 function NonLoginNav() {
   return (
-    <ul>
+    <Ul>
       <li>
         <Link to={HOME}>Main</Link>
       </li>
@@ -21,7 +22,7 @@ function NonLoginNav() {
       <li>
         <Link to={SIGN_UP}>Sign Up</Link>
       </li>
-    </ul>
+    </Ul>
   );
 }
 

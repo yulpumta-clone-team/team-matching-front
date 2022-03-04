@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { HOME, PROFILE, TEAM_BOARD, USER_BOARD } from 'utils/route';
+import { Ul } from './style';
 
 function LoginNav({ myData }) {
   console.log('Login naviogation:', myData);
   return (
-    <ul>
+    <Ul>
       <li>
         <Link to={HOME}>Main</Link>
       </li>
@@ -19,7 +20,7 @@ function LoginNav({ myData }) {
       <li>
         <Link to={PROFILE}>User Profile</Link>
       </li>
-    </ul>
+    </Ul>
   );
 }
 
