@@ -1,14 +1,9 @@
+import React from 'react';
 import Modal from 'components/Modal';
-import React, { useCallback, useState } from 'react';
+import useModal from 'hooks/useModal';
 
 function Main() {
-  const [showModal, setShowModal] = useState(false);
-  const onCloseModal = useCallback(() => {
-    setShowModal(false);
-  }, []);
-  const openModal = useCallback(() => {
-    setShowModal((prev) => !prev);
-  }, []);
+  const [showModal, onCloseModal, openModal] = useModal();
   return (
     <div>
       <h1>Main</h1>
