@@ -7,6 +7,7 @@
     "read": "int",
     "job": "string",
     "comment_cnt": 0,
+    "skills": ["react", "js", "ts"],
     "like_cnt": 0,
     "createdAt": "time",
     "updatedAt": "time",
