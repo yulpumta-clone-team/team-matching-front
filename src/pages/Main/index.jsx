@@ -1,12 +1,14 @@
 import React from 'react';
 import WindowModal from 'components/WindowModal';
 import useModal from 'hooks/useModal';
+import CheckBox from 'components/CheckBox';
 
 function Main() {
   const [showModal, onCloseModal, openModal] = useModal();
   return (
     <div>
       <h1>Main</h1>
+      <CheckBox />
       <button onClick={openModal}>Open Modal</button>
       <WindowModal show={showModal} onCloseModal={onCloseModal}>
         <div>
