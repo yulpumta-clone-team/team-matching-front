@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTeamArr } from '_actions/team_action';
 import Loader from 'pages/Loader';
@@ -16,6 +16,7 @@ function TeamBoard() {
   const dispatch = useDispatch();
   const { teamArray } = useSelector((state) => state.team);
   const [teamList, setTeamList] = useState(teamArray);
+  const [filteredLength, setFilteredLength] = useState(0);
   const fetchData = async (page) => {
     setLoading(true);
     const { payload } = await dispatch(getTeamArr(page));
@@ -24,12 +25,15 @@ function TeamBoard() {
   };
   const [target, loading, setLoading] = useInfiniteScroll({ fetchData });
   const [checked, setChecked, handleFilter] = useFilter();
+  useEffect(() => {
+    setFilteredLength(handleFilter(teamList).length);
+  }, [checked, teamList]);
   return (
     <>
       <CheckBox checked={checked} setChecked={setChecked} />
       <BoardWrapper>
         {handleFilter(teamList).length === 0 ? (
-          <NoDataMessage isLock={handleFilter(teamList).length === 0} />
+          <NoDataMessage isLock={filteredLength !== 0} />
         ) : (
           handleFilter(teamList).map((teamElement, idx) => (
             <TeamCard key={uuid()} teamInfo={{ ...teamElement, idx }} />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserArr } from '_actions/user_action';
 import UserCard from 'components/UserCard';
@@ -16,6 +16,7 @@ function UserBoard() {
   const dispatch = useDispatch();
   const { userArray } = useSelector((state) => state.user);
   const [userList, setUserList] = useState(userArray);
+  const [filteredLength, setFilteredLength] = useState(0);
   const fetchData = async (page) => {
     setLoading(true);
     const { payload } = await dispatch(getUserArr(page));
@@ -24,12 +25,15 @@ function UserBoard() {
   };
   const [target, loading, setLoading] = useInfiniteScroll({ fetchData });
   const [checked, setChecked, handleFilter] = useFilter();
+  useEffect(() => {
+    setFilteredLength(handleFilter(userList).length);
+  }, [checked, userList]);
   return (
     <>
       <CheckBox checked={checked} setChecked={setChecked} />
       <BoardWrapper>
         {handleFilter(userList).length === 0 ? (
-          <NoDataMessage isLock />
+          <NoDataMessage isLock={filteredLength !== 0} />
         ) : (
           handleFilter(userList).map((userElement, idx) => (
             <UserCard key={uuid()} userInfo={{ ...userElement, idx }} />
