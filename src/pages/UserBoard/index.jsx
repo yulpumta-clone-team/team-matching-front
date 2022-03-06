@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import UserCard from 'components/UserCard';
-import UpperButton from 'components/UpperButton';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Loader from 'pages/Loader';
 import { getUserArr } from '_actions/user_action';
+import UserCard from 'components/UserCard';
+import Loader from 'pages/Loader';
+import UpperButton from 'components/UpperButton';
+import CheckBox from 'components/CheckBox';
+import NoDataMessage from 'components/NoDataMessage';
 import useInfiniteScroll from 'hooks/useInfinitiScroll';
 import useFilter from 'hooks/useFilter';
-import CheckBox from 'components/CheckBox';
 import uuid from 'react-uuid';
 
 import { BoardWrapper } from './style';
@@ -27,10 +28,13 @@ function UserBoard() {
     <>
       <CheckBox checked={checked} setChecked={setChecked} />
       <BoardWrapper>
-        {handleFilter(userList).length !== 0 &&
+        {handleFilter(userList).length === 0 ? (
+          <NoDataMessage isLock />
+        ) : (
           handleFilter(userList).map((userElement, idx) => (
             <UserCard key={uuid()} userInfo={{ ...userElement, idx }} />
-          ))}
+          ))
+        )}
       </BoardWrapper>
       <div ref={target}>{loading && <Loader />}</div>
       <UpperButton />
@@ -39,18 +43,3 @@ function UserBoard() {
 }
 
 export default UserBoard;
-
-const filterObj = {
-  100: 'front',
-  101: 'react',
-  102: 'js',
-  103: 'ts',
-  104: 'vue',
-  200: 'back',
-  201: 'nodejs',
-  202: 'java',
-  203: 'spring',
-  300: 'design',
-  301: 'xd',
-  302: 'figma',
-};

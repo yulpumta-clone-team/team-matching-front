@@ -18,13 +18,16 @@ const useFilter = () => {
     301: 'xd',
     302: 'figma',
   };
-  const handleFilter = (list) => {
-    const checkedList = checked.map((e) => filterObj[e]);
-    const newList = [...list].filter(
-      ({ skills }) => skills.filter((x) => checkedList.includes(x)).length > 0,
-    );
-    return newList;
-  };
+  const handleFilter = useCallback(
+    (list) => {
+      const checkedList = checked.map((e) => filterObj[e]);
+      const newList = [...list].filter(
+        ({ skills }) => skills.filter((x) => checkedList.includes(x)).length > 0,
+      );
+      return newList;
+    },
+    [checked],
+  );
   return [checked, setChecked, handleFilter];
 };
 

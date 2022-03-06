@@ -6,7 +6,8 @@ import { TEAM_BOARD } from 'utils/route';
 import { CardTitle, CardWrapper, ImgContainer, SessionContainer } from './style';
 
 function TeamCard({ teamInfo }) {
-  const { user_id, team_id, name, session, img, read, comment_cnt, like_cnt, idx } = teamInfo;
+  const { user_id, team_id, name, skills, session, img, read, comment_cnt, like_cnt, idx } =
+    teamInfo;
   return (
     <CardWrapper>
       <h1>{idx}</h1>
@@ -16,9 +17,12 @@ function TeamCard({ teamInfo }) {
         <img src={img} alt="임시" />
       </ImgContainer>
       <SessionContainer>{session}</SessionContainer>
-      <span>{read}</span>
-      <span>{comment_cnt}</span>
-      <span>{like_cnt}</span>
+      <ul>
+        {skills.map((skill, idxx) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <li key={idxx}>{skill}</li>
+        ))}
+      </ul>
     </CardWrapper>
   );
 }
@@ -29,6 +33,7 @@ TeamCard.propTypes = {
     user_id: PropTypes.number.isRequired,
     team_id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
+    skills: PropTypes.array.isRequired,
     session: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
     read: PropTypes.number.isRequired,
