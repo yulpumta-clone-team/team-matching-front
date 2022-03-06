@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from 'components/Modal';
+import WindowModal from 'components/WindowModal';
 import useModal from 'hooks/useModal';
 
 function Main() {
@@ -8,12 +8,12 @@ function Main() {
     <div>
       <h1>Main</h1>
       <button onClick={openModal}>Open Modal</button>
-      <Modal show={showModal} onCloseModal={onCloseModal} isPopOver={false}>
+      <WindowModal show={showModal} onCloseModal={onCloseModal}>
         <div>
           <h1>this is modal</h1>
           <p>modal content</p>
         </div>
-      </Modal>
+      </WindowModal>
     </div>
   );
 }
