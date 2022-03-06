@@ -28,9 +28,12 @@ function UserCard({ userInfo }) {
         <img src={img} alt="임시" />
       </ImgContainer>
       <SessionContainer>{hope_session}</SessionContainer>
-      <span>{job}</span>
-      <span>{comment_cnt}</span>
-      <span>{like_cnt}</span>
+      <ul>
+        {skills.map((skill, idxx) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <li key={idxx}>{skill}</li>
+        ))}
+      </ul>
     </CardWrapper>
   );
 }

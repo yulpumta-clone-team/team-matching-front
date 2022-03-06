@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { CheckBoxGroupContainer } from './style';
 
-function CheckBox() {
-  const [checked, setChecked] = useState([]);
-  const handleToggle = ({ id, type }) => {
+function CheckBox({ checked, setChecked }) {
+  const handleToggle = ({ id, name, type }) => {
     const groupId = Math.floor(id / 100);
     const isGroup = id % 100 === 0;
     const currentIndex = checked.indexOf(id);
@@ -23,7 +22,7 @@ function CheckBox() {
         newChecked.splice(currentIndex, 1);
       }
     }
-    setChecked(newChecked);
+    setChecked([...new Set(newChecked)]);
   };
 
   const renderCheckBoxGroupContainer = (list, idx) => (
@@ -34,7 +33,7 @@ function CheckBox() {
             type="checkbox"
             name={name}
             id={id}
-            onChange={() => handleToggle({ id, type })}
+            onChange={() => handleToggle({ id, name, type })}
             checked={checked.indexOf(id) !== -1}
           />
           <span>{name}</span>
@@ -46,19 +45,10 @@ function CheckBox() {
   return <ul>{checkList.map((group, idx) => renderCheckBoxGroupContainer(group, idx))}</ul>;
 }
 
-// CheckBox.propTypes = {
-//   checkBoxList: PropTypes.shape({
-//     idx: PropTypes.number.isRequired,
-//     user_id: PropTypes.number.isRequired,
-//     team_id: PropTypes.number.isRequired,
-//     name: PropTypes.string.isRequired,
-//     session: PropTypes.string.isRequired,
-//     img: PropTypes.string.isRequired,
-//     read: PropTypes.number.isRequired,
-//     comment_cnt: PropTypes.number.isRequired,
-//     like_cnt: PropTypes.number.isRequired,
-//   }).isRequired,
-// };
+CheckBox.propTypes = {
+  checked: PropTypes.array.isRequired,
+  setChecked: PropTypes.func.isRequired,
+};
 
 export default CheckBox;
 

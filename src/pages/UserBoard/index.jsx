@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from 'pages/Loader';
 import { getUserArr } from '_actions/user_action';
 import useInfiniteScroll from 'hooks/useInfinitiScroll';
-
-// 임시로 만든 id발급
+import useFilter from 'hooks/useFilter';
+import CheckBox from 'components/CheckBox';
 import uuid from 'react-uuid';
 
 import { BoardWrapper } from './style';
@@ -22,11 +22,13 @@ function UserBoard() {
     setLoading(false);
   };
   const [target, loading, setLoading] = useInfiniteScroll({ fetchData });
+  const [checked, setChecked, handleFilter] = useFilter();
   return (
     <>
+      <CheckBox checked={checked} setChecked={setChecked} />
       <BoardWrapper>
-        {userList.length !== 0 &&
-          userList.map((userElement, idx) => (
+        {handleFilter(userList).length !== 0 &&
+          handleFilter(userList).map((userElement, idx) => (
             <UserCard key={uuid()} userInfo={{ ...userElement, idx }} />
           ))}
       </BoardWrapper>
@@ -37,3 +39,18 @@ function UserBoard() {
 }
 
 export default UserBoard;
+
+const filterObj = {
+  100: 'front',
+  101: 'react',
+  102: 'js',
+  103: 'ts',
+  104: 'vue',
+  200: 'back',
+  201: 'nodejs',
+  202: 'java',
+  203: 'spring',
+  300: 'design',
+  301: 'xd',
+  302: 'figma',
+};
