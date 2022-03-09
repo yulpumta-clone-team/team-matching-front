@@ -1,18 +1,19 @@
 {
   "data": {
-    "slogan": "각오",
-    "content": "자기소개",
+    "name": "홍길동",
+    "content": "# 임시 데이터\n# 이런식으로하면 됩니다.\n\n### 알겠습니다\n\n안녕하세요. **프론트**입니다.",
+    "session": "string",
     "img": "string",
-    "hope_session": "프론트앤드",
-    "skills": ["react", "ts"],
-    "status": false,
-    "porfolio": "string",
-    "job": "student",
+    "read": "int",
+    "job": "string",
+    "comment_cnt": 0,
+    "skills": ["react", "js", "ts"],
+    "like_cnt": 0,
     "createdAt": "time",
     "updatedAt": "time",
     "comments": [
       {
-        "user_id": "901929312",
+        "user_id": 140192931,
         "commment_id": "1",
         "nickname": "front_temp",
         "isLike": false,
@@ -24,7 +25,7 @@
         "replies": []
       },
       {
-        "user_id": "134124131",
+        "user_id": 134124131,
         "commment_id": "2",
         "nickname": "server_temp",
         "isLike": false,

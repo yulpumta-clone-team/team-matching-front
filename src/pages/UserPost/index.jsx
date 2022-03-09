@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import MarkdownViewer from 'components/MdViewer';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTeamArr, getTeamDetail } from '_actions/team_action';
+import { getUserDetail } from '_actions/user_action';
 import Loader from 'pages/Loader';
 import { Board, Button, Box, Box2, Box3 } from './styleu';
 
@@ -29,10 +29,10 @@ function UserPost(props) {
   const onClickback = () => {
     navigate(-1);
   };
-  // const { teamElement } = useSelector((state) => state.team);
-  const { id } = useParams();
+  const { userPostData } = useSelector((state) => state.user);
+  console.log('user', userPostData);
   useEffect(() => {
-    dispatch(getTeamDetail(id));
+    dispatch(getUserDetail(userId));
   }, []);
   if (!userElement) {
     return <Loader />;

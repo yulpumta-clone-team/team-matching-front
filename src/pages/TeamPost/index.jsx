@@ -3,20 +3,21 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import MarkdownViewer from 'components/MdViewer';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTeamArr, getTeamDetail } from '_actions/team_action';
+import { getTeamDetail } from '_actions/team_action';
 import Loader from 'pages/Loader';
 import { Board, Button, Box, Box2, Box3 } from './stylep';
 
 function TeamPost() {
+  const { teamId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onClickback = () => {
     navigate(-1);
   };
   const { teamElement } = useSelector((state) => state.team);
-  const { id } = useParams();
+  console.log(teamElement);
   useEffect(() => {
-    dispatch(getTeamDetail(id));
+    dispatch(getTeamDetail(teamId));
   }, []);
   if (!teamElement) {
     return <Loader />;
