@@ -9,6 +9,7 @@ import NoDataMessage from 'components/NoDataMessage';
 import useInfiniteScroll from 'hooks/useInfinitiScroll';
 import useScrollLock from 'hooks/useScrollLock';
 import useFilter from 'hooks/useFilter';
+import useOrder from 'hooks/useOrder';
 import uuid from 'react-uuid';
 import { BoardWrapper } from './style';
 
@@ -25,6 +26,7 @@ function UserBoard() {
   };
   const [target, loading, setLoading] = useInfiniteScroll({ fetchData });
   const [checked, setChecked, handleFilter] = useFilter();
+  const [likeOrder, setLikeOrder, handleOrder] = useOrder();
   const [setIsLock] = useScrollLock();
   useEffect(() => {
     setFilteredLength(handleFilter(userList).length);
@@ -32,15 +34,21 @@ function UserBoard() {
   useEffect(() => {
     setIsLock(filteredLength === 0);
   }, [filteredLength]);
+
   return (
     <>
-      <CheckBox checked={checked} setChecked={setChecked} />
+      <CheckBox
+        checked={checked}
+        setChecked={setChecked}
+        likeOrder={likeOrder}
+        setLikeOrder={setLikeOrder}
+      />
       <BoardWrapper>
         {filteredLength === 0 ? (
           <NoDataMessage />
         ) : (
-          handleFilter(userList).map((userElement, idx) => (
-            <UserCard key={uuid()} userInfo={{ ...userElement, idx }} />
+          handleOrder(userList, handleFilter).map((userElement) => (
+            <UserCard key={uuid()} userInfo={{ ...userElement }} />
           ))
         )}
       </BoardWrapper>

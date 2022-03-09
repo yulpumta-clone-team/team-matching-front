@@ -17,11 +17,10 @@ function UserCard({ userInfo }) {
     comment_cnt,
     like_cnt,
     status,
-    idx,
   } = userInfo;
   return (
     <CardWrapper>
-      <h1>{idx}</h1>
+      <h2>좋아요: {like_cnt}</h2>
       <Link to={`${USER_BOARD}/${user_id}`}>{nickname}</Link>
       <CardTitle>{nickname}</CardTitle>
       <ImgContainer>
@@ -40,7 +39,6 @@ function UserCard({ userInfo }) {
 
 UserCard.propTypes = {
   userInfo: PropTypes.shape({
-    idx: PropTypes.number.isRequired,
     user_id: PropTypes.number.isRequired,
     nickname: PropTypes.string.isRequired,
     hope_session: PropTypes.number.isRequired,

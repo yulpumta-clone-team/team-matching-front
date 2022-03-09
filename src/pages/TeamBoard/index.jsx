@@ -9,6 +9,7 @@ import NoDataMessage from 'components/NoDataMessage';
 import useInfiniteScroll from 'hooks/useInfinitiScroll';
 import useScrollLock from 'hooks/useScrollLock';
 import useFilter from 'hooks/useFilter';
+import useOrder from 'hooks/useOrder';
 import uuid from 'react-uuid';
 
 import { BoardWrapper } from './style';
@@ -26,6 +27,7 @@ function TeamBoard() {
   };
   const [target, loading, setLoading] = useInfiniteScroll({ fetchData });
   const [checked, setChecked, handleFilter] = useFilter();
+  const [likeOrder, setLikeOrder, handleOrder] = useOrder();
   const [setIsLock] = useScrollLock();
   useEffect(() => {
     setFilteredLength(handleFilter(teamList).length);
@@ -35,13 +37,18 @@ function TeamBoard() {
   }, [filteredLength]);
   return (
     <>
-      <CheckBox checked={checked} setChecked={setChecked} />
+      <CheckBox
+        checked={checked}
+        setChecked={setChecked}
+        likeOrder={likeOrder}
+        setLikeOrder={setLikeOrder}
+      />
       <BoardWrapper>
         {filteredLength === 0 ? (
           <NoDataMessage />
         ) : (
-          handleFilter(teamList).map((teamElement, idx) => (
-            <TeamCard key={uuid()} teamInfo={{ ...teamElement, idx }} />
+          handleOrder(teamList, handleFilter).map((teamElement) => (
+            <TeamCard key={uuid()} teamInfo={{ ...teamElement }} />
           ))
         )}
       </BoardWrapper>

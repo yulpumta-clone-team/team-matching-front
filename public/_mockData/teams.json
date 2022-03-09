@@ -12,7 +12,7 @@
       "img": "stirng",
       "read": 0,
       "comment_cnt": 0,
-      "like_cnt": 0,
+      "like_cnt": 10,
       "skills": ["react", "js", "java", "nodejs"]
     },
     {
@@ -23,7 +23,7 @@
       "img": "stirng",
       "read": 0,
       "comment_cnt": 0,
-      "like_cnt": 0,
+      "like_cnt": 30,
       "skills": ["js", "ts", "java", "nodejs"]
     },
     {
@@ -34,7 +34,7 @@
       "img": "stirng",
       "read": 0,
       "comment_cnt": 0,
-      "like_cnt": 0,
+      "like_cnt": 5,
       "skills": ["js", "ts", "java", "spring"]
     },
     {
@@ -45,7 +45,7 @@
       "img": "stirng",
       "read": 0,
       "comment_cnt": 0,
-      "like_cnt": 0,
+      "like_cnt": 3,
       "skills": ["js", "ts", "java", "spring", "xd"]
     },
     {
@@ -56,7 +56,7 @@
       "img": "stirng",
       "read": 0,
       "comment_cnt": 0,
-      "like_cnt": 0,
+      "like_cnt": 7,
       "skills": ["react", "js", "ts", "nodejs", "spring"]
     },
     {
@@ -67,7 +67,7 @@
       "img": "stirng",
       "read": 0,
       "comment_cnt": 0,
-      "like_cnt": 0,
+      "like_cnt": 9,
       "skills": ["react", "js", "ts", "java", "spring", "xd"]
     },
     {
@@ -78,7 +78,7 @@
       "img": "stirng",
       "read": 0,
       "comment_cnt": 0,
-      "like_cnt": 0,
+      "like_cnt": 10,
       "skills": ["react", "js", "java", "spring"]
     },
     {
@@ -89,7 +89,7 @@
       "img": "stirng",
       "read": 0,
       "comment_cnt": 0,
-      "like_cnt": 0,
+      "like_cnt": 4,
       "skills": ["react", "js", "ts", "java", "spring"]
     },
     {
@@ -100,7 +100,7 @@
       "img": "stirng",
       "read": 0,
       "comment_cnt": 0,
-      "like_cnt": 0,
+      "like_cnt": 2,
       "skills": ["react", "ts", "nodejs", "figma"]
     },
     {
@@ -111,7 +111,7 @@
       "img": "stirng",
       "read": 0,
       "comment_cnt": 0,
-      "like_cnt": 0,
+      "like_cnt": 6,
       "skills": ["react", "js", "ts", "nodejs", "figma"]
     }
   ]

@@ -21,7 +21,7 @@
       "skills": ["nodejs", "java", "spring"],
       "job": "student",
       "comment_cnt": 0,
-      "like_cnt": 0,
+      "like_cnt": 3,
       "status": true
     },
     {
@@ -33,7 +33,7 @@
       "skills": ["react", "js"],
       "job": "student",
       "comment_cnt": 0,
-      "like_cnt": 0,
+      "like_cnt": 10,
       "status": true
     },
     {
@@ -45,7 +45,7 @@
       "skills": ["react", "js", "ts"],
       "job": "student",
       "comment_cnt": 0,
-      "like_cnt": 0,
+      "like_cnt": 5,
       "status": true
     },
     {
@@ -57,7 +57,7 @@
       "skills": ["java", "spring"],
       "job": "student",
       "comment_cnt": 0,
-      "like_cnt": 0,
+      "like_cnt": 2,
       "status": true
     },
     {
@@ -81,7 +81,7 @@
       "skills": ["react", "js", "ts"],
       "job": "student",
       "comment_cnt": 0,
-      "like_cnt": 0,
+      "like_cnt": 4,
       "status": true
     },
     {
@@ -93,7 +93,7 @@
       "skills": ["nodejs"],
       "job": "student",
       "comment_cnt": 0,
-      "like_cnt": 0,
+      "like_cnt": 7,
       "status": true
     },
     {
@@ -105,7 +105,7 @@
       "skills": ["xd", "figma"],
       "job": "student",
       "comment_cnt": 0,
-      "like_cnt": 0,
+      "like_cnt": 10,
       "status": true
     }
   ]
