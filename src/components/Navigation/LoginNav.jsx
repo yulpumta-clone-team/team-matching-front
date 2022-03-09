@@ -28,7 +28,7 @@ function LoginNav({ myData }) {
         <Link to={PROFILE}>User Profile</Link>
       </li>
       <li onClick={openModal}>
-        <img src={img} alt="profile" />
+        <img style={{ width: '30px' }} src={img} alt="profile" />
         <span>{nickname}</span>
       </li>
       <Menu style={{ right: 0, top: 80 }} show={showModal} onCloseModal={onCloseModal}>

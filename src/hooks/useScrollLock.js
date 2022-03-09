@@ -1,8 +1,8 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const useScrollLock = () => {
+  const [isLock, setIsLock] = useState(false);
   const lockScroll = useCallback(() => {
-    console.log(1);
     document.body.style.overflow = 'hidden';
     document.body.style.paddingRight = '17px';
   }, []);
@@ -11,14 +11,17 @@ const useScrollLock = () => {
     document.body.style.overflow = '';
     document.body.style.paddingRight = '';
   }, []);
-  const handleLock = (isLock) => {
+  const handleLock = () => {
     if (isLock) {
       lockScroll();
     } else {
       unlockScroll();
     }
   };
-  return [handleLock];
+  useEffect(() => {
+    handleLock();
+  }, [isLock]);
+  return [setIsLock];
 };
 
 export default useScrollLock;

@@ -7,9 +7,9 @@ import UpperButton from 'components/UpperButton';
 import CheckBox from 'components/CheckBox';
 import NoDataMessage from 'components/NoDataMessage';
 import useInfiniteScroll from 'hooks/useInfinitiScroll';
+import useScrollLock from 'hooks/useScrollLock';
 import useFilter from 'hooks/useFilter';
 import uuid from 'react-uuid';
-
 import { BoardWrapper } from './style';
 
 function UserBoard() {
@@ -25,15 +25,19 @@ function UserBoard() {
   };
   const [target, loading, setLoading] = useInfiniteScroll({ fetchData });
   const [checked, setChecked, handleFilter] = useFilter();
+  const [setIsLock] = useScrollLock();
   useEffect(() => {
     setFilteredLength(handleFilter(userList).length);
   }, [checked, userList]);
+  useEffect(() => {
+    setIsLock(filteredLength === 0);
+  }, [filteredLength]);
   return (
     <>
       <CheckBox checked={checked} setChecked={setChecked} />
       <BoardWrapper>
-        {handleFilter(userList).length === 0 ? (
-          <NoDataMessage isLock={filteredLength !== 0} />
+        {filteredLength === 0 ? (
+          <NoDataMessage />
         ) : (
           handleFilter(userList).map((userElement, idx) => (
             <UserCard key={uuid()} userInfo={{ ...userElement, idx }} />
