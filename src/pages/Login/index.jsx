@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { OAUTH_URL } from 'utils/route';
-import { loginUser } from '_actions/user_action';
+import { loginUser } from '_actions/auth_action';
 
 function Login() {
   const dispatch = useDispatch();
