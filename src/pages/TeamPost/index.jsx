@@ -14,12 +14,12 @@ function TeamPost() {
   const onClickback = () => {
     navigate(-1);
   };
-  const { teamElement } = useSelector((state) => state.team);
-  console.log(teamElement);
+  const { targetTeam } = useSelector((state) => state.team);
+  console.log(targetTeam);
   useEffect(() => {
     dispatch(getTeamDetail(teamId));
   }, []);
-  if (!teamElement) {
+  if (!targetTeam) {
     return <Loader />;
   }
   const {
@@ -35,7 +35,7 @@ function TeamPost() {
     createdAt,
     updatedAt,
     comment,
-  } = teamElement;
+  } = targetTeam;
   return (
     <div>
       <button onClick={onClickback}>back</button>

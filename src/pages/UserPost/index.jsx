@@ -29,8 +29,8 @@ function UserPost(props) {
   const onClickback = () => {
     navigate(-1);
   };
-  const { userPostData } = useSelector((state) => state.user);
-  console.log('user', userPostData);
+  const { targetUser } = useSelector((state) => state.user);
+  console.log('user', targetUser);
   useEffect(() => {
     dispatch(getUserDetail(userId));
   }, []);

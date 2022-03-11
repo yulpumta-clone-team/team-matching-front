@@ -8,7 +8,7 @@ import {
 
 const initState = {
   myData: null,
-  userPostData: null,
+  targetUser: null,
   userArray: [],
 };
 
@@ -24,7 +24,7 @@ const userReducer = (state = initState, action) => {
       console.log(action.payload);
       return { ...state };
     case GET_USER_DETAIL:
-      return { ...state, userPostData: action.payload };
+      return { ...state, targetUser: action.payload };
     case GET_USER__ARR:
       return { ...state, userArray: action.payload };
     default:
