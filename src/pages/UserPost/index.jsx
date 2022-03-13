@@ -23,7 +23,7 @@ function UserPost() {
   const { myData } = useSelector((state) => state.auth);
   const { targetUser } = useSelector((state) => state.user);
   useEffect(() => {
-    dispatch(getUserDetail(userId));
+    dispatch(getUserDetail(Number(userId)));
   }, [dispatch, userId]);
   const onSubmit = (event) => {
     event.preventDefault();
@@ -44,6 +44,7 @@ function UserPost() {
     return <Loader />;
   }
   const {
+    user_id,
     name,
     content,
     session,
@@ -73,7 +74,7 @@ function UserPost() {
           <input value={commentValue} onChange={commentHander} placeholder="댓글을 입력하세요." />
           <button type="submit">작성</button>
         </form>
-        <CommentContainer type={USER} comments={comments} dispatchComment={dispatchComment} />
+        <CommentContainer postId={user_id} comments={comments} dispatchComment={dispatchComment} />
       </Board>
     </div>
   );

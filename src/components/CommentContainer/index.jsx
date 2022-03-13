@@ -2,19 +2,23 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import Comment from 'components/Comment';
 
-function CommentContainer({ type, comments, dispatchComment }) {
-  console.log(comments);
+function CommentContainer({ postId, comments, dispatchComment }) {
   return (
     <ul>
       {comments.map((comment) => (
-        <Comment key={comment.id} comment={comment} dispatchComment={dispatchComment} />
+        <Comment
+          key={comment.id}
+          postId={postId}
+          comment={comment}
+          dispatchComment={dispatchComment}
+        />
       ))}
     </ul>
   );
 }
 
 CommentContainer.propTypes = {
-  type: PropTypes.string.isRequired,
+  postId: PropTypes.number.isRequired,
   comments: PropTypes.array.isRequired,
   dispatchComment: PropTypes.object.isRequired,
 };

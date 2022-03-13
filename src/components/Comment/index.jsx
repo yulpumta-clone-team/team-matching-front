@@ -4,11 +4,10 @@ import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import useInput from 'hooks/useInput';
 
-function Comment({ comment, dispatchComment }) {
-  const { id, nickname, content, createdAt, updatedAt, team_id, user_id } = comment;
+function Comment({ postId, comment, dispatchComment }) {
+  const { id, nickname, content, createdAt, updatedAt, user_id } = comment;
   const [editValue, editValueHandler, setEditValue] = useInput('');
   const [activeEditForm, setActiveEditForm] = useState(null);
-  const postId = team_id || user_id;
   const deleteComment = ({ id }) => {
     dispatchComment.deleteComment({ id });
   };
@@ -21,7 +20,7 @@ function Comment({ comment, dispatchComment }) {
     dispatchComment.patchComment({ id, editValue });
     setActiveEditForm(null);
   };
-  console.log(postId, team_id, user_id);
+  console.log('해당포스트 id', postId);
   return (
     <li>
       <h3>{nickname}</h3>
@@ -62,9 +61,11 @@ function Comment({ comment, dispatchComment }) {
 }
 
 Comment.propTypes = {
+  postId: PropTypes.number.isRequired,
   dispatchComment: PropTypes.object.isRequired,
   comment: PropTypes.shape({
     id: PropTypes.string.isRequired,
+    user_id: PropTypes.number.isRequired,
     nickname: PropTypes.string.isRequired,
     isLike: PropTypes.bool.isRequired,
     content: PropTypes.string.isRequired,
@@ -73,8 +74,6 @@ Comment.propTypes = {
     updatedAt: PropTypes.string.isRequired,
     isSecret: PropTypes.bool.isRequired,
     replies: PropTypes.array.isRequired,
-    team_id: PropTypes.number,
-    user_id: PropTypes.number,
   }).isRequired,
 };
 

@@ -4,6 +4,7 @@
   "code": 1000,
   "message": "요청 성공",
   "data": {
+    "team_id": 88888888,
     "team_name": "코넥트팀",
     "name": "코넥트",
     "content": "# 임시 데이터\n# 이런식으로하면 됩니다.\n\n### 알겠습니다\n\n안녕하세요. **프론트**입니다.",
@@ -16,6 +17,19 @@
     "createdAt": "time",
     "updatedAt": "time",
     "skills": ["react", "js", "ts", "java", "spring", "xd"],
-    "comment": []
+    "comment": [
+      {
+        "id": "1",
+        "user_id": 140192931,
+        "nickname": "front_temp",
+        "isLike": false,
+        "content": "연습용 댓글입니다.",
+        "img": "string",
+        "createdAt": "2022-03-01 00:24:15.510341",
+        "updatedAt": "2022-03-04 00:24:15.510341",
+        "isSecret": false,
+        "replies": []
+      }
+    ]
   }
 }
