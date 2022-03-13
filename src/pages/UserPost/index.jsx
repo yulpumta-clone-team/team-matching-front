@@ -73,7 +73,7 @@ function UserPost() {
           <input value={commentValue} onChange={commentHander} placeholder="댓글을 입력하세요." />
           <button type="submit">작성</button>
         </form>
-        <CommentContainer comments={comments} dispatchComment={dispatchComment} />
+        <CommentContainer type={USER} comments={comments} dispatchComment={dispatchComment} />
       </Board>
     </div>
   );

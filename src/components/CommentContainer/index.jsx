@@ -2,7 +2,8 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import Comment from 'components/Comment';
 
-function CommentContainer({ comments, dispatchComment }) {
+function CommentContainer({ type, comments, dispatchComment }) {
+  console.log(comments);
   return (
     <ul>
       {comments.map((comment) => (
@@ -13,6 +14,7 @@ function CommentContainer({ comments, dispatchComment }) {
 }
 
 CommentContainer.propTypes = {
+  type: PropTypes.string.isRequired,
   comments: PropTypes.array.isRequired,
   dispatchComment: PropTypes.object.isRequired,
 };
