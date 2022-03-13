@@ -3,11 +3,14 @@ import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import useInput from 'hooks/useInput';
+import { useSelector } from 'react-redux';
 
 function Comment({ postId, comment, dispatchComment }) {
+  const { myData } = useSelector((state) => state.auth);
   const { id, nickname, content, createdAt, updatedAt, user_id } = comment;
   const [editValue, editValueHandler, setEditValue] = useInput('');
   const [activeEditForm, setActiveEditForm] = useState(null);
+  const isMine = myData.user_id === user_id;
   const deleteComment = ({ id }) => {
     dispatchComment.deleteComment({ id });
   };
@@ -20,7 +23,6 @@ function Comment({ postId, comment, dispatchComment }) {
     dispatchComment.patchComment({ id, editValue });
     setActiveEditForm(null);
   };
-  console.log('해당포스트 id', postId);
   return (
     <li>
       <h3>{nickname}</h3>
@@ -31,30 +33,33 @@ function Comment({ postId, comment, dispatchComment }) {
       ) : (
         <span>{dayjs(createdAt).format('YYYY년MM월DD일 HH시mm분ss초')}</span>
       )}
-
-      <button
-        onClick={() => {
-          deleteComment({ id });
-        }}
-      >
-        삭제
-      </button>
-      <button
-        onClick={() => {
-          activeTargetEditForm({ id, content });
-        }}
-      >
-        수정
-      </button>
-      {activeEditForm === id && (
-        <form
-          onSubmit={(event) => {
-            editComment({ event, id });
-          }}
-        >
-          <input value={editValue} onChange={editValueHandler} />
-          <button type="submit">수정완료</button>
-        </form>
+      {isMine && (
+        <div>
+          <button
+            onClick={() => {
+              deleteComment({ id });
+            }}
+          >
+            삭제
+          </button>
+          <button
+            onClick={() => {
+              activeTargetEditForm({ id, content });
+            }}
+          >
+            수정
+          </button>
+          {activeEditForm === id && (
+            <form
+              onSubmit={(event) => {
+                editComment({ event, id });
+              }}
+            >
+              <input value={editValue} onChange={editValueHandler} />
+              <button type="submit">수정완료</button>
+            </form>
+          )}
+        </div>
       )}
     </li>
   );
