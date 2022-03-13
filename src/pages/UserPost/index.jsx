@@ -6,7 +6,7 @@ import MarkdownViewer from 'components/MdViewer';
 import CommentContainer from 'components/CommentContainer';
 import useInput from 'hooks/useInput';
 import { getUserDetail } from '_actions/user_action';
-import handleComment from 'utils/handleComment';
+import { handleComment } from 'utils/handleComment';
 import { USER } from 'utils/constant';
 import { Board, Button, Box, Box2, Box3 } from './styleu';
 

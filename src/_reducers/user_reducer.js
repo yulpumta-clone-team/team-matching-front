@@ -1,4 +1,5 @@
 /* eslint-disable no-case-declarations */
+import { handleCommentReducer } from 'utils/handleComment';
 import {
   DELETE_USER_COMMENT,
   GET_USER_DETAIL,
@@ -14,7 +15,7 @@ const initState = {
 };
 
 const userReducer = (state = initState, action) => {
-  // type마다 다른 것을 switch로 처리
+  const handlecomment = handleCommentReducer(state.targetUser);
   const { targetUser } = state;
   switch (action.type) {
     case GET_USER_DETAIL:
@@ -24,42 +25,30 @@ const userReducer = (state = initState, action) => {
     case POST_USER_COMMENT:
       return {
         ...state,
-        targetUser: { ...targetUser, comments: [...[...targetUser.comments], action.payload] },
+        targetUser: { ...targetUser, comments: handlecomment.postComment(action.payload) },
       };
     case DELETE_USER_COMMENT:
       return {
         ...state,
         targetUser: {
           ...targetUser,
-          comments: [...targetUser.comments].filter((comment) => comment.id !== action.payload),
+          comments: handlecomment.deleteComment(action.payload),
         },
       };
     case PATCH_USER_COMMENT:
-      const { id: patchId, editValue, updatedAt: patchUpdatedAt } = action.payload;
       return {
         ...state,
         targetUser: {
           ...targetUser,
-          comments: [...targetUser.comments].map((comment) => {
-            if (comment.id === patchId) {
-              return { ...comment, content: editValue, updatedAt: patchUpdatedAt };
-            }
-            return comment;
-          }),
+          comments: handlecomment.patchComment(action.payload),
         },
       };
     case HANDLE_SECRET_USER_COMMENT:
-      const { id: handleSecretId, updatedAt: handleSecretUpdatedAt } = action.payload;
       return {
         ...state,
         targetUser: {
           ...targetUser,
-          comments: [...targetUser.comments].map((comment) => {
-            if (comment.id === handleSecretId) {
-              return { ...comment, isSecret: !comment.isSecret, updatedAt: handleSecretUpdatedAt };
-            }
-            return comment;
-          }),
+          comments: handlecomment.handleSecret(action.payload),
         },
       };
     default:

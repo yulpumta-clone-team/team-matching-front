@@ -7,7 +7,7 @@ import {
 } from '_actions/user_action';
 import { USER } from './constant';
 
-export default function handleComment(type, dispatch) {
+export function handleComment(type, dispatch) {
   const isUser = type === USER;
   return {
     postComment(dataToSubmit) {
@@ -21,6 +21,36 @@ export default function handleComment(type, dispatch) {
     },
     handleSecret(dataToSubmit) {
       isUser ? dispatch(handleSecretUserComment(dataToSubmit)) : null;
+    },
+  };
+}
+
+export function handleCommentReducer(target) {
+  const targetElement = target;
+  return {
+    postComment(payload) {
+      return [...[...targetElement.comments], payload];
+    },
+    deleteComment(payload) {
+      return [...targetElement.comments].filter((comment) => comment.id !== payload);
+    },
+    patchComment(payload) {
+      const { id, editValue, updatedAt } = payload;
+      return [...targetElement.comments].map((comment) => {
+        if (comment.id === id) {
+          return { ...comment, content: editValue, updatedAt };
+        }
+        return comment;
+      });
+    },
+    handleSecret(payload) {
+      const { id, updatedAt } = payload;
+      return [...targetElement.comments].map((comment) => {
+        if (comment.id === id) {
+          return { ...comment, isSecret: !comment.isSecret, updatedAt };
+        }
+        return comment;
+      });
     },
   };
 }

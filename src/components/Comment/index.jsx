@@ -27,51 +27,57 @@ function Comment({ postId, comment, dispatchComment }) {
     dispatchComment.handleSecret({ id });
   };
   return (
-    <li>
-      <h3>{nickname}</h3>
-      <span>{content}</span>
-      <br />
-      {updatedAt ? (
-        <span>{dayjs(updatedAt).format('YYYY년MM월DD일 HH시mm분ss초')}</span>
+    <div>
+      {isSecret ? (
+        <li>비밀댓글입니다.</li>
       ) : (
-        <span>{dayjs(createdAt).format('YYYY년MM월DD일 HH시mm분ss초')}</span>
-      )}
-      {isMine && (
-        <div>
-          <button
-            onClick={() => {
-              handleSecret({ id });
-            }}
-          >
-            {isSecret ? '공개' : '비밀'}
-          </button>
-          <button
-            onClick={() => {
-              deleteComment({ id });
-            }}
-          >
-            삭제
-          </button>
-          <button
-            onClick={() => {
-              activeTargetEditForm({ id, content });
-            }}
-          >
-            수정
-          </button>
-          {activeEditForm === id && (
-            <form
-              onSubmit={(event) => {
-                editComment({ event, id });
-              }}
-            >
-              <input value={editValue} onChange={editValueHandler} />
-              <button type="submit">수정완료</button>
-            </form>
+        <li>
+          <h3>{nickname}</h3>
+          <span>{content}</span>
+          <br />
+          {updatedAt ? (
+            <span>{dayjs(updatedAt).format('YYYY년MM월DD일 HH시mm분ss초')}</span>
+          ) : (
+            <span>{dayjs(createdAt).format('YYYY년MM월DD일 HH시mm분ss초')}</span>
           )}
-        </div>
+          {isMine && (
+            <div>
+              <button
+                onClick={() => {
+                  handleSecret({ id });
+                }}
+              >
+                {isSecret ? '공개' : '비밀'}
+              </button>
+              <button
+                onClick={() => {
+                  deleteComment({ id });
+                }}
+              >
+                삭제
+              </button>
+              <button
+                onClick={() => {
+                  activeTargetEditForm({ id, content });
+                }}
+              >
+                수정
+              </button>
+              {activeEditForm === id && (
+                <form
+                  onSubmit={(event) => {
+                    editComment({ event, id });
+                  }}
+                >
+                  <input value={editValue} onChange={editValueHandler} />
+                  <button type="submit">수정완료</button>
+                </form>
+              )}
+            </div>
+          )}
+        </li>
       )}
-    </li>
+    </div>
   );
 }
 

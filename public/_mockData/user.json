@@ -36,6 +36,18 @@
         "updatedAt": "2022-03-04 00:24:15.510341",
         "isSecret": false,
         "replies": []
+      },
+      {
+        "id": "4",
+        "user_id": 140192931,
+        "nickname": "front_temp",
+        "isLike": false,
+        "content": "연습용 댓글입니다.",
+        "img": "string",
+        "createdAt": "2022-03-01 00:24:15.510341",
+        "updatedAt": "2022-03-04 00:24:15.510341",
+        "isSecret": true,
+        "replies": []
       }
     ]
   }
