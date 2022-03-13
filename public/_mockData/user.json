@@ -15,7 +15,7 @@
     "comments": [
       {
         "user_id": 140192931,
-        "comment_id": 1,
+        "comment_id": "1",
         "nickname": "front_temp",
         "isLike": false,
         "content": "연습용 댓글입니다.",
@@ -27,7 +27,7 @@
       },
       {
         "user_id": 134124131,
-        "comment_id": 2,
+        "comment_id": "2",
         "nickname": "server_temp",
         "isLike": false,
         "content": "안녕하세요",
