@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import useInput from 'hooks/useInput';
 import useHandlePublishedDate from 'hooks/useHandlePublichedDate';
-import { handlePublishedDate, setDefaultProfileImage } from 'utils/constant';
+import { setDefaultProfileImage } from 'utils/constant';
 import { ButtonContainer, CommentLi } from './style';
 
 function Comment({ postId, comment, dispatchComment }) {
@@ -36,10 +36,11 @@ function Comment({ postId, comment, dispatchComment }) {
       ) : (
         <CommentLi>
           <img src={setDefaultProfileImage(img)} alt={`${nickname} profile`} />
-          <h3>{nickname}</h3>
-          <span>{content}</span>
-          <br />
-          <span>{handlePublishedDate()}</span>
+          <div>
+            <h3>{nickname}</h3>
+            <span>{content}</span>
+            <span>{handlePublishedDate()}</span>
+          </div>
           {isMine && (
             <ButtonContainer>
               <button
