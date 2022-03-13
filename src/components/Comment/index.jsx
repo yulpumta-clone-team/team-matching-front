@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 function Comment({ postId, comment, dispatchComment }) {
   const { myData } = useSelector((state) => state.auth);
-  const { id, nickname, content, createdAt, updatedAt, user_id } = comment;
+  const { id, nickname, content, createdAt, updatedAt, user_id, isSecret } = comment;
   const [editValue, editValueHandler, setEditValue] = useInput('');
   const [activeEditForm, setActiveEditForm] = useState(null);
   const isMine = myData.user_id === user_id;
@@ -23,6 +23,9 @@ function Comment({ postId, comment, dispatchComment }) {
     dispatchComment.patchComment({ id, editValue });
     setActiveEditForm(null);
   };
+  const handleSecret = ({ id }) => {
+    dispatchComment.handleSecret({ id });
+  };
   return (
     <li>
       <h3>{nickname}</h3>
@@ -35,6 +38,13 @@ function Comment({ postId, comment, dispatchComment }) {
       )}
       {isMine && (
         <div>
+          <button
+            onClick={() => {
+              handleSecret({ id });
+            }}
+          >
+            {isSecret ? '공개' : '비밀'}
+          </button>
           <button
             onClick={() => {
               deleteComment({ id });

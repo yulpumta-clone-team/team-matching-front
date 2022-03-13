@@ -3,6 +3,7 @@ import {
   DELETE_USER_COMMENT,
   GET_USER_DETAIL,
   GET_USER__ARR,
+  HANDLE_SECRET_USER_COMMENT,
   PATCH_USER_COMMENT,
   POST_USER_COMMENT,
 } from '_types/userTypes';
@@ -34,14 +35,28 @@ const userReducer = (state = initState, action) => {
         },
       };
     case PATCH_USER_COMMENT:
-      const { id, editValue, updatedAt } = action.payload;
+      const { id: patchId, editValue, updatedAt: patchUpdatedAt } = action.payload;
       return {
         ...state,
         targetUser: {
           ...targetUser,
           comments: [...targetUser.comments].map((comment) => {
-            if (comment.id === id) {
-              return { ...comment, content: editValue, updatedAt };
+            if (comment.id === patchId) {
+              return { ...comment, content: editValue, updatedAt: patchUpdatedAt };
+            }
+            return comment;
+          }),
+        },
+      };
+    case HANDLE_SECRET_USER_COMMENT:
+      const { id: handleSecretId, updatedAt: handleSecretUpdatedAt } = action.payload;
+      return {
+        ...state,
+        targetUser: {
+          ...targetUser,
+          comments: [...targetUser.comments].map((comment) => {
+            if (comment.id === handleSecretId) {
+              return { ...comment, isSecret: !comment.isSecret, updatedAt: handleSecretUpdatedAt };
             }
             return comment;
           }),

@@ -3,6 +3,7 @@ import {
   DELETE_USER_COMMENT,
   GET_USER_DETAIL,
   GET_USER__ARR,
+  HANDLE_SECRET_USER_COMMENT,
   PATCH_USER_COMMENT,
   POST_USER_COMMENT,
 } from '_types/userTypes';
@@ -48,7 +49,6 @@ export async function postUserComment(dataTosubmit) {
   };
 }
 export async function patchUserComment(dataTosubmit) {
-  const { id, editValue } = dataTosubmit;
   const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
   return {
     type: PATCH_USER_COMMENT,
@@ -60,6 +60,14 @@ export async function deleteUserComment(dataTosubmit) {
   return {
     type: DELETE_USER_COMMENT,
     payload: id,
+  };
+}
+
+export async function handleSecretUserComment(dataTosubmit) {
+  const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
+  return {
+    type: HANDLE_SECRET_USER_COMMENT,
+    payload: { ...dataTosubmit, updatedAt },
   };
 }
 

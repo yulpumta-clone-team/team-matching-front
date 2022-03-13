@@ -1,5 +1,10 @@
 /* eslint-disable no-unused-expressions */
-import { deleteUserComment, patchUserComment, postUserComment } from '_actions/user_action';
+import {
+  deleteUserComment,
+  handleSecretUserComment,
+  patchUserComment,
+  postUserComment,
+} from '_actions/user_action';
 import { USER } from './constant';
 
 export default function handleComment(type, dispatch) {
@@ -13,6 +18,9 @@ export default function handleComment(type, dispatch) {
     },
     patchComment(dataToSubmit) {
       isUser ? dispatch(patchUserComment(dataToSubmit)) : null;
+    },
+    handleSecret(dataToSubmit) {
+      isUser ? dispatch(handleSecretUserComment(dataToSubmit)) : null;
     },
   };
 }
