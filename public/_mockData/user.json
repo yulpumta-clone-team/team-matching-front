@@ -1,5 +1,6 @@
 {
   "data": {
+    "user_id": "409918278",
     "name": "홍길동",
     "content": "# 임시 데이터\n# 이런식으로하면 됩니다.\n\n### 알겠습니다\n\n안녕하세요. **프론트**입니다.",
     "session": "string",
@@ -9,30 +10,30 @@
     "comment_cnt": 0,
     "skills": ["react", "js", "ts"],
     "like_cnt": 0,
-    "createdAt": "time",
-    "updatedAt": "time",
+    "createdAt": "2022-02-23 00:24:15.510341",
+    "updatedAt": "2022-02-24 00:24:15.510341",
     "comments": [
       {
         "user_id": 140192931,
-        "commment_id": "1",
+        "comment_id": 1,
         "nickname": "front_temp",
         "isLike": false,
         "content": "연습용 댓글입니다.",
         "img": "string",
-        "createdAt": "string",
-        "updateAt": "tring",
+        "createdAt": "2022-03-01 00:24:15.510341",
+        "updatedAt": "2022-03-04 00:24:15.510341",
         "isSecret": false,
         "replies": []
       },
       {
         "user_id": 134124131,
-        "commment_id": "2",
+        "comment_id": 2,
         "nickname": "server_temp",
         "isLike": false,
         "content": "안녕하세요",
         "img": "string",
-        "createdAt": "string",
-        "updateAt": "tring",
+        "createdAt": "2022-03-02 00:24:15.510341",
+        "updatedAt": "2022-03-04 00:24:15.510341",
         "isSecret": false,
         "replies": []
       }

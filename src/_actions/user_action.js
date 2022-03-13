@@ -1,5 +1,13 @@
 import axios from 'axios';
-import { GET_USER_DETAIL, GET_USER__ARR, LOGIN_USER, SIGNUP_USER } from '_types/userTypes';
+import {
+  DELETE_USER_COMMENT,
+  GET_USER_DETAIL,
+  GET_USER__ARR,
+  PATCH_USER_COMMENT,
+  POST_USER_COMMENT,
+} from '_types/userTypes';
+import uuid from 'react-uuid';
+import dayjs from 'dayjs';
 
 export async function getUserDetail(dataTosubmit) {
   console.log('UserDetail ID: ', dataTosubmit);
@@ -19,3 +27,51 @@ export async function getUserArr(count) {
     payload: data,
   };
 }
+
+export async function postUserComment(dataTosubmit) {
+  const { user_id, nickname, content, isSecret } = dataTosubmit;
+  const newCommentCreateAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
+  const newCommentId = uuid();
+  const newComment = {
+    ...commentObj,
+    user_id,
+    comment_id: newCommentId,
+    nickname,
+    content,
+    isSecret,
+    createdAt: newCommentCreateAt,
+    updatedAt: newCommentCreateAt,
+  };
+  return {
+    type: POST_USER_COMMENT,
+    payload: newComment,
+  };
+}
+export async function patchUserComment(dataTosubmit) {
+  const { comment_id, editValue } = dataTosubmit;
+  const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
+  return {
+    type: PATCH_USER_COMMENT,
+    payload: { ...dataTosubmit, updatedAt },
+  };
+}
+export async function deleteUserComment(dataTosubmit) {
+  const { comment_id } = dataTosubmit;
+  return {
+    type: DELETE_USER_COMMENT,
+    payload: comment_id,
+  };
+}
+
+const commentObj = {
+  user_id: null,
+  comment_id: null,
+  nickname: null,
+  isLike: false,
+  content: null,
+  img: 'https://user-images.githubusercontent.com/71386219/157435570-a48382a8-63e5-4d25-91f4-e506289424b5.png',
+  createdAt: null,
+  updatedAt: null,
+  isSecret: false,
+  replies: [],
+};
