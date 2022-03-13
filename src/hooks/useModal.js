@@ -3,7 +3,6 @@ import { useCallback, useState } from 'react';
 const useModal = () => {
   const [showModal, setShowModal] = useState(false);
   const onCloseModal = useCallback((e) => {
-    console.log(e.target);
     setShowModal(false);
   }, []);
   const openModal = useCallback(() => {

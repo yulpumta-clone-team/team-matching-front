@@ -3,8 +3,7 @@ import styled from 'styled-components';
 export const temp = styled.div``;
 
 export const Board = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
   gap: 12px;
   width: 600px;
   margin: 0 auto;
@@ -25,7 +24,7 @@ export const Button = styled.button`
   cursor: pointer;
 `;
 
-export const Box = styled.ul`
+export const Box = styled.div`
   display: flex;
   width: 200px;
   padding: 15px;
@@ -35,7 +34,7 @@ export const Box = styled.ul`
   float: right;
 `;
 
-export const Box2 = styled.ul`
+export const Box2 = styled.div`
   display: flex;
   width: 250px;
   padding: 15px;
@@ -43,7 +42,7 @@ export const Box2 = styled.ul`
   float: right;
 `;
 
-export const Box3 = styled.ul`
+export const Box3 = styled.div`
   display: flex;
   width: 200px;
   padding: 15px;
