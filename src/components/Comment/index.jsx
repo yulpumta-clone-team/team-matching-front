@@ -1,15 +1,18 @@
 /* eslint-disable no-shadow */
 import React, { memo, useState } from 'react';
-import PropTypes from 'prop-types';
-import dayjs from 'dayjs';
-import useInput from 'hooks/useInput';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import useInput from 'hooks/useInput';
+import useHandlePublishedDate from 'hooks/useHandlePublichedDate';
+import { handlePublishedDate, setDefaultProfileImage } from 'utils/constant';
+import { ButtonContainer, CommentLi } from './style';
 
 function Comment({ postId, comment, dispatchComment }) {
   const { myData } = useSelector((state) => state.auth);
-  const { id, nickname, content, createdAt, updatedAt, user_id, isSecret } = comment;
+  const { id, nickname, content, createdAt, updatedAt, user_id, isSecret, img } = comment;
   const [editValue, editValueHandler, setEditValue] = useInput('');
   const [activeEditForm, setActiveEditForm] = useState(null);
+  const [handlePublishedDate] = useHandlePublishedDate(updatedAt);
   const isMine = myData.user_id === user_id;
   const deleteComment = ({ id }) => {
     dispatchComment.deleteComment({ id });
@@ -28,20 +31,17 @@ function Comment({ postId, comment, dispatchComment }) {
   };
   return (
     <div>
-      {isSecret ? (
-        <li>비밀댓글입니다.</li>
+      {isSecret && !isMine ? (
+        <CommentLi>비밀댓글입니다.</CommentLi>
       ) : (
-        <li>
+        <CommentLi>
+          <img src={setDefaultProfileImage(img)} alt={`${nickname} profile`} />
           <h3>{nickname}</h3>
           <span>{content}</span>
           <br />
-          {updatedAt ? (
-            <span>{dayjs(updatedAt).format('YYYY년MM월DD일 HH시mm분ss초')}</span>
-          ) : (
-            <span>{dayjs(createdAt).format('YYYY년MM월DD일 HH시mm분ss초')}</span>
-          )}
+          <span>{handlePublishedDate()}</span>
           {isMine && (
-            <div>
+            <ButtonContainer>
               <button
                 onClick={() => {
                   handleSecret({ id });
@@ -73,9 +73,9 @@ function Comment({ postId, comment, dispatchComment }) {
                   <button type="submit">수정완료</button>
                 </form>
               )}
-            </div>
+            </ButtonContainer>
           )}
-        </li>
+        </CommentLi>
       )}
     </div>
   );
@@ -90,11 +90,11 @@ Comment.propTypes = {
     nickname: PropTypes.string.isRequired,
     isLike: PropTypes.bool.isRequired,
     content: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     updatedAt: PropTypes.string.isRequired,
     isSecret: PropTypes.bool.isRequired,
     replies: PropTypes.array.isRequired,
+    img: PropTypes.string,
   }).isRequired,
 };
 

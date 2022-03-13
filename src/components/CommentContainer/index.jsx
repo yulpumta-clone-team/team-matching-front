@@ -1,10 +1,11 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import Comment from 'components/Comment';
+import { CommentUl } from './style';
 
 function CommentContainer({ postId, comments, dispatchComment }) {
   return (
-    <ul>
+    <CommentUl>
       {comments.map((comment) => (
         <Comment
           key={comment.id}
@@ -13,7 +14,7 @@ function CommentContainer({ postId, comments, dispatchComment }) {
           dispatchComment={dispatchComment}
         />
       ))}
-    </ul>
+    </CommentUl>
   );
 }
 
