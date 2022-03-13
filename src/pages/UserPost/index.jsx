@@ -16,7 +16,6 @@ function UserPost() {
   const dispatchComment = handleComment(USER, dispatch);
   const navigate = useNavigate();
   const [commentValue, commentHander, setCommentValue] = useInput('');
-  const [isSecretComment, setIsSecretComment] = useState(false);
   const onClickback = () => {
     navigate(-1);
   };

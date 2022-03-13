@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 import { handleCommentReducer } from 'utils/handleComment';
 import {
   DELETE_USER_COMMENT,
@@ -15,8 +14,8 @@ const initState = {
 };
 
 const userReducer = (state = initState, action) => {
-  const handlecomment = handleCommentReducer(state.targetUser);
   const { targetUser } = state;
+  const handlecomment = handleCommentReducer(state.targetUser);
   switch (action.type) {
     case GET_USER_DETAIL:
       return { ...state, targetUser: action.payload };

@@ -1,5 +1,11 @@
 /* eslint-disable no-unused-expressions */
 import {
+  deleteTeamComment,
+  handleSecretTeamComment,
+  patchTeamComment,
+  postTeamComment,
+} from '_actions/team_action';
+import {
   deleteUserComment,
   handleSecretUserComment,
   patchUserComment,
@@ -11,22 +17,25 @@ export function handleComment(type, dispatch) {
   const isUser = type === USER;
   return {
     postComment(dataToSubmit) {
-      isUser ? dispatch(postUserComment(dataToSubmit)) : null;
+      isUser ? dispatch(postUserComment(dataToSubmit)) : dispatch(postTeamComment(dataToSubmit));
     },
     deleteComment(dataToSubmit) {
-      isUser ? dispatch(deleteUserComment(dataToSubmit)) : null;
+      isUser ? dispatch(deleteUserComment(dataToSubmit)) : dispatch(patchTeamComment(dataToSubmit));
     },
     patchComment(dataToSubmit) {
-      isUser ? dispatch(patchUserComment(dataToSubmit)) : null;
+      isUser ? dispatch(patchUserComment(dataToSubmit)) : dispatch(deleteTeamComment(dataToSubmit));
     },
     handleSecret(dataToSubmit) {
-      isUser ? dispatch(handleSecretUserComment(dataToSubmit)) : null;
+      isUser
+        ? dispatch(handleSecretUserComment(dataToSubmit))
+        : dispatch(handleSecretTeamComment(dataToSubmit));
     },
   };
 }
 
 export function handleCommentReducer(target) {
   const targetElement = target;
+  console.log(targetElement);
   return {
     postComment(payload) {
       return [...[...targetElement.comments], payload];
