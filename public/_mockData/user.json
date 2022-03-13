@@ -14,8 +14,8 @@
     "updatedAt": "2022-02-24 00:24:15.510341",
     "comments": [
       {
+        "id": "1",
         "user_id": 140192931,
-        "comment_id": "1",
         "nickname": "front_temp",
         "isLike": false,
         "content": "연습용 댓글입니다.",
@@ -26,8 +26,8 @@
         "replies": []
       },
       {
+        "id": "2",
         "user_id": 134124131,
-        "comment_id": "2",
         "nickname": "server_temp",
         "isLike": false,
         "content": "안녕하세요",

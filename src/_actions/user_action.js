@@ -35,7 +35,7 @@ export async function postUserComment(dataTosubmit) {
   const newComment = {
     ...commentObj,
     user_id,
-    comment_id: newCommentId,
+    id: newCommentId,
     nickname,
     content,
     isSecret,
@@ -48,7 +48,7 @@ export async function postUserComment(dataTosubmit) {
   };
 }
 export async function patchUserComment(dataTosubmit) {
-  const { comment_id, editValue } = dataTosubmit;
+  const { id, editValue } = dataTosubmit;
   const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
   return {
     type: PATCH_USER_COMMENT,
@@ -56,16 +56,16 @@ export async function patchUserComment(dataTosubmit) {
   };
 }
 export async function deleteUserComment(dataTosubmit) {
-  const { comment_id } = dataTosubmit;
+  const { id } = dataTosubmit;
   return {
     type: DELETE_USER_COMMENT,
-    payload: comment_id,
+    payload: id,
   };
 }
 
 const commentObj = {
   user_id: null,
-  comment_id: null,
+  id: null,
   nickname: null,
   isLike: false,
   content: null,

@@ -30,19 +30,17 @@ const userReducer = (state = initState, action) => {
         ...state,
         targetUser: {
           ...targetUser,
-          comments: [...targetUser.comments].filter(
-            (comment) => comment.comment_id !== action.payload,
-          ),
+          comments: [...targetUser.comments].filter((comment) => comment.id !== action.payload),
         },
       };
     case PATCH_USER_COMMENT:
-      const { comment_id, editValue, updatedAt } = action.payload;
+      const { id, editValue, updatedAt } = action.payload;
       return {
         ...state,
         targetUser: {
           ...targetUser,
           comments: [...targetUser.comments].map((comment) => {
-            if (comment.comment_id === comment_id) {
+            if (comment.id === id) {
               return { ...comment, content: editValue, updatedAt };
             }
             return comment;

@@ -8,19 +8,19 @@ import { deleteUserComment, patchUserComment } from '_actions/user_action';
 
 function Comment({ comment }) {
   const dispatch = useDispatch();
-  const { comment_id, nickname, content, createdAt } = comment;
+  const { id, nickname, content, createdAt } = comment;
   const [editValue, editValueHandler, setEditValue] = useInput('');
   const [activeEditForm, setActiveEditForm] = useState(null);
-  const deleteComment = ({ comment_id }) => {
-    dispatch(deleteUserComment({ comment_id }));
+  const deleteComment = ({ id }) => {
+    dispatch(deleteUserComment({ id }));
   };
-  const activeTargetEditForm = ({ comment_id, content }) => {
-    setActiveEditForm(comment_id);
+  const activeTargetEditForm = ({ id, content }) => {
+    setActiveEditForm(id);
     setEditValue(content);
   };
-  const editComment = ({ event, comment_id }) => {
+  const editComment = ({ event, id }) => {
     event.preventDefault();
-    dispatch(patchUserComment({ comment_id, editValue }));
+    dispatch(patchUserComment({ id, editValue }));
     setActiveEditForm(null);
   };
   return (
@@ -31,22 +31,22 @@ function Comment({ comment }) {
       <span>{dayjs(createdAt).format('YYYY년MM월DD일 HH시mm분ss초')}</span>
       <button
         onClick={() => {
-          deleteComment({ comment_id });
+          deleteComment({ id });
         }}
       >
         삭제
       </button>
       <button
         onClick={() => {
-          activeTargetEditForm({ comment_id, content });
+          activeTargetEditForm({ id, content });
         }}
       >
         수정
       </button>
-      {activeEditForm === comment_id && (
+      {activeEditForm === id && (
         <form
           onSubmit={(event) => {
-            editComment({ event, comment_id });
+            editComment({ event, id });
           }}
         >
           <input value={editValue} onChange={editValueHandler} />
@@ -59,8 +59,8 @@ function Comment({ comment }) {
 
 Comment.propTypes = {
   comment: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     user_id: PropTypes.number.isRequired,
-    comment_id: PropTypes.string.isRequired,
     nickname: PropTypes.string.isRequired,
     isLike: PropTypes.bool.isRequired,
     content: PropTypes.string.isRequired,

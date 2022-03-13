@@ -6,7 +6,7 @@ function CommentContainer({ comments }) {
   return (
     <ul>
       {comments.map((comment) => (
-        <Comment key={comment.comment_id} comment={comment} />
+        <Comment key={comment.id} comment={comment} />
       ))}
     </ul>
   );
