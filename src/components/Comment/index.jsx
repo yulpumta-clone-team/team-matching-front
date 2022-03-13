@@ -3,16 +3,13 @@ import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import useInput from 'hooks/useInput';
-import { useDispatch } from 'react-redux';
-import { deleteUserComment, patchUserComment } from '_actions/user_action';
 
-function Comment({ comment }) {
-  const dispatch = useDispatch();
+function Comment({ comment, dispatchComment }) {
   const { id, nickname, content, createdAt } = comment;
   const [editValue, editValueHandler, setEditValue] = useInput('');
   const [activeEditForm, setActiveEditForm] = useState(null);
   const deleteComment = ({ id }) => {
-    dispatch(deleteUserComment({ id }));
+    dispatchComment.deleteComment({ id });
   };
   const activeTargetEditForm = ({ id, content }) => {
     setActiveEditForm(id);
@@ -20,7 +17,7 @@ function Comment({ comment }) {
   };
   const editComment = ({ event, id }) => {
     event.preventDefault();
-    dispatch(patchUserComment({ id, editValue }));
+    dispatchComment.patchComment({ id, editValue });
     setActiveEditForm(null);
   };
   return (
@@ -58,6 +55,7 @@ function Comment({ comment }) {
 }
 
 Comment.propTypes = {
+  dispatchComment: PropTypes.object.isRequired,
   comment: PropTypes.shape({
     id: PropTypes.string.isRequired,
     user_id: PropTypes.number.isRequired,

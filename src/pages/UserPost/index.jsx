@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
+import Loader from 'pages/Loader';
 import MarkdownViewer from 'components/MdViewer';
 import CommentContainer from 'components/CommentContainer';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  deleteUserComment,
-  getUserDetail,
-  patchUserComment,
-  postUserComment,
-} from '_actions/user_action';
-import Loader from 'pages/Loader';
 import useInput from 'hooks/useInput';
+import { getUserDetail } from '_actions/user_action';
+import handleComment from 'utils/handleComment';
+import { USER } from 'utils/constant';
 import { Board, Button, Box, Box2, Box3 } from './styleu';
 
 function UserPost() {
   const { userId } = useParams();
   const dispatch = useDispatch();
+  const dispatchComment = handleComment(USER, dispatch);
   const navigate = useNavigate();
   const [commentValue, commentHander, setCommentValue] = useInput('');
   const [isSecretComment, setIsSecretComment] = useState(false);
@@ -38,7 +36,7 @@ function UserPost() {
         nickname: myData.nickname,
         isSecret: false,
       };
-      dispatch(postUserComment(newCommentData));
+      dispatchComment.postComment(newCommentData);
       setCommentValue('');
     }
   };
@@ -75,7 +73,7 @@ function UserPost() {
           <input value={commentValue} onChange={commentHander} placeholder="댓글을 입력하세요." />
           <button type="submit">작성</button>
         </form>
-        <CommentContainer comments={comments} />
+        <CommentContainer comments={comments} dispatchComment={dispatchComment} />
       </Board>
     </div>
   );
