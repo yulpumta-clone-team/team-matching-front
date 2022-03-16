@@ -1,8 +1,8 @@
 /* eslint-disable no-shadow */
 import React, { memo, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import useInput from 'hooks/useInput';
 import useHandlePublishedDate from 'hooks/useHandlePublichedDate';
 import { setDefaultProfileImage } from 'utils/constant';
 import { ButtonContainer, CommentLi } from './style';
@@ -10,26 +10,37 @@ import { ButtonContainer, CommentLi } from './style';
 function Comment({ postId, comment, dispatchComment }) {
   const { myData } = useSelector((state) => state.auth);
   const { id, nickname, content, createdAt, updatedAt, user_id, isSecret, img } = comment;
-  const [editValue, editValueHandler, setEditValue] = useInput('');
-  const [activeEditForm, setActiveEditForm] = useState(null);
+  const [activeEditCommentId, setActiveEditCommentId] = useState(null);
   const [handlePublishedDate] = useHandlePublishedDate(updatedAt);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    setError,
+    formState: { errors },
+    // watch,
+  } = useForm({
+    defaultValues: {
+      editContent: content,
+    },
+  });
   const isMine = myData.user_id === user_id;
   const deleteComment = ({ id }) => {
     dispatchComment.deleteComment({ id });
   };
-  const activeTargetEditForm = ({ id, content }) => {
-    setActiveEditForm(id);
-    setEditValue(content);
+  const activeTargetEditForm = ({ id }) => {
+    setActiveEditCommentId(id);
   };
-  const editComment = ({ event, id }) => {
-    event.preventDefault();
+  const editComment = ({ editContent }) => {
     // 서버랑 연결한 후에 comment 제외해야함.
-    dispatchComment.patchComment({ id, editValue, comment });
-    setActiveEditForm(null);
+    dispatchComment.patchComment({ id, editContent, comment });
+    setActiveEditCommentId(null);
+    setValue('editContent', '');
   };
   const handleSecret = ({ id }) => {
     dispatchComment.handleSecret({ id });
   };
+  console.log(activeEditCommentId);
   return (
     <div>
       {isSecret && !isMine ? (
@@ -58,21 +69,28 @@ function Comment({ postId, comment, dispatchComment }) {
               >
                 삭제
               </button>
-              <button
-                onClick={() => {
-                  activeTargetEditForm({ id, content });
-                }}
-              >
-                수정
-              </button>
-              {activeEditForm === id && (
-                <form
-                  onSubmit={(event) => {
-                    editComment({ event, id });
+              {activeEditCommentId !== id ? (
+                <button
+                  onClick={() => {
+                    activeTargetEditForm({ id, content });
                   }}
                 >
-                  <input value={editValue} onChange={editValueHandler} />
-                  <button type="submit">수정완료</button>
+                  수정
+                </button>
+              ) : (
+                <form
+                  style={{ display: 'flex', flexDirection: 'column' }}
+                  onSubmit={handleSubmit(editComment)}
+                >
+                  <input
+                    {...register('editContent', {
+                      required: '내용을 입력해주세요.',
+                    })}
+                    placeholder="댓글을 입력하세요."
+                  />
+                  <span>{errors?.editContent?.message}</span>
+                  <span>{errors?.extraError?.message}</span>
+                  <button type="submit">작성</button>
                 </form>
               )}
             </ButtonContainer>

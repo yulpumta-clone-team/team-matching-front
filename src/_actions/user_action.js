@@ -50,16 +50,17 @@ export async function postUserComment(dataTosubmit) {
 }
 export async function patchUserComment(dataTosubmit) {
   const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
-  const { id, editValue, comment } = dataTosubmit;
-  const editedComment = {
+  const { id, editContent, comment } = dataTosubmit;
+
+  const editiedComment = {
     ...comment,
     id,
-    content: editValue,
+    content: editContent,
     updatedAt,
   };
   return {
     type: PATCH_USER_COMMENT,
-    payload: editedComment,
+    payload: editiedComment,
   };
 }
 export async function deleteUserComment(dataTosubmit) {
