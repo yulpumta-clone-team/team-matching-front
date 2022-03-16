@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import { HOME, LOGIN, PROFILE, SIGN_UP, TEAM_BOARD, USER_BOARD } from 'utils/route';
+import { HOME, LOGIN, PROFILE, SIGN_UP, TEAM_BOARD, USERS_LIST, USER_BOARD } from 'utils/route';
 
 function Navigation() {
   const [cookies] = useCookies(['token']);
@@ -42,6 +42,9 @@ function Navigation() {
           </li>
           <li>
             <Link to={PROFILE}>User Profile</Link>
+          </li>
+          <li>
+            <Link to={USERS_LIST}>Users List</Link>
           </li>
         </ul>
       )}
