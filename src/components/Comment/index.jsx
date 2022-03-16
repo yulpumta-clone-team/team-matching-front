@@ -23,7 +23,8 @@ function Comment({ postId, comment, dispatchComment }) {
   };
   const editComment = ({ event, id }) => {
     event.preventDefault();
-    dispatchComment.patchComment({ id, editValue });
+    // 서버랑 연결한 후에 comment 제외해야함.
+    dispatchComment.patchComment({ id, editValue, comment });
     setActiveEditForm(null);
   };
   const handleSecret = ({ id }) => {

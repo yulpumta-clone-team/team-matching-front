@@ -20,10 +20,12 @@ export function handleComment(type, dispatch) {
       isUser ? dispatch(postUserComment(dataToSubmit)) : dispatch(postTeamComment(dataToSubmit));
     },
     deleteComment(dataToSubmit) {
-      isUser ? dispatch(deleteUserComment(dataToSubmit)) : dispatch(patchTeamComment(dataToSubmit));
+      isUser
+        ? dispatch(deleteUserComment(dataToSubmit))
+        : dispatch(deleteTeamComment(dataToSubmit));
     },
     patchComment(dataToSubmit) {
-      isUser ? dispatch(patchUserComment(dataToSubmit)) : dispatch(deleteTeamComment(dataToSubmit));
+      isUser ? dispatch(patchUserComment(dataToSubmit)) : dispatch(patchTeamComment(dataToSubmit));
     },
     handleSecret(dataToSubmit) {
       isUser
@@ -35,7 +37,6 @@ export function handleComment(type, dispatch) {
 
 export function handleCommentReducer(target) {
   const targetElement = target;
-  console.log(targetElement);
   return {
     postComment(payload) {
       return [...[...targetElement.comments], payload];
@@ -44,10 +45,10 @@ export function handleCommentReducer(target) {
       return [...targetElement.comments].filter((comment) => comment.id !== payload);
     },
     patchComment(payload) {
-      const { id, editValue, updatedAt } = payload;
+      const { id } = payload;
       return [...targetElement.comments].map((comment) => {
         if (comment.id === id) {
-          return { ...comment, content: editValue, updatedAt };
+          return payload;
         }
         return comment;
       });
