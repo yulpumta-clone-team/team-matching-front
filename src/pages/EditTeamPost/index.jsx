@@ -72,4 +72,4 @@ function EditTeamProfile() {
   );
 }
 
-export default React.memo(EditTeamProfile);
+export default EditTeamProfile;
