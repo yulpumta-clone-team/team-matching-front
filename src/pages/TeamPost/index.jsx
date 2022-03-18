@@ -3,25 +3,49 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import MarkdownViewer from 'components/MdViewer';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTeamArr, getTeamDetail } from '_actions/team_action';
+import { getTeamDetail } from '_actions/team_action';
 import Loader from 'pages/Loader';
+import { handleComment } from 'utils/handleComment';
+import { TEAM } from 'utils/constant';
+import useInput from 'hooks/useInput';
+import CommentContainer from 'components/CommentContainer';
 import { Board, Button, Box, Box2, Box3 } from './stylep';
 
 function TeamPost() {
+  const { teamId } = useParams();
   const dispatch = useDispatch();
+  const dispatchComment = handleComment(TEAM, dispatch);
   const navigate = useNavigate();
+  const [commentValue, commentHander, setCommentValue] = useInput('');
   const onClickback = () => {
     navigate(-1);
   };
-  const { teamElement } = useSelector((state) => state.team);
-  const { id } = useParams();
+  const { myData } = useSelector((state) => state.auth);
+  const { targetTeam } = useSelector((state) => state.team);
   useEffect(() => {
-    dispatch(getTeamDetail(id));
+    dispatch(getTeamDetail(Number(teamId)));
   }, []);
-  if (!teamElement) {
+  const onSubmit = (event) => {
+    event.preventDefault();
+    if (!myData) {
+      alert('로그인을 먼저해주세요');
+    } else {
+      const newCommentData = {
+        content: commentValue,
+        team_id,
+        user_id: myData.user_id,
+        nickname: myData.nickname,
+        isSecret: false,
+      };
+      dispatchComment.postComment(newCommentData);
+      setCommentValue('');
+    }
+  };
+  if (!targetTeam) {
     return <Loader />;
   }
   const {
+    team_id,
     team_name,
     name,
     content,
@@ -33,8 +57,8 @@ function TeamPost() {
     like_cnt,
     createdAt,
     updatedAt,
-    comment,
-  } = teamElement;
+    comments,
+  } = targetTeam;
   return (
     <div>
       <button onClick={onClickback}>back</button>
@@ -47,6 +71,11 @@ function TeamPost() {
           이름 : {name} / 팀명 : {team_name}
         </Box2>
         <Box2>좋아요 개수 : {like_cnt}</Box2>
+        <form onSubmit={onSubmit}>
+          <input value={commentValue} onChange={commentHander} placeholder="댓글을 입력하세요." />
+          <button type="submit">작성</button>
+        </form>
+        <CommentContainer postId={team_id} comments={comments} dispatchComment={dispatchComment} />
       </Board>
       <Link to="./edit" state={{ team_name, content, name, img, like_cnt }}>
         <Button>Edit</Button>

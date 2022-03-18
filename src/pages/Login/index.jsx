@@ -1,11 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { OAUTH_URL } from 'utils/route';
-// import { loginUser } from '_actions/user_action';
+import { loginUser } from '_actions/auth_action';
 
 function Login() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -22,8 +24,8 @@ function Login() {
     }
     // fetch
     console.log(data);
-    // dispatch(loginUser(data));
-    setError('extraError', { message: 'Server offLine.' });
+    dispatch(loginUser(data));
+    navigate('/callback');
   };
   return (
     <div>

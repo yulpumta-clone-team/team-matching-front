@@ -7,8 +7,6 @@
 
 # 📌 To Do
 
-- [ ] modal component 만들기
-- [ ] md 에디터 변경
 - [ ] oauth
   - http://yoonbumtae.com/?p=3000
   - https://github.com/callicoder/spring-boot-react-oauth2-social-login-demo
@@ -17,6 +15,8 @@
 
 # ✅ Done
 
-- [x] react router dom v6 :id prevent refresh
-- [x] http-proxy-middleware 작동하는지 확인
-- [x] pr 방식으로 레포지토리 업데이트
+# TEMP
+
+## filtering
+
+> checkbox만들기 -> onChange 함수 만들기 -> checkbox상태에 따라 paranet component업데이트
