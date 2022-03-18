@@ -17,7 +17,6 @@ import EditTeamProfile from 'pages/EditTeamPost';
 import UsersList from 'pages/UsersList';
 import AppLayout from './style';
 
-
 function App() {
   console.log(process.env.REACT_APP_SERVER_API);
   return (
