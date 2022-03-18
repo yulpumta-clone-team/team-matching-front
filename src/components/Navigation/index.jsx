@@ -7,7 +7,7 @@ import { NavWrapper } from './style';
 
 function Navigation() {
   const [cookies] = useCookies(['token']);
-  const { myData } = useSelector((state) => state.user);
+  const { myData } = useSelector((state) => state.auth);
   const token = cookies?.token || null;
   return <NavWrapper>{myData ? <LoginNav myData={myData} /> : <NonLoginNav />}</NavWrapper>;
 }
