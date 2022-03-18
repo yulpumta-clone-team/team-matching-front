@@ -6,47 +6,9 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TeamCard from 'components/TeamCard';
+import { CardTitle, CardWrapper, ImgContainer, SessionContainer } from './style';
 
-const teamElement = {
-  user_id: 123123123,
-  team_id: 1,
-  name: '코넥트',
-  session: '희망기간',
-  img: 'string',
-  read: 0,
-  comment_cnt: 0,
-  like_cnt: 0,
-  allArticles: [],
-  currentCategory: '읽은목록',
-  currentArticles: [],
-  currentTeam: 1,
-
-  team: [
-    {
-      idx: 1,
-      team_id: 1,
-      name: 'team1 소개글',
-    },
-    {
-      idx: 2,
-      team_id: 2,
-      name: 'team2 소개글',
-    },
-  ],
-
-  categories: [
-    {
-      id: 1,
-      name: '읽은목록',
-    },
-    {
-      id: 2,
-      name: '좋아하는 목록',
-    },
-  ],
-};
-function Tabs({ setTeam, setType, categories }) {
-  // const { categories } = teamElement;
+function Tabs({ setType, categories }) {
   function tempfunction(event, name, team) {
     if (name === '읽은목록') {
       setType('read');
@@ -66,45 +28,85 @@ function Tabs({ setTeam, setType, categories }) {
     </ul>
   );
 }
-function Articles({ setArticles, type, currentArticles, team }) {
-  const { teamArray } = useSelector((state) => state.team);
-  const [teamList, setTeamList] = useState(teamArray);
-  const { team_id, name, idx } = teamInfo;
-  const { allArticles } = teamElement;
-  const category = this.categories.find(
-    category => category.id === team.team_id
-  );
-  setArticles(team.name);
-
+function Articles({ type, read_array, like_array }) {
   return (
     <ul>
       {type === 'read' ? (
-        <li>
-        {teamList.length !== 0 &&
-          teamList.map((teamElement, idx) => (
-            <TeamCard key={uuid()} teamInfo={{ ...teamElement, idx }} />
+        <div>
+          {read_array.map((read) => (
+            <CardWrapper>
+              <h1>{read.team_id}</h1>
+              <CardTitle>{read.name}</CardTitle>
+              <ImgContainer>
+                <img alt="팀 사진" />
+              </ImgContainer>
+              <span>{read.like_cnt}</span>
+            </CardWrapper>
           ))}
-        </li>
+        </div>
       ) : (
-        <li>???</li>
+        <div>
+          {like_array.map((like) => (
+            <CardWrapper>
+              <h1>{like.team_id}</h1>
+              <CardTitle>{like.name}</CardTitle>
+              <ImgContainer>
+                <img alt="좋아요" />
+              </ImgContainer>
+              <span>{like.like_cnt}</span>
+            </CardWrapper>
+          ))}
+        </div>
       )}
     </ul>
   );
 }
 
 function UsersList() {
+  const read_array = [
+    {
+      team_id: 1,
+      name: '코넥트',
+      like_cnt: 0,
+    },
+    {
+      team_id: 2,
+      name: '애플팀플',
+      like_cnt: 1,
+    },
+  ];
+  const like_array = [
+    {
+      team_id: 3,
+      name: '윈도우팀플',
+      like_cnt: 2,
+    },
+    {
+      team_id: 4,
+      name: '444',
+      like_cnt: 3,
+    },
+  ];
+  const categories = [
+    {
+      id: 1,
+      name: '읽은목록',
+    },
+    {
+      id: 2,
+      name: '좋아하는 목록',
+    },
+  ];
   const [type, setType] = useState('read');
   // const [read, setRead] = useState(false);
   // const [like_cnt, setLikecnt] = useState(false);
-  const [currentArticles, setArticles] = useState('읽은목록');
-  // const { currentArticles, currentCategory } = teamElement;
-  const { categories, articles } = teamElement;
-  const [currentTeam, setTeam] = useState(1);
+  // const [currentArticles, setArticles] = useState('읽은목록');
+  // const { currentArticles, currentCategory } = teamElement
   console.log(type);
   return (
     <div className="App">
       <Tabs setType={setType} categories={categories} />
-      <Articles type={type} allArticles={currentArticles} setArticles={setArticles} />
+      <Articles type={type} read_array={read_array} like_array={like_array} />
     </div>
   );
 }
