@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import useModal from 'hooks/useModal';
-import { HOME, PROFILE, TEAM_BOARD, USER_BOARD } from 'utils/route';
+import { HOME, PROFILE, TEAM_BOARD, USERS_LIST, USER_BOARD } from 'utils/route';
 import Menu from 'components/Menu';
 import { Ul } from './style';
 
@@ -24,9 +24,6 @@ function LoginNav({ myData }) {
       <li>
         <Link to={TEAM_BOARD}>Team Board</Link>
       </li>
-      <li>
-        <Link to={PROFILE}>User Profile</Link>
-      </li>
       <li onClick={openModal}>
         <img style={{ width: '30px' }} src={img} alt="profile" />
         <span>{nickname}</span>
@@ -37,10 +34,10 @@ function LoginNav({ myData }) {
             <Link to={HOME}>내 작성글</Link>
           </li>
           <li>
-            <Link to={USER_BOARD}>내 관심글</Link>
+            <Link to={USERS_LIST}>내 관심글</Link>
           </li>
           <li>
-            <Link to={TEAM_BOARD}>프로필 설정</Link>
+            <Link to={PROFILE}>프로필 설정</Link>
           </li>
           <li>
             <button>로그아웃</button>

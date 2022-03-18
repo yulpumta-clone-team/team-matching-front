@@ -40,7 +40,7 @@ function App() {
             element={<Auth SpecificComponent={TeamPost} option={null} />}
           />
           <Route
-            path={`${PROFILE}/edit`}
+            path={`${PROFILE}`}
             element={<Auth SpecificComponent={EditUserProfile} option={null} />}
           />
           <Route
