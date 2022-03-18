@@ -1,21 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import Loader from 'pages/Loader';
 import MarkdownViewer from 'components/MdViewer';
 import CommentContainer from 'components/CommentContainer';
-import useInput from 'hooks/useInput';
 import { getUserDetail } from '_actions/user_action';
 import { handleComment } from 'utils/handleComment';
 import { USER } from 'utils/constant';
 import { Board, Button, Box, Box2, Box3 } from './styleu';
 
 function UserPost() {
+  const {
+    register,
+    handleSubmit,
+    setError,
+    setValue,
+    formState: { errors },
+    // watch,
+  } = useForm({
+    defaultValues: {},
+  });
   const { userId } = useParams();
   const dispatch = useDispatch();
   const dispatchComment = handleComment(USER, dispatch);
   const navigate = useNavigate();
-  const [commentValue, commentHander, setCommentValue] = useInput('');
+  // const [commentValue, commentHander, setCommentValue] = useInput('');
   const onClickback = () => {
     navigate(-1);
   };
@@ -24,8 +34,7 @@ function UserPost() {
   useEffect(() => {
     dispatch(getUserDetail(Number(userId)));
   }, [dispatch, userId]);
-  const onSubmit = (event) => {
-    event.preventDefault();
+  const onSubmit = async ({ commentValue }) => {
     if (!myData) {
       alert('로그인을 먼저해주세요');
     } else {
@@ -36,8 +45,9 @@ function UserPost() {
         isSecret: false,
       };
       dispatchComment.postComment(newCommentData);
-      setCommentValue('');
+      setValue('commentValue', '');
     }
+    // setError('extraError', { message: 'Server offLine.' });
   };
   if (!targetUser) {
     return <Loader />;
@@ -69,8 +79,18 @@ function UserPost() {
           <p>이름 : {name}</p>
         </div>
         <Box2>좋아요 개수 : {like_cnt}</Box2>
-        <form onSubmit={onSubmit}>
-          <input value={commentValue} onChange={commentHander} placeholder="댓글을 입력하세요." />
+        <form
+          style={{ display: 'flex', flexDirection: 'column' }}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <input
+            {...register('commentValue', {
+              required: '내용을 입력해주세요.',
+            })}
+            placeholder="댓글을 입력하세요."
+          />
+          <span>{errors?.commentValue?.message}</span>
+          <span>{errors?.extraError?.message}</span>
           <button type="submit">작성</button>
         </form>
         <CommentContainer postId={user_id} comments={comments} dispatchComment={dispatchComment} />

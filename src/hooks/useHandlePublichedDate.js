@@ -2,12 +2,15 @@ import dayjs from 'dayjs';
 import { useCallback } from 'react';
 import { DAY_SEC, HOUR_SEC, MINUTES_SEC, MONTH_SEC, WEEK_SEC, YEAR_SEC } from 'utils/constant';
 
-function useHandlePublishedDate(targetDate) {
+function useHandlePublishedDate() {
   const nowDate = dayjs();
-  const handlePublishedDate = useCallback(() => {
+  const handlePublishedDate = useCallback((targetDate) => {
     let diffType = 'second';
     const diff = nowDate.diff(targetDate, diffType);
     let unit = '초';
+    if (diff < 5) {
+      return '방금전';
+    }
     if (diff < MINUTES_SEC) {
       diffType = 'second';
       unit = '초';
@@ -31,7 +34,7 @@ function useHandlePublishedDate(targetDate) {
       unit = '년';
     }
     return `${nowDate.diff(targetDate, diffType)}${unit} 전`;
-  }, [targetDate]);
+  }, []);
   return [handlePublishedDate];
 }
 export default useHandlePublishedDate;
