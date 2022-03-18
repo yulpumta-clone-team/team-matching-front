@@ -10,6 +10,7 @@ import {
   handleSecretUserComment,
   patchUserComment,
   postUserComment,
+  postUserReply,
 } from '_actions/user_action';
 import { USER } from './constant';
 
@@ -32,10 +33,14 @@ export function handleComment(type, dispatch) {
         ? dispatch(handleSecretUserComment(dataToSubmit))
         : dispatch(handleSecretTeamComment(dataToSubmit));
     },
+    postReply(dataToSubmit) {
+      isUser ? dispatch(postUserReply(dataToSubmit)) : null;
+    },
   };
 }
 
 export function handleCommentReducer(target) {
+  console.log(target);
   const targetElement = target;
   return {
     postComment(payload) {
@@ -61,6 +66,10 @@ export function handleCommentReducer(target) {
         }
         return comment;
       });
+    },
+    postRelpy(payload) {
+      const { id: parentId, content } = payload;
+      return [...[...targetElement.comments], payload];
     },
   };
 }

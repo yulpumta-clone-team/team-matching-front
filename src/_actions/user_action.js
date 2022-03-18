@@ -6,6 +6,7 @@ import {
   HANDLE_SECRET_USER_COMMENT,
   PATCH_USER_COMMENT,
   POST_USER_COMMENT,
+  POST_USER_REPLY,
 } from '_types/userTypes';
 import uuid from 'react-uuid';
 import dayjs from 'dayjs';
@@ -79,9 +80,30 @@ export async function handleSecretUserComment(dataTosubmit) {
   };
 }
 
+export async function postUserReply(dataTosubmit) {
+  const { user_id, nickname, content, isSecret } = dataTosubmit;
+  const newCommentCreateAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
+  const newCommentId = uuid();
+  const newComment = {
+    ...commentObj,
+    user_id,
+    id: newCommentId,
+    nickname,
+    content,
+    isSecret,
+    createdAt: newCommentCreateAt,
+    updatedAt: newCommentCreateAt,
+  };
+  return {
+    type: POST_USER_REPLY,
+    payload: newComment,
+  };
+}
+
 const commentObj = {
   user_id: null,
   id: null,
+  users_like: [],
   nickname: null,
   isLike: false,
   content: null,
