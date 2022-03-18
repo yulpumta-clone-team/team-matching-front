@@ -1,43 +1,49 @@
-/* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import MarkdownViewer from 'components/MdViewer';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTeamArr, getTeamDetail } from '_actions/team_action';
+import { useParams, useNavigate } from 'react-router-dom';
 import Loader from 'pages/Loader';
+import MarkdownViewer from 'components/MdViewer';
+import CommentContainer from 'components/CommentContainer';
+import useInput from 'hooks/useInput';
+import { getUserDetail } from '_actions/user_action';
+import { handleComment } from 'utils/handleComment';
+import { USER } from 'utils/constant';
 import { Board, Button, Box, Box2, Box3 } from './styleu';
 
-const userElement = {
-  name: '홍길동',
-  content:
-    '# 임시 데이터\n# 이런식으로하면 됩니다.\n\n### 알겠습니다\n\n안녕하세요. **프론트**입니다.',
-  session: 'string',
-  img: 'string',
-  read: 'int',
-  job: 'string',
-  comment_cnt: 0,
-  like_cnt: 0,
-  createdAt: 'time',
-  updatedAt: 'time',
-  comment: [],
-};
-function UserPost(props) {
+function UserPost() {
   const { userId } = useParams();
   const dispatch = useDispatch();
+  const dispatchComment = handleComment(USER, dispatch);
   const navigate = useNavigate();
+  const [commentValue, commentHander, setCommentValue] = useInput('');
   const onClickback = () => {
     navigate(-1);
   };
-  // const { teamElement } = useSelector((state) => state.team);
-  const { id } = useParams();
+  const { myData } = useSelector((state) => state.auth);
+  const { targetUser } = useSelector((state) => state.user);
   useEffect(() => {
-    dispatch(getTeamDetail(id));
-  }, []);
-  if (!userElement) {
+    dispatch(getUserDetail(Number(userId)));
+  }, [dispatch, userId]);
+  const onSubmit = (event) => {
+    event.preventDefault();
+    if (!myData) {
+      alert('로그인을 먼저해주세요');
+    } else {
+      const newCommentData = {
+        content: commentValue,
+        user_id: myData.user_id,
+        nickname: myData.nickname,
+        isSecret: false,
+      };
+      dispatchComment.postComment(newCommentData);
+      setCommentValue('');
+    }
+  };
+  if (!targetUser) {
     return <Loader />;
   }
   const {
+    user_id,
     name,
     content,
     session,
@@ -48,8 +54,8 @@ function UserPost(props) {
     like_cnt,
     createdAt,
     updatedAt,
-    comment,
-  } = userElement;
+    comments,
+  } = targetUser;
   return (
     <div>
       <button onClick={onClickback}>back</button>
@@ -63,10 +69,12 @@ function UserPost(props) {
           <p>이름 : {name}</p>
         </div>
         <Box2>좋아요 개수 : {like_cnt}</Box2>
+        <form onSubmit={onSubmit}>
+          <input value={commentValue} onChange={commentHander} placeholder="댓글을 입력하세요." />
+          <button type="submit">작성</button>
+        </form>
+        <CommentContainer postId={user_id} comments={comments} dispatchComment={dispatchComment} />
       </Board>
-      <Link to="./edit" state={{ userId, content, name, img, like_cnt }}>
-        <Button>Edit</Button>
-      </Link>
     </div>
   );
 }

@@ -1,24 +1,19 @@
-import Modal from 'components/Modal';
-import React, { useCallback, useState } from 'react';
+import React from 'react';
+import WindowModal from 'components/WindowModal';
+import useModal from 'hooks/useModal';
 
 function Main() {
-  const [showModal, setShowModal] = useState(false);
-  const onCloseModal = useCallback(() => {
-    setShowModal(false);
-  }, []);
-  const openModal = useCallback(() => {
-    setShowModal((prev) => !prev);
-  }, []);
+  const [showModal, onCloseModal, openModal] = useModal();
   return (
     <div>
       <h1>Main</h1>
       <button onClick={openModal}>Open Modal</button>
-      <Modal show={showModal} onCloseModal={onCloseModal}>
+      <WindowModal show={showModal} onCloseModal={onCloseModal}>
         <div>
           <h1>this is modal</h1>
           <p>modal content</p>
         </div>
-      </Modal>
+      </WindowModal>
     </div>
   );
 }

@@ -6,29 +6,32 @@ import { TEAM_BOARD } from 'utils/route';
 import { CardTitle, CardWrapper, ImgContainer, SessionContainer } from './style';
 
 function TeamCard({ teamInfo }) {
-  const { user_id, team_id, name, session, img, read, comment_cnt, like_cnt, idx } = teamInfo;
+  const { user_id, team_id, name, skills, session, img, read, comment_cnt, like_cnt } = teamInfo;
   return (
     <CardWrapper>
-      <h1>{idx}</h1>
+      <h2>좋아요: {like_cnt}</h2>
       <Link to={`${TEAM_BOARD}/${team_id}`}>{name}</Link>
       <CardTitle>{name}</CardTitle>
       <ImgContainer>
         <img src={img} alt="임시" />
       </ImgContainer>
       <SessionContainer>{session}</SessionContainer>
-      <span>{read}</span>
-      <span>{comment_cnt}</span>
-      <span>{like_cnt}</span>
+      <ul>
+        {skills.map((skill, idx) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <li key={idx}>{skill}</li>
+        ))}
+      </ul>
     </CardWrapper>
   );
 }
 
 TeamCard.propTypes = {
   teamInfo: PropTypes.shape({
-    idx: PropTypes.number.isRequired,
     user_id: PropTypes.number.isRequired,
     team_id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
+    skills: PropTypes.array.isRequired,
     session: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
     read: PropTypes.number.isRequired,
