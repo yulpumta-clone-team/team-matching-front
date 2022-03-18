@@ -50,9 +50,17 @@ export async function postTeamComment(dataTosubmit) {
 }
 export async function patchTeamComment(dataTosubmit) {
   const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
+  const { id, editValue, comment } = dataTosubmit;
+  const editedComment = {
+    ...comment,
+    id,
+    content: editValue,
+    updatedAt,
+  };
+  console.log(editedComment);
   return {
     type: PATCH_TEAM_COMMENT,
-    payload: { ...dataTosubmit, updatedAt },
+    payload: editedComment,
   };
 }
 export async function deleteTeamComment(dataTosubmit) {

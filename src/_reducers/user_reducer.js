@@ -6,6 +6,7 @@ import {
   HANDLE_SECRET_USER_COMMENT,
   PATCH_USER_COMMENT,
   POST_USER_COMMENT,
+  POST_USER_REPLY,
 } from '_types/userTypes';
 
 const initState = {
@@ -49,6 +50,11 @@ const userReducer = (state = initState, action) => {
           ...targetUser,
           comments: handlecomment.handleSecret(action.payload),
         },
+      };
+    case POST_USER_REPLY:
+      return {
+        ...state,
+        targetUser: { ...targetUser, comments: handlecomment.postComment(action.payload) },
       };
     default:
       return state;

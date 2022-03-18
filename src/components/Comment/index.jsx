@@ -1,83 +1,128 @@
 /* eslint-disable no-shadow */
 /* eslint-disable camelcase */
 import React, { memo, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import useInput from 'hooks/useInput';
 import useHandlePublishedDate from 'hooks/useHandlePublichedDate';
 import { setDefaultProfileImage } from 'utils/constant';
-import { ButtonContainer, CommentLi } from './style';
+import { ButtonContainer, Content } from './style';
 
 function Comment({ postId, comment, dispatchComment }) {
   const { myData } = useSelector((state) => state.auth);
-  const { id, nickname, content, createdAt, updatedAt, user_id, isSecret, img } = comment;
-  const [editValue, editValueHandler, setEditValue] = useInput('');
-  const [activeEditForm, setActiveEditForm] = useState(null);
-  const [handlePublishedDate] = useHandlePublishedDate(updatedAt);
+  const { id, nickname, content, users_like, updatedAt, user_id, isSecret, img, parent_id } =
+    comment;
+  const [activeEditCommentId, setActiveEditCommentId] = useState(null);
+  const [showReplyBox, setShowReplyBox] = useState(false);
+  const [handlePublishedDate] = useHandlePublishedDate();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    setError,
+    formState: { errors },
+    // watch,
+  } = useForm({
+    defaultValues: {
+      editContent: content,
+      replyContent: '',
+    },
+  });
   const isMine = myData.user_id === user_id;
   const deleteComment = ({ id }) => {
-    dispatchComment.deleteComment({ id });
+    dispatchComment.deleteComment({ id, postId });
   };
-  const activeTargetEditForm = ({ id, content }) => {
-    setActiveEditForm(id);
-    setEditValue(content);
+  const activeTargetEditForm = ({ id }) => {
+    setActiveEditCommentId(id);
   };
-  const editComment = ({ event, id }) => {
-    event.preventDefault();
-    dispatchComment.patchComment({ id, editValue });
-    setActiveEditForm(null);
+  const editComment = ({ editContent }) => {
+    // 서버랑 연결한 후에 comment 제외해야함.
+    dispatchComment.patchComment({ postId, id, editContent, comment });
+    setActiveEditCommentId(null);
+    setValue('editContent', '');
   };
   const handleSecret = ({ id }) => {
     dispatchComment.handleSecret({ id });
   };
+  const handleReply = () => {
+    setShowReplyBox((prev) => !prev);
+  };
+  const postReply = ({ replyContent }) => {
+    dispatchComment.postReply({ id, content: replyContent });
+  };
   return (
     <div>
       {isSecret && !isMine ? (
-        <CommentLi>비밀댓글입니다.</CommentLi>
+        <span>비밀댓글입니다.</span>
       ) : (
-        <CommentLi>
+        <>
           <img src={setDefaultProfileImage(img)} alt={`${nickname} profile`} />
-          <div>
+          <Content>
             <h3>{nickname}</h3>
             <span>{content}</span>
-            <span>{handlePublishedDate()}</span>
-          </div>
-          {isMine && (
-            <ButtonContainer>
-              <button
-                onClick={() => {
-                  handleSecret({ id });
-                }}
+            <span>{handlePublishedDate(updatedAt)}</span>
+            <button onClick={handleReply}>대댓글남기기</button>
+            {showReplyBox && (
+              <form
+                style={{ display: 'flex', flexDirection: 'column' }}
+                onSubmit={handleSubmit(postReply)}
               >
-                {isSecret ? '공개' : '비밀'}
-              </button>
-              <button
-                onClick={() => {
-                  deleteComment({ id });
-                }}
-              >
-                삭제
-              </button>
-              <button
-                onClick={() => {
-                  activeTargetEditForm({ id, content });
-                }}
-              >
-                수정
-              </button>
-              {activeEditForm === id && (
-                <form
-                  onSubmit={(event) => {
-                    editComment({ event, id });
+                <input
+                  {...register('replyContent', {
+                    required: '내용을 입력해주세요.',
+                  })}
+                  placeholder="댓글을 입력하세요."
+                />
+                <span>{errors?.editContent?.message}</span>
+                <span>{errors?.extraError?.message}</span>
+                <button type="submit">작성</button>
+              </form>
+            )}
+            {isMine && (
+              <ButtonContainer>
+                <button
+                  onClick={() => {
+                    handleSecret({ id });
                   }}
                 >
-                  <input value={editValue} onChange={editValueHandler} />
-                  <button type="submit">수정완료</button>
-                </form>
-              )}
-            </ButtonContainer>
-          )}
-        </CommentLi>
+                  {isSecret ? '공개' : '비밀'}
+                </button>
+                <button
+                  onClick={() => {
+                    deleteComment({ id });
+                  }}
+                >
+                  삭제
+                </button>
+                {activeEditCommentId !== id && (
+                  <button
+                    onClick={() => {
+                      activeTargetEditForm({ id });
+                    }}
+                  >
+                    수정
+                  </button>
+                )}
+              </ButtonContainer>
+            )}
+            {activeEditCommentId === id && (
+              <form
+                style={{ display: 'flex', flexDirection: 'column' }}
+                onSubmit={handleSubmit(editComment)}
+              >
+                <input
+                  {...register('editContent', {
+                    required: '내용을 입력해주세요.',
+                  })}
+                  placeholder="댓글을 입력하세요."
+                />
+                <span>{errors?.editContent?.message}</span>
+                <span>{errors?.extraError?.message}</span>
+                <button type="submit">작성</button>
+              </form>
+            )}
+          </Content>
+        </>
       )}
     </div>
   );
@@ -88,14 +133,14 @@ Comment.propTypes = {
   dispatchComment: PropTypes.object.isRequired,
   comment: PropTypes.shape({
     id: PropTypes.string.isRequired,
+    parent_id: PropTypes.string,
     user_id: PropTypes.number.isRequired,
     nickname: PropTypes.string.isRequired,
-    isLike: PropTypes.bool.isRequired,
     content: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     updatedAt: PropTypes.string.isRequired,
     isSecret: PropTypes.bool.isRequired,
-    replies: PropTypes.array.isRequired,
+    users_like: PropTypes.array.isRequired,
     img: PropTypes.string,
   }).isRequired,
 };

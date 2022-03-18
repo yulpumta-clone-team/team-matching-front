@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import MarkdownViewer from 'components/MdViewer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,16 +8,24 @@ import { getTeamDetail } from '_actions/team_action';
 import Loader from 'pages/Loader';
 import { handleComment } from 'utils/handleComment';
 import { TEAM } from 'utils/constant';
-import useInput from 'hooks/useInput';
 import CommentContainer from 'components/CommentContainer';
 import { Board, Button, Box, Box2, Box3 } from './stylep';
 
 function TeamPost() {
+  const {
+    register,
+    handleSubmit,
+    setError,
+    setValue,
+    formState: { errors },
+    // watch,
+  } = useForm({
+    defaultValues: {},
+  });
   const { teamId } = useParams();
   const dispatch = useDispatch();
   const dispatchComment = handleComment(TEAM, dispatch);
   const navigate = useNavigate();
-  const [commentValue, commentHander, setCommentValue] = useInput('');
   const onClickback = () => {
     navigate(-1);
   };
@@ -25,21 +34,20 @@ function TeamPost() {
   useEffect(() => {
     dispatch(getTeamDetail(Number(teamId)));
   }, []);
-  const onSubmit = (event) => {
-    event.preventDefault();
+  const onSubmit = async ({ commentValue }) => {
     if (!myData) {
       alert('로그인을 먼저해주세요');
     } else {
       const newCommentData = {
         content: commentValue,
-        team_id,
         user_id: myData.user_id,
         nickname: myData.nickname,
         isSecret: false,
       };
       dispatchComment.postComment(newCommentData);
-      setCommentValue('');
+      setValue('commentValue', '');
     }
+    // setError('extraError', { message: 'Server offLine.' });
   };
   if (!targetTeam) {
     return <Loader />;
@@ -71,8 +79,19 @@ function TeamPost() {
           이름 : {name} / 팀명 : {team_name}
         </Box2>
         <Box2>좋아요 개수 : {like_cnt}</Box2>
-        <form onSubmit={onSubmit}>
-          <input value={commentValue} onChange={commentHander} placeholder="댓글을 입력하세요." />
+        <form
+          style={{ display: 'flex', flexDirection: 'column' }}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          {/* <input value={commentValue} onChange={commentHander} placeholder="댓글을 입력하세요." /> */}
+          <input
+            {...register('commentValue', {
+              required: '내용을 입력해주세요.',
+            })}
+            placeholder="댓글을 입력하세요."
+          />
+          <span>{errors?.commentValue?.message}</span>
+          <span>{errors?.extraError?.message}</span>
           <button type="submit">작성</button>
         </form>
         <CommentContainer postId={team_id} comments={comments} dispatchComment={dispatchComment} />

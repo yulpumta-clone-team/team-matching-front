@@ -10,6 +10,7 @@ import {
   handleSecretUserComment,
   patchUserComment,
   postUserComment,
+  postUserReply,
 } from '_actions/user_action';
 import { USER } from './constant';
 
@@ -20,22 +21,27 @@ export function handleComment(type, dispatch) {
       isUser ? dispatch(postUserComment(dataToSubmit)) : dispatch(postTeamComment(dataToSubmit));
     },
     deleteComment(dataToSubmit) {
-      isUser ? dispatch(deleteUserComment(dataToSubmit)) : dispatch(patchTeamComment(dataToSubmit));
+      isUser
+        ? dispatch(deleteUserComment(dataToSubmit))
+        : dispatch(deleteTeamComment(dataToSubmit));
     },
     patchComment(dataToSubmit) {
-      isUser ? dispatch(patchUserComment(dataToSubmit)) : dispatch(deleteTeamComment(dataToSubmit));
+      isUser ? dispatch(patchUserComment(dataToSubmit)) : dispatch(patchTeamComment(dataToSubmit));
     },
     handleSecret(dataToSubmit) {
       isUser
         ? dispatch(handleSecretUserComment(dataToSubmit))
         : dispatch(handleSecretTeamComment(dataToSubmit));
     },
+    postReply(dataToSubmit) {
+      isUser ? dispatch(postUserReply(dataToSubmit)) : null;
+    },
   };
 }
 
 export function handleCommentReducer(target) {
+  console.log(target);
   const targetElement = target;
-  console.log(targetElement);
   return {
     postComment(payload) {
       return [...[...targetElement.comments], payload];
@@ -44,10 +50,10 @@ export function handleCommentReducer(target) {
       return [...targetElement.comments].filter((comment) => comment.id !== payload);
     },
     patchComment(payload) {
-      const { id, editValue, updatedAt } = payload;
+      const { id } = payload;
       return [...targetElement.comments].map((comment) => {
         if (comment.id === id) {
-          return { ...comment, content: editValue, updatedAt };
+          return payload;
         }
         return comment;
       });
@@ -60,6 +66,10 @@ export function handleCommentReducer(target) {
         }
         return comment;
       });
+    },
+    postRelpy(payload) {
+      const { id: parentId, content } = payload;
+      return [...[...targetElement.comments], payload];
     },
   };
 }
