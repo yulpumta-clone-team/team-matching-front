@@ -150,4 +150,3 @@ const commentObj = {
   isSecret: false,
   replies: [],
 };
-

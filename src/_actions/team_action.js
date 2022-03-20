@@ -14,7 +14,6 @@ import {
   HANDLE_SECRET_TEAM_REPLY,
 } from '_types/teamTypes';
 
-
 export async function getTeamDetail(dataTosubmit) {
   console.log('TeamDetail ID: ', dataTosubmit);
   const { data } = await axios.get('../_mockData/team.json').then((response) => response.data);

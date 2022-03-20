@@ -10,4 +10,3 @@ export const POST_TEAM_REPLY = 'postTeamReply';
 export const PATCH_TEAM_REPLY = 'patchTeamReply';
 export const DELETE_TEAM_REPLY = 'deleteTeamReply';
 export const HANDLE_SECRET_TEAM_REPLY = 'handleSecretTeamReply';
-
