@@ -25,7 +25,6 @@ function UserPost() {
   const dispatch = useDispatch();
   const dispatchComment = handleComment(USER, dispatch);
   const navigate = useNavigate();
-  // const [commentValue, commentHander, setCommentValue] = useInput('');
   const onClickback = () => {
     navigate(-1);
   };

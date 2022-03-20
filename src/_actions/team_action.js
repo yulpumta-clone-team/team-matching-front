@@ -8,6 +8,10 @@ import {
   HANDLE_SECRET_TEAM_COMMENT,
   DELETE_TEAM_COMMENT,
   PATCH_TEAM_COMMENT,
+  POST_TEAM_REPLY,
+  DELETE_TEAM_REPLY,
+  PATCH_TEAM_REPLY,
+  HANDLE_SECRET_TEAM_REPLY,
 } from '_types/teamTypes';
 
 export async function getTeamDetail(dataTosubmit) {
@@ -28,13 +32,13 @@ export async function getTeamArr(count) {
   };
 }
 
-export async function postTeamComment(dataTosubmit) {
-  const { team_id, user_id, nickname, content, isSecret } = dataTosubmit;
+export async function postTeamComment(dataToSubmit) {
+  const { team_id, writter_id, nickname, content, isSecret } = dataToSubmit;
   const newCommentCreateAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
   const newCommentId = uuid();
   const newComment = {
     ...commentObj,
-    user_id,
+    writter_id,
     id: newCommentId,
     nickname,
     content,
@@ -47,23 +51,23 @@ export async function postTeamComment(dataTosubmit) {
     payload: newComment,
   };
 }
-export async function patchTeamComment(dataTosubmit) {
+export async function patchTeamComment(dataToSubmit) {
   const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
-  const { id, editValue, comment } = dataTosubmit;
-  const editedComment = {
+  const { postId: team_id, id, editContent, comment } = dataToSubmit;
+  const editiedComment = {
     ...comment,
     id,
-    content: editValue,
+    team_id,
+    content: editContent,
     updatedAt,
   };
-  console.log(editedComment);
   return {
     type: PATCH_TEAM_COMMENT,
-    payload: editedComment,
+    payload: editiedComment,
   };
 }
-export async function deleteTeamComment(dataTosubmit) {
-  const { id } = dataTosubmit;
+export async function deleteTeamComment(dataToSubmit) {
+  const { postId: team_id, id } = dataToSubmit;
   return {
     type: DELETE_TEAM_COMMENT,
     payload: id,
@@ -78,10 +82,65 @@ export async function handleSecretTeamComment(dataTosubmit) {
   };
 }
 
+export async function postTeamReply(dataToSubmit) {
+  const { postId: team_id, parent_id, nickname, content, writter_id } = dataToSubmit;
+  const newCommentCreateAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
+  const newCommentId = uuid();
+  const newComment = {
+    ...commentObj,
+    team_id,
+    parent_id,
+    id: newCommentId,
+    writter_id,
+    nickname,
+    content,
+    createdAt: newCommentCreateAt,
+    updatedAt: newCommentCreateAt,
+  };
+  return {
+    type: POST_TEAM_REPLY,
+    payload: newComment,
+  };
+}
+
+export async function deleteTeamReply(dataToSubmit) {
+  const { id, postId, parent_id } = dataToSubmit;
+  return {
+    type: DELETE_TEAM_REPLY,
+    payload: dataToSubmit,
+  };
+}
+export async function patchTeamReply(dataToSubmit) {
+  const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
+  const { id, postId: team_id, parent_id, editContent, comment } = dataToSubmit;
+  const editiedComment = {
+    ...comment,
+    id,
+    parent_id,
+    team_id,
+    content: editContent,
+    updatedAt,
+  };
+  return {
+    type: PATCH_TEAM_REPLY,
+    payload: editiedComment,
+  };
+}
+
+export async function handleSecretTeamReply(dataToSubmit) {
+  const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
+  return {
+    type: HANDLE_SECRET_TEAM_REPLY,
+    payload: { ...dataToSubmit, updatedAt },
+  };
+}
+
 const commentObj = {
-  user_id: null,
+  team_id: null,
   id: null,
+  writter_id: null,
   nickname: null,
+  users_like: [],
   isLike: false,
   content: null,
   img: 'https://user-images.githubusercontent.com/71386219/157435570-a48382a8-63e5-4d25-91f4-e506289424b5.png',

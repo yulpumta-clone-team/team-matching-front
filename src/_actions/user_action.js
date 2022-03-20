@@ -52,9 +52,9 @@ export async function postUserComment(dataTosubmit) {
     payload: newComment,
   };
 }
-export async function patchUserComment(dataTosubmit) {
+export async function patchUserComment(dataToSubmit) {
   const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
-  const { postId: user_id, id, editContent, comment } = dataTosubmit;
+  const { postId: user_id, id, editContent, comment } = dataToSubmit;
   const editiedComment = {
     ...comment,
     id,
@@ -139,6 +139,7 @@ export async function handleSecretUserReply(dataToSubmit) {
 const commentObj = {
   user_id: null,
   id: null,
+  writter_id: null,
   users_like: [],
   nickname: null,
   isLike: false,

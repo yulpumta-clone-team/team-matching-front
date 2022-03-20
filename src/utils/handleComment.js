@@ -2,9 +2,13 @@
 /* eslint-disable no-unused-expressions */
 import {
   deleteTeamComment,
+  deleteTeamReply,
   handleSecretTeamComment,
+  handleSecretTeamReply,
   patchTeamComment,
+  patchTeamReply,
   postTeamComment,
+  postTeamReply,
 } from '_actions/team_action';
 import {
   deleteUserComment,
@@ -38,16 +42,18 @@ export function handleComment(type, dispatch) {
         : dispatch(handleSecretTeamComment(dataToSubmit));
     },
     postReply(dataToSubmit) {
-      isUser ? dispatch(postUserReply(dataToSubmit)) : null;
+      isUser ? dispatch(postUserReply(dataToSubmit)) : dispatch(postTeamReply(dataToSubmit));
     },
     deleteReply(dataToSubmit) {
-      isUser ? dispatch(deleteUserReply(dataToSubmit)) : null;
+      isUser ? dispatch(deleteUserReply(dataToSubmit)) : dispatch(deleteTeamReply(dataToSubmit));
     },
     patchReply(dataToSubmit) {
-      isUser ? dispatch(patchUserReply(dataToSubmit)) : null;
+      isUser ? dispatch(patchUserReply(dataToSubmit)) : dispatch(patchTeamReply(dataToSubmit));
     },
     handleSecretReply(dataToSubmit) {
-      isUser ? dispatch(handleSecretUserReply(dataToSubmit)) : null;
+      isUser
+        ? dispatch(handleSecretUserReply(dataToSubmit))
+        : dispatch(handleSecretTeamReply(dataToSubmit));
     },
   };
 }
