@@ -135,7 +135,6 @@ export async function handleSecretUserReply(dataToSubmit) {
     payload: { ...dataToSubmit, updatedAt },
   };
 }
-
 const commentObj = {
   user_id: null,
   id: null,

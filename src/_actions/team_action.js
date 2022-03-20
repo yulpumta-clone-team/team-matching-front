@@ -66,6 +66,7 @@ export async function patchTeamComment(dataToSubmit) {
     payload: editiedComment,
   };
 }
+
 export async function deleteTeamComment(dataToSubmit) {
   const { postId: team_id, id } = dataToSubmit;
   return {
