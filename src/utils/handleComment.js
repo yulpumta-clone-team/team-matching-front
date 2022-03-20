@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-expressions */
 import {
   deleteTeamComment,
@@ -7,8 +8,11 @@ import {
 } from '_actions/team_action';
 import {
   deleteUserComment,
+  deleteUserReply,
   handleSecretUserComment,
+  handleSecretUserReply,
   patchUserComment,
+  patchUserReply,
   postUserComment,
   postUserReply,
 } from '_actions/user_action';
@@ -36,15 +40,23 @@ export function handleComment(type, dispatch) {
     postReply(dataToSubmit) {
       isUser ? dispatch(postUserReply(dataToSubmit)) : null;
     },
+    deleteReply(dataToSubmit) {
+      isUser ? dispatch(deleteUserReply(dataToSubmit)) : null;
+    },
+    patchReply(dataToSubmit) {
+      isUser ? dispatch(patchUserReply(dataToSubmit)) : null;
+    },
+    handleSecretReply(dataToSubmit) {
+      isUser ? dispatch(handleSecretUserReply(dataToSubmit)) : null;
+    },
   };
 }
 
 export function handleCommentReducer(target) {
-  console.log(target);
   const targetElement = target;
   return {
     postComment(payload) {
-      return [...[...targetElement.comments], payload];
+      return [...targetElement.comments, payload];
     },
     deleteComment(payload) {
       return [...targetElement.comments].filter((comment) => comment.id !== payload);
@@ -68,8 +80,50 @@ export function handleCommentReducer(target) {
       });
     },
     postRelpy(payload) {
-      const { id: parentId, content } = payload;
-      return [...[...targetElement.comments], payload];
+      const { parent_id } = payload;
+      return [...targetElement.comments].map((comment) => {
+        if (comment.id === parent_id) {
+          comment.replies = [...comment.replies, payload];
+        }
+        return comment;
+      });
+    },
+    deleteReply(payload) {
+      const { parent_id, id } = payload;
+      return [...targetElement.comments].map((comment) => {
+        if (comment.id === parent_id) {
+          comment.replies = [...comment.replies].filter((reply) => reply.id !== id);
+        }
+        return comment;
+      });
+    },
+    patchReply(payload) {
+      const { parent_id, id } = payload;
+      return [...targetElement.comments].map((comment) => {
+        if (comment.id === parent_id) {
+          comment.replies = comment.replies.map((reply) => {
+            if (reply.id === id) {
+              return payload;
+            }
+            return reply;
+          });
+        }
+        return comment;
+      });
+    },
+    handleSecretReply(payload) {
+      const { id, parent_id, updatedAt } = payload;
+      return [...targetElement.comments].map((comment) => {
+        if (comment.id === parent_id) {
+          comment.replies = comment.replies.map((reply) => {
+            if (reply.id === id) {
+              return { ...reply, isSecret: !reply.isSecret, updatedAt };
+            }
+            return reply;
+          });
+        }
+        return comment;
+      });
     },
   };
 }
