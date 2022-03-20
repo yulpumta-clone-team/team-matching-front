@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Potal from 'components/Potal';
 import { ModalWrapper, ModalContainer, CloseModalButton } from './style';
 
-function Modal({ children, show, onCloseModal }) {
+function WindowModal({ children, show, onCloseModal }) {
   const stopPropagation = useCallback((e) => {
     e.stopPropagation();
   }, []);
@@ -30,10 +30,10 @@ function Modal({ children, show, onCloseModal }) {
   );
 }
 
-Modal.propTypes = {
+WindowModal.propTypes = {
   children: PropTypes.element.isRequired,
   onCloseModal: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
 };
 
-export default Modal;
+export default WindowModal;

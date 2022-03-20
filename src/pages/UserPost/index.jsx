@@ -1,43 +1,59 @@
-/* eslint-disable camelcase */
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import MarkdownViewer from 'components/MdViewer';
+import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTeamArr, getTeamDetail } from '_actions/team_action';
+import { useParams, useNavigate } from 'react-router-dom';
 import Loader from 'pages/Loader';
+import MarkdownViewer from 'components/MdViewer';
+import CommentContainer from 'components/CommentContainer';
+import { getUserDetail } from '_actions/user_action';
+import { handleComment } from 'utils/handleComment';
+import { USER } from 'utils/constant';
 import { Board, Button, Box, Box2, Box3 } from './styleu';
 
-const userElement = {
-  name: '홍길동',
-  content:
-    '# 임시 데이터\n# 이런식으로하면 됩니다.\n\n### 알겠습니다\n\n안녕하세요. **프론트**입니다.',
-  session: 'string',
-  img: 'string',
-  read: 'int',
-  job: 'string',
-  comment_cnt: 0,
-  like_cnt: 0,
-  createdAt: 'time',
-  updatedAt: 'time',
-  comment: [],
-};
-function UserPost(props) {
+function UserPost() {
+  const {
+    register,
+    handleSubmit,
+    setError,
+    setValue,
+    formState: { errors },
+    // watch,
+  } = useForm({
+    defaultValues: {},
+  });
   const { userId } = useParams();
   const dispatch = useDispatch();
+  const dispatchComment = handleComment(USER, dispatch);
   const navigate = useNavigate();
   const onClickback = () => {
     navigate(-1);
   };
-  // const { teamElement } = useSelector((state) => state.team);
-  const { id } = useParams();
+  const { myData } = useSelector((state) => state.auth);
+  const { targetUser } = useSelector((state) => state.user);
   useEffect(() => {
-    dispatch(getTeamDetail(id));
-  }, []);
-  if (!userElement) {
+    dispatch(getUserDetail(Number(userId)));
+  }, [dispatch, userId]);
+  const onSubmit = async ({ commentValue }) => {
+    if (!myData) {
+      alert('로그인을 먼저해주세요');
+    } else {
+      const newCommentData = {
+        content: commentValue,
+        writter_id: myData.user_id,
+        user_id,
+        nickname: myData.nickname,
+        isSecret: false,
+      };
+      dispatchComment.postComment(newCommentData);
+      setValue('commentValue', '');
+    }
+    // setError('extraError', { message: 'Server offLine.' });
+  };
+  if (!targetUser) {
     return <Loader />;
   }
   const {
+    user_id,
     name,
     content,
     session,
@@ -48,8 +64,8 @@ function UserPost(props) {
     like_cnt,
     createdAt,
     updatedAt,
-    comment,
-  } = userElement;
+    comments,
+  } = targetUser;
   return (
     <div>
       <button onClick={onClickback}>back</button>
@@ -63,10 +79,22 @@ function UserPost(props) {
           <p>이름 : {name}</p>
         </div>
         <Box2>좋아요 개수 : {like_cnt}</Box2>
+        <form
+          style={{ display: 'flex', flexDirection: 'column' }}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <input
+            {...register('commentValue', {
+              required: '내용을 입력해주세요.',
+            })}
+            placeholder="댓글을 입력하세요."
+          />
+          <span>{errors?.commentValue?.message}</span>
+          <span>{errors?.extraError?.message}</span>
+          <button type="submit">작성</button>
+        </form>
+        <CommentContainer postId={user_id} comments={comments} dispatchComment={dispatchComment} />
       </Board>
-      <Link to="./edit" state={{ userId, content, name, img, like_cnt }}>
-        <Button>Edit</Button>
-      </Link>
     </div>
   );
 }

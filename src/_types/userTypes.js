@@ -1,7 +1,13 @@
-// user_actions에 types들을 관리하는 파일
-export const LOGIN_USER = 'login_user';
-export const SIGNUP_USER = 'signUp_user';
-export const AUTH_USER = 'auth_user';
-
 export const GET_USER_DETAIL = 'getUserDetail';
 export const GET_USER__ARR = 'getUserArr';
+
+// commment
+export const POST_USER_COMMENT = 'postUserComment';
+export const PATCH_USER_COMMENT = 'patchUserComment';
+export const DELETE_USER_COMMENT = 'deleteUserComment';
+export const HANDLE_SECRET_USER_COMMENT = 'handleSecretUserComment';
+export const POST_USER_REPLY = 'postUserReply';
+export const PATCH_USER_REPLY = 'patchUserReply';
+export const DELETE_USER_REPLY = 'deleteUserReply';
+export const HANDLE_SECRET_USER_REPLY = 'handleSecretUserReply';
+
