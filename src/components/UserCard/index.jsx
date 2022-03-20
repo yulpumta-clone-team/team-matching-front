@@ -50,3 +50,4 @@ const array = [
   { user_id: 1, nickname: '123' },
   { user_id: 1, nickname: '123' },
 ];
+
