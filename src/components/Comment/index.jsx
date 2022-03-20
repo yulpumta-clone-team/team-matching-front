@@ -29,6 +29,13 @@ function Comment({ postId, comment, dispatchComment }) {
     },
   });
   const isMine = my_id === writter_id;
+  const isLogInUser = () => {
+    if (!myData) {
+      alert('로그인을 먼저해주세요');
+      return false;
+    }
+    return true;
+  };
   const deleteComment = ({ id }) => {
     parent_id
       ? dispatchComment.deleteReply({ id, postId, parent_id })
@@ -38,6 +45,7 @@ function Comment({ postId, comment, dispatchComment }) {
     setActiveEditCommentId(id);
   };
   const editComment = ({ editContent }) => {
+    isLogInUser();
     // 서버랑 연결한 후에 comment 제외해야함.
     parent_id
       ? dispatchComment.patchReply({ id, postId, parent_id, editContent, comment })
@@ -46,6 +54,7 @@ function Comment({ postId, comment, dispatchComment }) {
     setValue('editContent', '');
   };
   const handleSecret = ({ id }) => {
+    isLogInUser();
     parent_id
       ? dispatchComment.handleSecretReply({ id, postId, parent_id })
       : dispatchComment.handleSecret({ id, postId });
@@ -54,6 +63,7 @@ function Comment({ postId, comment, dispatchComment }) {
     setShowReplyBox((prev) => !prev);
   };
   const postReply = ({ replyContent }) => {
+    isLogInUser();
     dispatchComment.postReply({
       postId,
       parent_id: id,
@@ -86,7 +96,7 @@ function Comment({ postId, comment, dispatchComment }) {
                   })}
                   placeholder="대댓글을 입력하세요."
                 />
-                <span>{errors?.editContent?.message}</span>
+                <span>{errors?.replyContent?.message}</span>
                 <span>{errors?.extraError?.message}</span>
                 <button type="submit">작성</button>
               </form>
