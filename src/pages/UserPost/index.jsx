@@ -25,7 +25,6 @@ function UserPost() {
   const dispatch = useDispatch();
   const dispatchComment = handleComment(USER, dispatch);
   const navigate = useNavigate();
-  // const [commentValue, commentHander, setCommentValue] = useInput('');
   const onClickback = () => {
     navigate(-1);
   };
@@ -40,7 +39,8 @@ function UserPost() {
     } else {
       const newCommentData = {
         content: commentValue,
-        user_id: myData.user_id,
+        writter_id: myData.user_id,
+        user_id,
         nickname: myData.nickname,
         isSecret: false,
       };

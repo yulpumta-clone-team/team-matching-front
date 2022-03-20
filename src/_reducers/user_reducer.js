@@ -1,10 +1,13 @@
 import { handleCommentReducer } from 'utils/handleComment';
 import {
   DELETE_USER_COMMENT,
+  DELETE_USER_REPLY,
   GET_USER_DETAIL,
   GET_USER__ARR,
   HANDLE_SECRET_USER_COMMENT,
+  HANDLE_SECRET_USER_REPLY,
   PATCH_USER_COMMENT,
+  PATCH_USER_REPLY,
   POST_USER_COMMENT,
   POST_USER_REPLY,
 } from '_types/userTypes';
@@ -54,7 +57,25 @@ const userReducer = (state = initState, action) => {
     case POST_USER_REPLY:
       return {
         ...state,
-        targetUser: { ...targetUser, comments: handlecomment.postComment(action.payload) },
+        targetUser: { ...targetUser, comments: handlecomment.postRelpy(action.payload) },
+      };
+    case DELETE_USER_REPLY:
+      return {
+        ...state,
+        targetUser: { ...targetUser, comments: handlecomment.deleteReply(action.payload) },
+      };
+    case PATCH_USER_REPLY:
+      return {
+        ...state,
+        targetUser: { ...targetUser, comments: handlecomment.patchReply(action.payload) },
+      };
+    case HANDLE_SECRET_USER_REPLY:
+      return {
+        ...state,
+        targetUser: {
+          ...targetUser,
+          comments: handlecomment.handleSecretReply(action.payload),
+        },
       };
     default:
       return state;
