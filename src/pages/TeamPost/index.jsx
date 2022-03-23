@@ -1,14 +1,14 @@
 /* eslint-disable camelcase */
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import MarkdownViewer from 'components/MdViewer';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTeamDetail } from '_actions/team_action';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import Loader from 'pages/Loader';
+import MarkdownViewer from 'components/MdViewer';
+import CommentContainer from 'components/CommentContainer';
+import { getTeamDetail } from '_actions/team_action';
 import { handleComment } from 'utils/handleComment';
 import { TEAM } from 'utils/constant';
-import CommentContainer from 'components/CommentContainer';
 import { Board, Button, Box, Box2, Box3 } from './stylep';
 
 function TeamPost() {
@@ -33,14 +33,15 @@ function TeamPost() {
   const { targetTeam } = useSelector((state) => state.team);
   useEffect(() => {
     dispatch(getTeamDetail(Number(teamId)));
-  }, []);
+  }, [dispatch, teamId]);
   const onSubmit = async ({ commentValue }) => {
     if (!myData) {
       alert('로그인을 먼저해주세요');
     } else {
       const newCommentData = {
         content: commentValue,
-        user_id: myData.user_id,
+        writter_id: myData.user_id,
+        team_id,
         nickname: myData.nickname,
         isSecret: false,
       };
@@ -83,7 +84,6 @@ function TeamPost() {
           style={{ display: 'flex', flexDirection: 'column' }}
           onSubmit={handleSubmit(onSubmit)}
         >
-          {/* <input value={commentValue} onChange={commentHander} placeholder="댓글을 입력하세요." /> */}
           <input
             {...register('commentValue', {
               required: '내용을 입력해주세요.',
