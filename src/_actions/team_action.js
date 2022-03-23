@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import axios from 'axios';
 import dayjs from 'dayjs';
 import uuid from 'react-uuid';

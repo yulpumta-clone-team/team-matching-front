@@ -1,5 +1,4 @@
 /* eslint-disable no-shadow */
-/* eslint-disable camelcase */
 import React, { memo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
@@ -73,12 +72,6 @@ function Comment({ postId, comment, dispatchComment }) {
       writter_id: my_id,
     });
     setValue('replyContent', '');
-  };
-  const handleReply = () => {
-    setShowReplyBox((prev) => !prev);
-  };
-  const postReply = ({ replyContent }) => {
-    dispatchComment.postReply({ id, content: replyContent });
   };
   return (
     <div>

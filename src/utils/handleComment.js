@@ -59,7 +59,6 @@ export function handleComment(type, dispatch) {
 }
 
 export function handleCommentReducer(target) {
-  console.log(target);
   const targetElement = target;
   return {
     postComment(payload) {
