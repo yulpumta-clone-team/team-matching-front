@@ -4,12 +4,11 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor, Viewer } from '@toast-ui/react-editor';
 import { Box } from './stylemd';
 
-function MarkdownEditor({ mdValue, setContent }) {
+function MarkdownEditor({ mdValue }) {
   console.log(mdValue);
   const editorRef = useRef(null);
   const onChangeEditorTextHandler = () => {
     // const result = editorRef.current?.getInstance().getMarkdown();
-    setContent(editorRef.current?.getInstance().getMarkdown());
     console.log(editorRef.current?.getInstance().getMarkdown());
   };
   return (
@@ -33,7 +32,6 @@ function MarkdownEditor({ mdValue, setContent }) {
 
 MarkdownEditor.propTypes = {
   mdValue: PropTypes.string.isRequired,
-  setContent: PropTypes.string.isRequired,
 };
 
 export default React.memo(MarkdownEditor);

@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';

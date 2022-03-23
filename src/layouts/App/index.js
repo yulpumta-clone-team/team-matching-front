@@ -1,16 +1,6 @@
-/* eslint-disable camelcase */
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import {
-  HOME,
-  LOGIN,
-  New_Post,
-  PROFILE,
-  SIGN_UP,
-  TEAM_BOARD,
-  USERS_LIST,
-  USER_BOARD,
-} from 'utils/route';
+import { HOME, LOGIN, PROFILE, SIGN_UP, TEAM_BOARD, USERS_LIST, USER_BOARD } from 'utils/route';
 import Auth from 'hoc/auth';
 import Login from 'pages/Login';
 import Main from 'pages/Main';
@@ -25,7 +15,6 @@ import Navigation from 'components/Navigation';
 import EditUserProfile from 'pages/EditUserProfile';
 import EditTeamProfile from 'pages/EditTeamPost';
 import UsersList from 'pages/UsersList';
-import NewPost from 'pages/NewPost';
 import AppLayout from './style';
 
 function App() {
@@ -42,7 +31,6 @@ function App() {
           <Route path={LOGIN} element={<Auth SpecificComponent={Login} option={false} />} />
           <Route path={SIGN_UP} element={<Auth SpecificComponent={SignUp} option={false} />} />
           <Route path={USERS_LIST} element={<UsersList />} />
-          <Route path={New_Post} element={<NewPost />} />
           <Route
             path={`${USER_BOARD}/:userId`}
             element={<Auth SpecificComponent={UserPost} option={null} />}
