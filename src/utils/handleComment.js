@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-expressions */
+/* eslint-disable camelcase */
 import {
   deleteTeamComment,
   deleteTeamReply,
