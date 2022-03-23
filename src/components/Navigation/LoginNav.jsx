@@ -6,7 +6,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import useModal from 'hooks/useModal';
-import { HOME, PROFILE, TEAM_BOARD, USERS_LIST, USER_BOARD } from 'utils/route';
+import { HOME, My_Post, New_Post, PROFILE, TEAM_BOARD, USERS_LIST, USER_BOARD } from 'utils/route';
 import Menu from 'components/Menu';
 import { Ul } from './style';
 
@@ -25,6 +25,9 @@ function LoginNav({ myData }) {
       <li>
         <Link to={TEAM_BOARD}>Team Board</Link>
       </li>
+      <li>
+        <Link to={New_Post}>New Post</Link>
+      </li>
       <li onClick={openModal}>
         <img style={{ width: '30px' }} src={img} alt="profile" />
         <span>{nickname}</span>
@@ -32,7 +35,7 @@ function LoginNav({ myData }) {
       <Menu style={{ right: 0, top: 80 }} show={showModal} onCloseModal={onCloseModal}>
         <Ul IsflexDirectionColumn>
           <li>
-            <Link to={HOME}>내 작성글</Link>
+            <Link to={My_Post}>내 작성글</Link>
           </li>
           <li>
             <Link to={USERS_LIST}>내 관심글</Link>

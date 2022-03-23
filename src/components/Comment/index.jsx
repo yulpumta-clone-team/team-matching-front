@@ -80,6 +80,12 @@ function Comment({ postId, comment, dispatchComment }) {
   const postReply = ({ replyContent }) => {
     dispatchComment.postReply({ id, content: replyContent });
   };
+  const handleReply = () => {
+    setShowReplyBox((prev) => !prev);
+  };
+  const postReply = ({ replyContent }) => {
+    dispatchComment.postReply({ id, content: replyContent });
+  };
   return (
     <div>
       {isSecret && !isMine ? (

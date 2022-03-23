@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,6 +26,7 @@ function UserPost() {
   const dispatch = useDispatch();
   const dispatchComment = handleComment(USER, dispatch);
   const navigate = useNavigate();
+  // const [commentValue, commentHander, setCommentValue] = useInput('');
   const onClickback = () => {
     navigate(-1);
   };
