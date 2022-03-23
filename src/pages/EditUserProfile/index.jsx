@@ -14,15 +14,23 @@ function EditUserProfile(props) {
   const onClickback = () => {
     navigate(-1);
   };
+  const editUserData = {
+    name: '임시',
+    img: 'https://user-images.githubusercontent.com/71386219/157435570-a48382a8-63e5-4d25-91f4-e506289424b5.png',
+    content: '임시 프로필',
+    userId: 123123123,
+    like_cnt: 3,
+  };
+  const { name, img, content, userId, like_cnt } = editUserData;
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userName);
     // console.log(editorRef.current?.getInstance().getMarkdown());
   };
-  const { userId, content, name, img, like_cnt } = location.state;
-  // console.log(team_name);
+
   const [userName, setName] = useState(name);
   const [userImg, setImg] = useState(img);
+  const [mdcontent, setContent] = useState(content);
   const onNameChange = (e) => {
     // console.log(e.target.name, e.target.value);
     setName(e.target.value);
@@ -40,10 +48,11 @@ function EditUserProfile(props) {
         <button onClick={onClickback}>back</button>
         <Board>
           <Box3>
-            <input name="사진" onChange={onImgChange} value={userImg} />
+            {/* <input name="사진" onChange={onImgChange} value={userImg} /> */}
+            <img style={{ width: '300px', heigth: '300px' }} src={userImg} alt="프로필 이미지" />
           </Box3>
           <div>
-            <MarkdownEditor mdValue={content} />
+            <MarkdownEditor mdValue={mdcontent} setContent={setContent} />
           </div>
           <Box2>
             <div>

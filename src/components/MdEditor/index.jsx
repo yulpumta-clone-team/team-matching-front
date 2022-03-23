@@ -33,7 +33,7 @@ function MarkdownEditor({ mdValue, setContent }) {
 
 MarkdownEditor.propTypes = {
   mdValue: PropTypes.string.isRequired,
-  setContent: PropTypes.string.isRequired,
+  setContent: PropTypes.func.isRequired,
 };
 
 export default React.memo(MarkdownEditor);

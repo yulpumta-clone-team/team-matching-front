@@ -74,18 +74,6 @@ function Comment({ postId, comment, dispatchComment }) {
     });
     setValue('replyContent', '');
   };
-  const handleReply = () => {
-    setShowReplyBox((prev) => !prev);
-  };
-  const postReply = ({ replyContent }) => {
-    dispatchComment.postReply({ id, content: replyContent });
-  };
-  const handleReply = () => {
-    setShowReplyBox((prev) => !prev);
-  };
-  const postReply = ({ replyContent }) => {
-    dispatchComment.postReply({ id, content: replyContent });
-  };
   return (
     <div>
       {isSecret && !isMine ? (
