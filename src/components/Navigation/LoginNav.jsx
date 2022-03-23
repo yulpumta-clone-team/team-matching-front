@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import useModal from 'hooks/useModal';
-import { HOME, PROFILE, TEAM_BOARD, USERS_LIST, USER_BOARD } from 'utils/route';
+import { HOME, New_Post, PROFILE, TEAM_BOARD, USERS_LIST, USER_BOARD } from 'utils/route';
 import Menu from 'components/Menu';
 import { Ul } from './style';
 
@@ -23,6 +24,9 @@ function LoginNav({ myData }) {
       </li>
       <li>
         <Link to={TEAM_BOARD}>Team Board</Link>
+      </li>
+      <li>
+        <Link to={New_Post}>New Post</Link>
       </li>
       <li onClick={openModal}>
         <img style={{ width: '30px' }} src={img} alt="profile" />
