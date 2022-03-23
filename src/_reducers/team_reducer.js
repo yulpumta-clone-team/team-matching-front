@@ -6,6 +6,10 @@ import {
   HANDLE_SECRET_TEAM_COMMENT,
   DELETE_TEAM_COMMENT,
   PATCH_TEAM_COMMENT,
+  POST_TEAM_REPLY,
+  DELETE_TEAM_REPLY,
+  PATCH_TEAM_REPLY,
+  HANDLE_SECRET_TEAM_REPLY,
 } from '_types/teamTypes';
 
 const initState = {
@@ -48,6 +52,29 @@ const userReducer = (state = initState, action) => {
         targetTeam: {
           ...targetTeam,
           comments: handlecomment.handleSecret(action.payload),
+        },
+      };
+    case POST_TEAM_REPLY:
+      return {
+        ...state,
+        targetUser: { ...targetTeam, comments: handlecomment.postRelpy(action.payload) },
+      };
+    case DELETE_TEAM_REPLY:
+      return {
+        ...state,
+        targetTeam: { ...targetTeam, comments: handlecomment.deleteReply(action.payload) },
+      };
+    case PATCH_TEAM_REPLY:
+      return {
+        ...state,
+        targetTeam: { ...targetTeam, comments: handlecomment.patchReply(action.payload) },
+      };
+    case HANDLE_SECRET_TEAM_REPLY:
+      return {
+        ...state,
+        targetTeam: {
+          ...targetTeam,
+          comments: handlecomment.handleSecretReply(action.payload),
         },
       };
     default:
