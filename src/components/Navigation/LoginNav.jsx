@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import useModal from 'hooks/useModal';
-import { HOME, PROFILE, TEAM_BOARD, USER_BOARD } from 'utils/route';
+import { HOME, My_Post, New_Post, PROFILE, TEAM_BOARD, USERS_LIST, USER_BOARD } from 'utils/route';
 import Menu from 'components/Menu';
 import { Ul } from './style';
 
@@ -25,7 +26,7 @@ function LoginNav({ myData }) {
         <Link to={TEAM_BOARD}>Team Board</Link>
       </li>
       <li>
-        <Link to={PROFILE}>User Profile</Link>
+        <Link to={New_Post}>New Post</Link>
       </li>
       <li onClick={openModal}>
         <img style={{ width: '30px' }} src={img} alt="profile" />
@@ -34,13 +35,13 @@ function LoginNav({ myData }) {
       <Menu style={{ right: 0, top: 80 }} show={showModal} onCloseModal={onCloseModal}>
         <Ul IsflexDirectionColumn>
           <li>
-            <Link to={HOME}>내 작성글</Link>
+            <Link to={My_Post}>내 작성글</Link>
           </li>
           <li>
-            <Link to={USER_BOARD}>내 관심글</Link>
+            <Link to={USERS_LIST}>내 관심글</Link>
           </li>
           <li>
-            <Link to={TEAM_BOARD}>프로필 설정</Link>
+            <Link to={PROFILE}>프로필 설정</Link>
           </li>
           <li>
             <button>로그아웃</button>
