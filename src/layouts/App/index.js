@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   HOME,
   LOGIN,
+  My_Post,
   New_Post,
   PROFILE,
   SIGN_UP,
@@ -26,6 +27,7 @@ import EditUserProfile from 'pages/EditUserProfile';
 import EditTeamProfile from 'pages/EditTeamPost';
 import UsersList from 'pages/UsersList';
 import NewPost from 'pages/NewPost';
+import MyPost from 'pages/MyPost';
 import AppLayout from './style';
 
 function App() {
@@ -43,6 +45,7 @@ function App() {
           <Route path={SIGN_UP} element={<Auth SpecificComponent={SignUp} option={false} />} />
           <Route path={USERS_LIST} element={<UsersList />} />
           <Route path={New_Post} element={<NewPost />} />
+          <Route path={My_Post} element={<MyPost />} />
           <Route
             path={`${USER_BOARD}/:userId`}
             element={<Auth SpecificComponent={UserPost} option={null} />}
