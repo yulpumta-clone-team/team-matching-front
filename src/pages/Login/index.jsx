@@ -17,14 +17,16 @@ function Login() {
   } = useForm({
     defaultValues: {},
   });
-  const onValid = async (data) => {
-    const { password, verifiedPassword } = data;
+  const onValid = async (submitData) => {
+    const { password, verifiedPassword } = submitData;
     if (password !== verifiedPassword) {
       setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
     }
     // fetch
-    console.log(data);
-    dispatch(loginUser(data));
+    console.log(submitData);
+    const {
+      payload: { status, code, data, message },
+    } = await dispatch(loginUser(submitData));
     navigate('/callback');
   };
   return (
@@ -34,7 +36,7 @@ function Login() {
           {...register('email', {
             required: 'Email is required',
             pattern: {
-              value: /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i,
+              value: /^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\w+\.)+\w+$/i,
               message: '이메일 형식으로 입력해주세요.',
             },
           })}
@@ -42,7 +44,15 @@ function Login() {
         />
         <span>{errors?.email?.message}</span>
         <input
-          {...register('password', { required: '비빌번호를 입력해주세요.' })}
+          {...register('password', {
+            required: '4자리 이상 비밀번호를 입력해주세요.',
+            minLength: 4,
+            pattern: {
+              value: /(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&+=])(?=\S+$).{8,20}/,
+              message:
+                '8자 이상 20자 이하, 숫자 한개이상 특수문자 한개이상 영어 한개이상 포함 공백 불가',
+            },
+          })}
           placeholder="password"
         />
         <span>{errors?.password?.message}</span>
