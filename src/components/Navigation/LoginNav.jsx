@@ -12,7 +12,7 @@ import { Ul } from './style';
 
 function LoginNav({ myData }) {
   console.log('Login naviogation:', myData);
-  const { nickname, img } = myData;
+  const { name, img } = myData;
   const [showModal, onCloseModal, openModal] = useModal();
   return (
     <Ul>
@@ -30,7 +30,7 @@ function LoginNav({ myData }) {
       </li>
       <li onClick={openModal}>
         <img style={{ width: '30px' }} src={img} alt="profile" />
-        <span>{nickname}</span>
+        <span>{name}</span>
       </li>
       <Menu style={{ right: 0, top: 80 }} show={showModal} onCloseModal={onCloseModal}>
         <Ul IsflexDirectionColumn>
@@ -54,7 +54,7 @@ function LoginNav({ myData }) {
 
 LoginNav.propTypes = {
   myData: PropTypes.shape({
-    nickname: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
   }).isRequired,
 };
