@@ -7,7 +7,7 @@ import MarkdownViewer from 'components/MdViewer';
 import CommentContainer from 'components/CommentContainer';
 import { getTeamDetail } from '_actions/team_action';
 import { handleComment } from 'utils/handleComment';
-import { TEAM } from 'utils/constant';
+import { TEAM } from 'constant';
 import { Board, Button, Box, Box2, Box3 } from './stylep';
 
 function TeamPost() {

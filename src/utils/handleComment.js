@@ -18,7 +18,7 @@ import {
   postUserComment,
   postUserReply,
 } from '_actions/user_action';
-import { USER } from './constant';
+import { USER } from 'constant';
 
 export function handleComment(type, dispatch) {
   const isUser = type === USER;
