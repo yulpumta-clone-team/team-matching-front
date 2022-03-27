@@ -1,12 +1,18 @@
 import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Potal from 'components/Potal';
+import { resetError } from '_actions/global_action';
 import { ModalWrapper, ModalContainer, CloseModalButton } from './style';
 
-function WindowModal({ children, show, onCloseModal }) {
+function WindowModal({ children, show }) {
+  const dispatch = useDispatch();
   const stopPropagation = useCallback((e) => {
     e.stopPropagation();
   }, []);
+  const onCloseModal = useCallback(() => {
+    dispatch(resetError());
+  }, [dispatch]);
   const handleKeyEsc = useCallback(
     (e) => {
       if (e.keyCode === 27) {
@@ -32,7 +38,6 @@ function WindowModal({ children, show, onCloseModal }) {
 
 WindowModal.propTypes = {
   children: PropTypes.element.isRequired,
-  onCloseModal: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
 };
 

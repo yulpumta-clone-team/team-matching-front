@@ -26,14 +26,14 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (response) => {
-    const {
-      data: { code, data, message, status },
-    } = response;
-    return data;
+    // const {
+    //   data: { code, data, message, status },
+    // } = response;
+    return response;
   },
   (error) => {
-    console.log(error);
-    return Promise.reject(Error);
+    console.log(error); // 디버깅
+    return Promise.reject(error);
   },
 );
 

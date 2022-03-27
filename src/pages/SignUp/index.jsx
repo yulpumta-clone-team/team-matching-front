@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { registerUser } from '_actions/auth_action';
+import { handleSignUp } from '_actions/auth_action';
 
 function SignUp() {
   const dispatch = useDispatch();
@@ -22,9 +22,11 @@ function SignUp() {
       setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
     }
     // fetch
+    // const reponse = await dispatch(handleSignUp(submitData));
+    // console.log(reponse);
     const {
       payload: { status, code, data, message },
-    } = await dispatch(registerUser(submitData));
+    } = await dispatch(handleSignUp(submitData));
     console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
     if (status === 'OK') {
       navigate('/login');

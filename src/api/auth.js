@@ -8,7 +8,7 @@ const authApi = {
       data,
     });
   },
-  requestSignIn(data) {
+  requestSignUp(data) {
     return instance({
       url: '/user/join',
       method: 'post',

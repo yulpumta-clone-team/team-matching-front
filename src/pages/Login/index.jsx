@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { OAUTH_URL } from 'constant/route';
-import { loginUser } from '_actions/auth_action';
+import { handleLogin } from '_actions/auth_action';
 
 function Login() {
   const dispatch = useDispatch();
@@ -24,9 +24,7 @@ function Login() {
     }
     // fetch
     console.log(submitData);
-    const {
-      payload: { status, code, data, message },
-    } = await dispatch(loginUser(submitData));
+    await dispatch(handleLogin(submitData));
     navigate('/callback');
   };
   return (

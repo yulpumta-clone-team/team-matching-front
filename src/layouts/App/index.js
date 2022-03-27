@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   HOME,
@@ -26,17 +27,24 @@ import EditTeamProfile from 'pages/EditTeamPost';
 import UsersList from 'pages/UsersList';
 import NewPost from 'pages/NewPost';
 import MyPost from 'pages/MyPost';
+import WindowModal from 'components/WindowModal';
+import ErrorModal from 'components/ErrorModal';
 import AppLayout from './style';
 
 // option: null => 아무나 출입 가능
 // option: true => 로그인 유저만
 // option: false => 로그인 하면 출입 불가능한 곳(회원가입 등...)
 function App() {
-  console.log(process.env.REACT_APP_SERVER_API);
+  const { isOpen, errorContent, modalContent } = useSelector((state) => state.global);
   return (
     <Router>
       <AppLayout>
         <Navigation />
+        {isOpen && (
+          <WindowModal show={isOpen}>
+            {errorContent ? <ErrorModal msg={errorContent} /> : modalContent}
+          </WindowModal>
+        )}
         <Routes>
           <Route path={HOME} element={<Auth SpecificComponent={Main} option={null} />} />
           <Route path={USER_BOARD} element={<Auth SpecificComponent={UserBoard} option={null} />} />
