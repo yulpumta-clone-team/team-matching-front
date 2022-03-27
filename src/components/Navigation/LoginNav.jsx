@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Menu from 'components/Menu';
 import useModal from 'hooks/useModal';
+import { removeLoginCookie } from 'utils/cookie';
 import {
   HOME,
   MY_POST,
@@ -14,14 +16,19 @@ import {
   USERS_LIST,
   USER_BOARD,
 } from 'constant/route';
-import Menu from 'components/Menu';
 import { DEFAULT_PROFILE_IMG } from 'constant';
 import { Ul } from './style';
 
 function LoginNav({ userInfo }) {
+  const navigate = useNavigate();
   const { name, img } = userInfo;
   const image = (!img || img === 'string') && DEFAULT_PROFILE_IMG;
   const [showModal, onCloseModal, openModal] = useModal();
+  const triggerLogOut = useCallback(() => {
+    removeLoginCookie();
+    navigate('/');
+    window.location.reload();
+  }, []);
   return (
     <Ul>
       <li>
@@ -52,7 +59,7 @@ function LoginNav({ userInfo }) {
             <Link to={PROFILE}>프로필 설정</Link>
           </li>
           <li>
-            <button>로그아웃</button>
+            <button onClick={triggerLogOut}>로그아웃</button>
           </li>
         </Ul>
       </Menu>

@@ -1,25 +1,19 @@
 import React, { useEffect } from 'react';
 import Loader from 'pages/Loader';
 import { useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
-import { useSelector } from 'react-redux';
+import { getAuthCookie } from 'utils/cookie';
 
 function Callback() {
-  const { myData } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const authCookie = getAuthCookie();
   useEffect(() => {
     function getToken() {
-      try {
-        // setCookie
-        navigate('/');
-      } catch (error) {
-        console.log(error.meesage);
-        navigate('/login');
-      }
+      authCookie ? navigate('/') : navigate('/login');
+      window.location.reload();
     }
 
     getToken();
-  }, [navigate]);
+  }, [authCookie, navigate]);
   return <Loader />;
 }
 
