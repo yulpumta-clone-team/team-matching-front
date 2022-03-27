@@ -1,5 +1,3 @@
-/* eslint-disable no-shadow */
-/* eslint-disable camelcase */
 import React, { memo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';

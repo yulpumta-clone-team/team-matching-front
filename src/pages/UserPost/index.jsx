@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +7,7 @@ import MarkdownViewer from 'components/MdViewer';
 import CommentContainer from 'components/CommentContainer';
 import { getUserDetail } from '_actions/user_action';
 import { handleComment } from 'utils/handleComment';
-import { USER } from 'utils/constant';
+import { USER } from 'constant';
 import { Board, Button, Box, Box2, Box3 } from './styleu';
 
 function UserPost() {

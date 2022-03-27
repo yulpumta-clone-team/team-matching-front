@@ -1,6 +1,4 @@
-/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-/* eslint-disable camelcase */
 import React from 'react';
 import { CardTitle, CardWrapper, ImgContainer } from './style';
 

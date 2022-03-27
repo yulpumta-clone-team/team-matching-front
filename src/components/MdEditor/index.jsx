@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor, Viewer } from '@toast-ui/react-editor';
-import { Box } from './stylemd';
 
 function MarkdownEditor({ mdValue, setContent }) {
   console.log(mdValue);

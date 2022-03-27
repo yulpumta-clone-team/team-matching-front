@@ -1,6 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable camelcase */
 import {
   deleteTeamComment,
   deleteTeamReply,
@@ -21,7 +18,7 @@ import {
   postUserComment,
   postUserReply,
 } from '_actions/user_action';
-import { USER } from './constant';
+import { USER } from 'constant';
 
 export function handleComment(type, dispatch) {
   const isUser = type === USER;
@@ -60,7 +57,6 @@ export function handleComment(type, dispatch) {
 }
 
 export function handleCommentReducer(target) {
-  console.log(target);
   const targetElement = target;
   return {
     postComment(payload) {
