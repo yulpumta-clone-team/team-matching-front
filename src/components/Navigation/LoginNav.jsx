@@ -5,7 +5,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import useModal from 'hooks/useModal';
-import { HOME, MY_POST, NEW_POST, PROFILE, TEAM_BOARD, USERS_LIST, USER_BOARD } from 'utils/route';
+import {
+  HOME,
+  MY_POST,
+  NEW_POST,
+  PROFILE,
+  TEAM_BOARD,
+  USERS_LIST,
+  USER_BOARD,
+} from 'constant/route';
 import Menu from 'components/Menu';
 import { Ul } from './style';
 

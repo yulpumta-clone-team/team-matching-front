@@ -10,7 +10,7 @@ import {
   TEAM_BOARD,
   USERS_LIST,
   USER_BOARD,
-} from 'utils/route';
+} from 'constant/route';
 import Auth from 'hoc/auth';
 import Login from 'pages/Login';
 import Main from 'pages/Main';

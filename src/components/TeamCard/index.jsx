@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { TEAM_BOARD } from 'utils/route';
+import { TEAM_BOARD } from 'constant/route';
 import { CardTitle, CardWrapper, ImgContainer, SessionContainer } from './style';
 
 function TeamCard({ teamInfo }) {
