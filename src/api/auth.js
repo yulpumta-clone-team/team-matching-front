@@ -1,26 +1,26 @@
 import instance from './core';
 
 const authApi = {
-  login(data) {
+  reqeustLogIn(data) {
     return instance({
       url: '/user/login',
       method: 'post',
       data,
     });
   },
-  signIn(data) {
+  requestSignIn(data) {
     return instance({
       url: '/user/join',
       method: 'post',
       data,
     });
   },
-  logOut() {
+  requestLogOut() {
     return instance({
       url: '/user/logout',
     });
   },
-  withdrawal() {
+  requestWithdrawal() {
     return instance({
       url: '/user/withdrawal',
       method: 'delete',

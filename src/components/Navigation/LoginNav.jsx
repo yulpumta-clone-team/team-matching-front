@@ -15,11 +15,12 @@ import {
   USER_BOARD,
 } from 'constant/route';
 import Menu from 'components/Menu';
+import { DEFAULT_PROFILE_IMG } from 'constant';
 import { Ul } from './style';
 
-function LoginNav({ myData }) {
-  console.log('Login naviogation:', myData);
-  const { name, img } = myData;
+function LoginNav({ userInfo }) {
+  const { name, img } = userInfo;
+  const image = (!img || img === 'string') && DEFAULT_PROFILE_IMG;
   const [showModal, onCloseModal, openModal] = useModal();
   return (
     <Ul>
@@ -36,7 +37,7 @@ function LoginNav({ myData }) {
         <Link to={NEW_POST}>New Post</Link>
       </li>
       <li onClick={openModal}>
-        <img style={{ width: '30px' }} src={img} alt="profile" />
+        <img style={{ width: '30px' }} src={image} alt="profile" />
         <span>{name}</span>
       </li>
       <Menu style={{ right: 0, top: 80 }} show={showModal} onCloseModal={onCloseModal}>
@@ -60,7 +61,7 @@ function LoginNav({ myData }) {
 }
 
 LoginNav.propTypes = {
-  myData: PropTypes.shape({
+  userInfo: PropTypes.shape({
     name: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
   }).isRequired,

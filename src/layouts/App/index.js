@@ -28,6 +28,9 @@ import NewPost from 'pages/NewPost';
 import MyPost from 'pages/MyPost';
 import AppLayout from './style';
 
+// option: null => 아무나 출입 가능
+// option: true => 로그인 유저만
+// option: false => 로그인 하면 출입 불가능한 곳(회원가입 등...)
 function App() {
   console.log(process.env.REACT_APP_SERVER_API);
   return (
@@ -44,9 +47,9 @@ function App() {
           />
           <Route path={LOGIN} element={<Auth SpecificComponent={Login} option={false} />} />
           <Route path={SIGN_UP} element={<Auth SpecificComponent={SignUp} option={false} />} />
-          <Route path={USERS_LIST} element={<UsersList />} />
-          <Route path={NEW_POST} element={<NewPost />} />
-          <Route path={MY_POST} element={<MyPost />} />
+          <Route path={USERS_LIST} element={<Auth SpecificComponent={UsersList} option />} />
+          <Route path={NEW_POST} element={<Auth SpecificComponent={NewPost} option />} />
+          <Route path={MY_POST} element={<Auth SpecificComponent={MyPost} option />} />
           <Route
             path={`${USER_BOARD}/:userId`}
             element={<Auth SpecificComponent={UserPost} option={null} />}
