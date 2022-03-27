@@ -10,7 +10,6 @@ function NewPost() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userImg);
     console.log(userName);
     console.log(teamName);
     console.log(mdcontent);
@@ -33,8 +32,8 @@ function NewPost() {
   return (
     <>
       <button onClick={onClickback}>back</button>
+      <input type="file" name="사진" onChange={onImgChange} value={userImg} />
       <form onSubmit={handleSubmit}>
-        <input name="사진" onChange={onImgChange} value={userImg} />
         <div>
           <MarkdownEditor mdValue={mdcontent} setContent={setContent} />
         </div>
