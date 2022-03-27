@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
 import React, { useEffect } from 'react';
 import Loader from 'pages/Loader';
 import { useNavigate } from 'react-router-dom';

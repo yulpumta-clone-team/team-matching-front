@@ -11,12 +11,14 @@
     "no-console": "off",
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
     "linebreak-style": 0,
-    "import/no-unresolved": "off",
-    "react/button-has-type": "off",
-    "react/jsx-props-no-spreading": "off",
-    "import/no-extraneous-dependencies": "off",
-    "default-param-last": "off",
-    "react/forbid-prop-types": "off",
-    "camelcase": "off"
+    "import/no-unresolved": 0,
+    "react/button-has-type": 0,
+    "react/jsx-props-no-spreading": 0,
+    "import/no-extraneous-dependencies": 0,
+    "default-param-last": 0,
+    "react/forbid-prop-types": 0,
+    "camelcase": 0,
+    "no-shadow": 0,
+    "no-param-reassign": [2, { "props": false }]
   }
 }

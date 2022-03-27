@@ -1,13 +1,5 @@
-/* eslint-disable no-shadow */
 import axios from 'axios';
-import { ROOT_URL } from 'utils/route';
 import { LOGIN_USER, SIGNUP_USER } from '_types/authType';
-
-// const headers = {
-//   'Content-Type': 'application/json;charset=UTF-8',
-//   'Access-Control-Allow-Origin': '*',
-//   Accept: 'application/json',
-// };
 
 export async function loginUser(dataTosubmit) {
   const { password, email } = dataTosubmit;

@@ -1,11 +1,10 @@
-/* eslint-disable camelcase */
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   HOME,
   LOGIN,
-  My_Post,
-  New_Post,
+  MY_POST,
+  NEW_POST,
   PROFILE,
   SIGN_UP,
   TEAM_BOARD,
@@ -46,8 +45,8 @@ function App() {
           <Route path={LOGIN} element={<Auth SpecificComponent={Login} option={false} />} />
           <Route path={SIGN_UP} element={<Auth SpecificComponent={SignUp} option={false} />} />
           <Route path={USERS_LIST} element={<UsersList />} />
-          <Route path={New_Post} element={<NewPost />} />
-          <Route path={My_Post} element={<MyPost />} />
+          <Route path={NEW_POST} element={<NewPost />} />
+          <Route path={MY_POST} element={<MyPost />} />
           <Route
             path={`${USER_BOARD}/:userId`}
             element={<Auth SpecificComponent={UserPost} option={null} />}
