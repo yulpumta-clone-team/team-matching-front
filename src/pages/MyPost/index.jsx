@@ -4,25 +4,6 @@
 import React from 'react';
 import { CardTitle, CardWrapper, ImgContainer } from './style';
 
-function Articles({ my_posting }) {
-  return (
-    <ul>
-      <div>
-        {my_posting.map((posting) => (
-          <CardWrapper>
-            <h1>{posting.team_id}</h1>
-            <CardTitle>{posting.name}</CardTitle>
-            <ImgContainer>
-              <img alt="팀 사진" />
-            </ImgContainer>
-            <span>{posting.like_cnt}</span>
-          </CardWrapper>
-        ))}
-      </div>
-    </ul>
-  );
-}
-
 function MyPost() {
   const my_posting = [
     {
@@ -37,8 +18,17 @@ function MyPost() {
     },
   ];
   return (
-    <div className="App">
-      <Articles my_posting={my_posting} />
+    <div>
+      {my_posting.map((posting) => (
+        <CardWrapper>
+          <h1>{posting.team_id}</h1>
+          <CardTitle>{posting.name}</CardTitle>
+          <ImgContainer>
+            <img alt="팀 사진" />
+          </ImgContainer>
+          <span>{posting.like_cnt}</span>
+        </CardWrapper>
+      ))}
     </div>
   );
 }
