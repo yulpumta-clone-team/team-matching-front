@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { useCallback } from 'react';
-import { DAY_SEC, HOUR_SEC, MINUTES_SEC, MONTH_SEC, WEEK_SEC, YEAR_SEC } from 'utils/constant';
+import { DAY_SEC, HOUR_SEC, MINUTES_SEC, MONTH_SEC, WEEK_SEC, YEAR_SEC } from 'constant/time';
 
 function useHandlePublishedDate() {
   const nowDate = dayjs();

@@ -1,7 +1,5 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-/* eslint-disable camelcase */
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

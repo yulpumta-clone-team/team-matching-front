@@ -1,17 +1,17 @@
-/* eslint-disable camelcase */
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   HOME,
   LOGIN,
-  My_Post,
-  New_Post,
+  MY_POST,
+  NEW_POST,
   PROFILE,
   SIGN_UP,
   TEAM_BOARD,
   USERS_LIST,
   USER_BOARD,
-} from 'utils/route';
+} from 'constant/route';
 import Auth from 'hoc/auth';
 import Login from 'pages/Login';
 import Main from 'pages/Main';
@@ -27,14 +27,24 @@ import EditTeamProfile from 'pages/EditTeamPost';
 import UsersList from 'pages/UsersList';
 import NewPost from 'pages/NewPost';
 import MyPost from 'pages/MyPost';
+import WindowModal from 'components/WindowModal';
+import ErrorModal from 'components/ErrorModal';
 import AppLayout from './style';
 
+// option: null => 아무나 출입 가능
+// option: true => 로그인 유저만
+// option: false => 로그인 하면 출입 불가능한 곳(회원가입 등...)
 function App() {
-  console.log(process.env.REACT_APP_SERVER_API);
+  const { isOpen, errorContent, modalContent } = useSelector((state) => state.global);
   return (
     <Router>
       <AppLayout>
         <Navigation />
+        {isOpen && (
+          <WindowModal show={isOpen}>
+            {errorContent ? <ErrorModal msg={errorContent} /> : modalContent}
+          </WindowModal>
+        )}
         <Routes>
           <Route path={HOME} element={<Auth SpecificComponent={Main} option={null} />} />
           <Route path={USER_BOARD} element={<Auth SpecificComponent={UserBoard} option={null} />} />
@@ -45,9 +55,9 @@ function App() {
           />
           <Route path={LOGIN} element={<Auth SpecificComponent={Login} option={false} />} />
           <Route path={SIGN_UP} element={<Auth SpecificComponent={SignUp} option={false} />} />
-          <Route path={USERS_LIST} element={<UsersList />} />
-          <Route path={New_Post} element={<NewPost />} />
-          <Route path={My_Post} element={<MyPost />} />
+          <Route path={USERS_LIST} element={<Auth SpecificComponent={UsersList} option />} />
+          <Route path={NEW_POST} element={<Auth SpecificComponent={NewPost} option />} />
+          <Route path={MY_POST} element={<Auth SpecificComponent={MyPost} option />} />
           <Route
             path={`${USER_BOARD}/:userId`}
             element={<Auth SpecificComponent={UserPost} option={null} />}

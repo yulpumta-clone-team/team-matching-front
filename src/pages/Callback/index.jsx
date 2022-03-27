@@ -1,29 +1,19 @@
-/* eslint-disable react/forbid-prop-types */
 import React, { useEffect } from 'react';
 import Loader from 'pages/Loader';
 import { useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
-import { useSelector } from 'react-redux';
+import { getAuthCookie } from 'utils/cookie';
 
 function Callback() {
-  const { myData } = useSelector((state) => state.user);
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(['Authorization']);
-  console.log(cookies);
+  const authCookie = getAuthCookie();
   useEffect(() => {
     function getToken() {
-      try {
-        console.log(myData);
-        // setCookie
-        navigate('/');
-      } catch (error) {
-        console.log(error.meesage);
-        navigate('/login');
-      }
+      authCookie ? navigate('/') : navigate('/login');
+      window.location.reload();
     }
 
     getToken();
-  }, [cookies, navigate]);
+  }, [authCookie, navigate]);
   return <Loader />;
 }
 
