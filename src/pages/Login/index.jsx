@@ -27,7 +27,7 @@ function Login() {
       payload: { status, code, data, message },
     } = await dispatch(handleLogin(submitData));
     console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
-    if (isStatusOk(code)) {
+    if (isStatusOk(status)) {
       navigate('/callback');
     }
   };

@@ -4,11 +4,15 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import useHandlePublishedDate from 'hooks/useHandlePublichedDate';
 import { setDefaultProfileImage } from 'utils/constant';
+import { getCookie } from 'utils/cookie';
 import { ButtonContainer, Content } from './style';
 
 function Comment({ postId, comment, dispatchComment }) {
-  const { myData } = useSelector((state) => state.auth);
-  const { nickname: my_nickname, user_id: my_id } = myData;
+  const userInfo = getCookie('userInfo');
+  // const { myData } = useSelector((state) => state.auth);
+  const myNickname = userInfo?.name;
+  const myId = userInfo?.id;
+  // const { nickname: myNickname, user_id: myId } = myData;
   const { id, nickname, content, users_like, updatedAt, writter_id, isSecret, img, parent_id } =
     comment;
   const [activeEditCommentId, setActiveEditCommentId] = useState(null);
@@ -27,9 +31,9 @@ function Comment({ postId, comment, dispatchComment }) {
       replyContent: '',
     },
   });
-  const isMine = my_id === writter_id;
+  const isMine = myId === writter_id;
   const isLogInUser = () => {
-    if (!myData) {
+    if (!userInfo) {
       alert('로그인을 먼저해주세요');
       return false;
     }
@@ -67,8 +71,8 @@ function Comment({ postId, comment, dispatchComment }) {
       postId,
       parent_id: id,
       content: replyContent,
-      nickname: my_nickname,
-      writter_id: my_id,
+      nickname: myNickname,
+      writter_id: myId,
     });
     setValue('replyContent', '');
   };

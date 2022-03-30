@@ -36,7 +36,6 @@ import AppLayout from './style';
 // option: false => 로그인 하면 출입 불가능한 곳(회원가입 등...)
 function App() {
   const { isOpen, errorContent, modalContent } = useSelector((state) => state.global);
-  console.log(errorContent);
   return (
     <Router>
       <AppLayout>

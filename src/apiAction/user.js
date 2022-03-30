@@ -1,7 +1,6 @@
 import userApi from 'api/user';
 import dayjs from 'dayjs';
 import uuid from 'react-uuid';
-
 import { catchError } from '_actions/global_action';
 import {
   actionPostUserComment,
@@ -18,7 +17,7 @@ import {
 export function getUserList({ page }) {
   return (dispatch) => {
     return userApi
-      .GET_USER__ARR({ page })
+      .GET_USER_LIST({ page })
       .then((response) => dispatch(actionGetUserList(response)))
       .catch((error) => dispatch(catchError(error)));
   };
@@ -79,7 +78,7 @@ export function patchUserComment(dataToSubmit) {
 export function deleteUserComment(dataToSubmit) {
   return (dispatch) => {
     const { postId: user_id, id } = dataToSubmit;
-    return dispatch(actionPatchUserComment(dataToSubmit));
+    return dispatch(actionDeleteUserReply(dataToSubmit));
     // return userApi
     //   .POST_USER_COMMENT(newComment)
     //   .then((response) => dispatch(actionPostUserComment(response)))

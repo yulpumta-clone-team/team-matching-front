@@ -1,7 +1,7 @@
 import instance from './core';
 
 const userApi = {
-  GET_USER__ARR({ page }) {
+  GET_USER_LIST({ page }) {
     return instance({
       url: '/user',
       method: 'get',

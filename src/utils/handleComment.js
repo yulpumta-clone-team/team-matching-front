@@ -1,13 +1,3 @@
-import {
-  deleteTeamComment,
-  deleteTeamReply,
-  handleSecretTeamComment,
-  handleSecretTeamReply,
-  patchTeamComment,
-  patchTeamReply,
-  postTeamComment,
-  postTeamReply,
-} from '_actions/team_action';
 import { USER } from 'constant';
 import {
   deleteUserComment,
@@ -19,6 +9,16 @@ import {
   postUserComment,
   postUserReply,
 } from 'apiAction/user';
+import {
+  deleteTeamComment,
+  deleteTeamReply,
+  handleSecretTeamComment,
+  handleSecretTeamReply,
+  patchTeamComment,
+  patchTeamReply,
+  postTeamComment,
+  postTeamReply,
+} from 'apiAction/team';
 
 export function handleComment(type, dispatch) {
   const isUser = type === USER;

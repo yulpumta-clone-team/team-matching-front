@@ -1,6 +1,6 @@
 import { USER_INFO } from 'constant';
 import { setCookie } from 'utils/cookie';
-import { LOGIN_USER, SIGNUP_USER } from '_types/authType';
+import { AUTH, LOGIN_USER, SIGNUP_USER } from '_types/authType';
 
 export function actionLogin(responseData) {
   const { data } = responseData;
@@ -16,5 +16,12 @@ export function actionSignUp(responseData) {
   return {
     type: SIGNUP_USER,
     payload: responseData,
+  };
+}
+
+export function checkUserInfo(userInfo) {
+  return {
+    type: AUTH,
+    payload: userInfo,
   };
 }

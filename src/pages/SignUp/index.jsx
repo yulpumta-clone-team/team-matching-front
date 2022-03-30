@@ -26,7 +26,7 @@ function SignUp() {
       payload: { status, code, data, message },
     } = await dispatch(handleSignUp(submitData));
     console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
-    if (isStatusOk(code)) {
+    if (isStatusOk(status)) {
       navigate('/login');
     }
   };

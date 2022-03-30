@@ -18,4 +18,4 @@ export const serverStatus = {
   9000: '서버 내부 논리 에러',
 };
 
-export const isStatusOk = (serverCode) => !(serverCode > 1000);
+export const isStatusOk = (httpStatus) => !(httpStatus > 200);
