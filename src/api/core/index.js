@@ -32,7 +32,7 @@ instance.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log(error); // 디버깅
+    console.log(error, error.response); // 디버깅
     return Promise.reject(error);
   },
 );

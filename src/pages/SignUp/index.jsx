@@ -21,17 +21,13 @@ function SignUp() {
     if (password !== verifiedPassword) {
       setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
     }
-    // fetch
-    // const reponse = await dispatch(handleSignUp(submitData));
-    // console.log(reponse);
     const {
       payload: { status, code, data, message },
     } = await dispatch(handleSignUp(submitData));
     console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
-    if (status === 'OK') {
+    if (status === 200) {
       navigate('/login');
     }
-    // setError('extraError', { message: 'Server offLine.' });
   };
   return (
     <div>

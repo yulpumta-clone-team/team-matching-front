@@ -14,10 +14,12 @@ export const closeModal = () => {
 };
 
 export const catchError = (error) => {
-  console.log(error);
+  const {
+    response: { data },
+  } = error;
   return {
     type: CATCH_ERR,
-    payload: error.message,
+    payload: data,
   };
 };
 

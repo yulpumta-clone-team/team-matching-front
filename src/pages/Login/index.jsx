@@ -22,10 +22,13 @@ function Login() {
     if (password !== verifiedPassword) {
       setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
     }
-    // fetch
-    console.log(submitData);
-    await dispatch(handleLogin(submitData));
-    navigate('/callback');
+    const {
+      payload: { status, code, data, message },
+    } = await dispatch(handleLogin(submitData));
+    console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
+    if (status === 200) {
+      navigate('/callback');
+    }
   };
   return (
     <div>

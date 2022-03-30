@@ -7,10 +7,12 @@ import { catchError } from './global_action';
 const { reqeustLogIn, requestSignUp } = authApi;
 
 function triggerLogin(responseData) {
-  setCookie(USER_INFO, responseData, { maxAge: 60 * 60, path: '/' });
+  const { data } = responseData;
+  const { data: userInfo } = data;
+  setCookie(USER_INFO, userInfo, { maxAge: 60 * 60, path: '/' });
   return {
     type: LOGIN_USER,
-    payload: responseData,
+    payload: data,
   };
 }
 
@@ -22,16 +24,16 @@ function triggerSignUp(responseData) {
 }
 
 export function handleLogin(dataTosubmit) {
-  return async (dispatch) => {
+  return (dispatch) => {
     const { password, email } = dataTosubmit;
-    await reqeustLogIn({ pwd: password, email })
+    return reqeustLogIn({ pwd: password, email })
       .then((response) => dispatch(triggerLogin(response)))
       .catch((error) => dispatch(catchError(error)));
   };
 }
 
 export async function handleSignUp(dataTosubmit) {
-  return async (dispatch) => {
+  return (dispatch) => {
     const { name, nickname, email, password } = dataTosubmit;
     const test = {
       content: '12341234!@#abc',
