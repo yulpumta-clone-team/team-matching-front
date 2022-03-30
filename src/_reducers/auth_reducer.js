@@ -1,4 +1,4 @@
-import { AUTH_USER, LOGIN_USER, SIGNUP_USER } from '_types/authType';
+import { LOGIN_USER, SIGNUP_USER } from '_types/authType';
 
 const initState = {
   myData: null,
@@ -11,9 +11,6 @@ const userReducer = (state = initState, action) => {
       return { ...state, myData: action.payload };
     case SIGNUP_USER:
       return { ...state, status: action.payload };
-    case AUTH_USER:
-      console.log(action.payload);
-      return { ...state };
     default:
       return state;
   }

@@ -1,18 +1,19 @@
 import axios from 'axios';
 import {
-  DELETE_USER_COMMENT,
-  DELETE_USER_REPLY,
-  GET_USER_DETAIL,
   GET_USER__ARR,
-  HANDLE_SECRET_USER_COMMENT,
-  HANDLE_SECRET_USER_REPLY,
-  PATCH_USER_COMMENT,
-  PATCH_USER_REPLY,
+  GET_USER_DETAIL,
   POST_USER_COMMENT,
   POST_USER_REPLY,
+  DELETE_USER_COMMENT,
+  DELETE_USER_REPLY,
+  PATCH_USER_COMMENT,
+  PATCH_USER_REPLY,
+  HANDLE_SECRET_USER_REPLY,
+  HANDLE_SECRET_USER_COMMENT,
 } from '_types/userTypes';
 import uuid from 'react-uuid';
 import dayjs from 'dayjs';
+import userApi from 'api/user';
 
 export async function getUserDetail(dataTosubmit) {
   console.log('UserDetail ID: ', dataTosubmit);
@@ -26,6 +27,7 @@ export async function getUserDetail(dataTosubmit) {
 
 export async function getUserArr(count) {
   console.log('UserBoard page count: ', count);
+
   const { data } = await axios.get('../_mockData/users.json').then((response) => response.data);
   return {
     type: GET_USER__ARR,
