@@ -11,6 +11,7 @@ import useScrollLock from 'hooks/useScrollLock';
 import useFilter from 'hooks/useFilter';
 import useOrder from 'hooks/useOrder';
 import uuid from 'react-uuid';
+import { isStatusOk } from 'constant/serverStatus';
 import { BoardWrapper } from './style';
 
 function UserBoard() {
@@ -20,9 +21,15 @@ function UserBoard() {
   const [filteredLength, setFilteredLength] = useState(0);
   const fetchData = async (page) => {
     setLoading(true);
-    const { payload } = await dispatch(getUserList(page));
-    setUserList((prev) => [...prev, ...payload]);
-    setLoading(false);
+    const {
+      payload: { status, code, data, message },
+    } = await dispatch(getUserList({ page }));
+    if (isStatusOk(status)) {
+      !data || data?.length === 0
+        ? setUserList((prev) => [...prev])
+        : setUserList((prev) => [...prev, ...data]);
+      setLoading(false);
+    }
   };
   const [target, loading, setLoading] = useInfiniteScroll({ fetchData });
   const [checked, setChecked, handleFilter] = useFilter();
