@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserArr } from '_actions/user_action';
+import { getUserList } from 'apiAction/user';
 import UserCard from 'components/UserCard';
 import Loader from 'pages/Loader';
 import UpperButton from 'components/UpperButton';
@@ -20,7 +20,7 @@ function UserBoard() {
   const [filteredLength, setFilteredLength] = useState(0);
   const fetchData = async (page) => {
     setLoading(true);
-    const { payload } = await dispatch(getUserArr(page));
+    const { payload } = await dispatch(getUserList(page));
     setUserList((prev) => [...prev, ...payload]);
     setLoading(false);
   };

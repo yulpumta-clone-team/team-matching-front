@@ -8,6 +8,7 @@ import {
   postTeamComment,
   postTeamReply,
 } from '_actions/team_action';
+import { USER } from 'constant';
 import {
   deleteUserComment,
   deleteUserReply,
@@ -17,8 +18,7 @@ import {
   patchUserReply,
   postUserComment,
   postUserReply,
-} from '_actions/user_action';
-import { USER } from 'constant';
+} from 'apiAction/user';
 
 export function handleComment(type, dispatch) {
   const isUser = type === USER;

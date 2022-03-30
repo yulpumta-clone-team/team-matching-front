@@ -20,6 +20,7 @@ const useFilter = () => {
   };
   const handleFilter = useCallback(
     (list) => {
+      if (list.length === 0 || !list) return [];
       const checkedList = checked.map((e) => filterObj[e]);
       const newList = [...list].filter(
         ({ skills }) => skills.filter((x) => checkedList.includes(x)).length > 0,

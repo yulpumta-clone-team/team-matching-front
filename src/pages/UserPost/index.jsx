@@ -5,7 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Loader from 'pages/Loader';
 import MarkdownViewer from 'components/MdViewer';
 import CommentContainer from 'components/CommentContainer';
-import { getUserDetail } from '_actions/user_action';
+import { getUserDetail } from 'apiAction/user';
 import { handleComment } from 'utils/handleComment';
 import { USER } from 'constant';
 import { Board, Button, Box, Box2, Box3 } from './styleu';

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   GET_USER__ARR,
   GET_USER_DETAIL,
@@ -13,109 +12,69 @@ import {
 } from '_types/userTypes';
 import uuid from 'react-uuid';
 import dayjs from 'dayjs';
-import userApi from 'api/user';
 
-export async function getUserDetail(dataTosubmit) {
-  console.log('UserDetail ID: ', dataTosubmit);
-  const { data } = await axios.get('../_mockData/user.json').then((response) => response.data);
+export async function actionGetUserDetail(responseData) {
+  const { data } = responseData;
   return {
     // request변수로 받은 data를 reducer로 넘겨주기
     type: GET_USER_DETAIL,
-    payload: { ...data, user_id: dataTosubmit },
-  };
-}
-
-export async function getUserArr(count) {
-  console.log('UserBoard page count: ', count);
-
-  const { data } = await axios.get('../_mockData/users.json').then((response) => response.data);
-  return {
-    type: GET_USER__ARR,
     payload: data,
   };
 }
 
-export async function postUserComment(dataTosubmit) {
-  const { user_id, writter_id, nickname, content, isSecret } = dataTosubmit;
-  const newCommentCreateAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
-  const newCommentId = uuid();
-  const newComment = {
-    ...commentObj,
-    writter_id,
-    id: newCommentId,
-    nickname,
-    content,
-    isSecret,
-    createdAt: newCommentCreateAt,
-    updatedAt: newCommentCreateAt,
+export async function actionGetUserList(responseData) {
+  console.log(responseData);
+  const { data } = responseData;
+  return {
+    type: GET_USER__ARR,
+    payload: [],
   };
+}
+
+export async function actionPostUserComment(responseData) {
   return {
     type: POST_USER_COMMENT,
-    payload: newComment,
+    payload: responseData,
   };
 }
-export async function patchUserComment(dataToSubmit) {
-  const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
-  const { postId: user_id, id, editContent, comment } = dataToSubmit;
-  const editiedComment = {
-    ...comment,
-    id,
-    user_id,
-    content: editContent,
-    updatedAt,
-  };
+export async function actionPatchUserComment(responseData) {
   return {
     type: PATCH_USER_COMMENT,
-    payload: editiedComment,
+    payload: responseData,
   };
 }
-export async function deleteUserComment(dataToSubmit) {
-  const { postId: user_id, id } = dataToSubmit;
+export async function actionDeleteUserComment(responseData) {
+  const { id } = responseData;
   return {
     type: DELETE_USER_COMMENT,
     payload: id,
   };
 }
 
-export async function handleSecretUserComment(dataToSubmit) {
-  const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
+export async function actionSecretUserComment(responseData) {
   return {
     type: HANDLE_SECRET_USER_COMMENT,
-    payload: { ...dataToSubmit, updatedAt },
+    payload: responseData,
   };
 }
 
-export async function postUserReply(dataToSubmit) {
-  const { postId: user_id, parent_id, nickname, content, writter_id } = dataToSubmit;
-  const newCommentCreateAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
-  const newCommentId = uuid();
-  const newComment = {
-    ...commentObj,
-    user_id,
-    parent_id,
-    id: newCommentId,
-    writter_id,
-    nickname,
-    content,
-    createdAt: newCommentCreateAt,
-    updatedAt: newCommentCreateAt,
-  };
+export async function actionPostUserReply(responseData) {
   return {
     type: POST_USER_REPLY,
-    payload: newComment,
+    payload: responseData,
   };
 }
 
-export async function deleteUserReply(dataToSubmit) {
-  const { id, postId, parent_id } = dataToSubmit;
+export async function actionDeleteUserReply(responseData) {
   return {
     type: DELETE_USER_REPLY,
-    payload: dataToSubmit,
+    payload: responseData,
   };
 }
-export async function patchUserReply(dataToSubmit) {
+
+export async function actionPatchUserReply(responseData) {
   const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
-  const { id, postId: user_id, parent_id, editContent, comment } = dataToSubmit;
+  const { id, postId: user_id, parent_id, editContent, comment } = responseData;
   const editiedComment = {
     ...comment,
     id,
@@ -130,11 +89,11 @@ export async function patchUserReply(dataToSubmit) {
   };
 }
 
-export async function handleSecretUserReply(dataToSubmit) {
+export async function actionSecretUserReply(responseData) {
   const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
   return {
     type: HANDLE_SECRET_USER_REPLY,
-    payload: { ...dataToSubmit, updatedAt },
+    payload: responseData,
   };
 }
 const commentObj = {
