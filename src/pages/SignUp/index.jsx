@@ -1,3 +1,4 @@
+import { isStatusOk } from 'constant/serverStatus';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -25,7 +26,7 @@ function SignUp() {
       payload: { status, code, data, message },
     } = await dispatch(handleSignUp(submitData));
     console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
-    if (status === 200) {
+    if (isStatusOk(code)) {
       navigate('/login');
     }
   };

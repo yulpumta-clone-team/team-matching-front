@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { OAUTH_URL } from 'constant/route';
 import { handleLogin } from '_actions/auth_action';
+import { isStatusOk } from 'constant/serverStatus';
 
 function Login() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function Login() {
       payload: { status, code, data, message },
     } = await dispatch(handleLogin(submitData));
     console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
-    if (status === 200) {
+    if (isStatusOk(code)) {
       navigate('/callback');
     }
   };
