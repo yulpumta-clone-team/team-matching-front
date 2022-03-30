@@ -9,9 +9,9 @@ import {
   PATCH_USER_REPLY,
   HANDLE_SECRET_USER_REPLY,
   HANDLE_SECRET_USER_COMMENT,
+  PATCH_USER_LIKE,
+  PATCH_USER_COMMENT_LIKE,
 } from '_types/userTypes';
-import uuid from 'react-uuid';
-import dayjs from 'dayjs';
 
 export async function actionGetUserDetail(responseData) {
   const { data } = responseData;
@@ -37,26 +37,6 @@ export async function actionPostUserComment(responseData) {
     payload: responseData,
   };
 }
-export async function actionPatchUserComment(responseData) {
-  return {
-    type: PATCH_USER_COMMENT,
-    payload: responseData,
-  };
-}
-export async function actionDeleteUserComment(responseData) {
-  const { id } = responseData;
-  return {
-    type: DELETE_USER_COMMENT,
-    payload: id,
-  };
-}
-
-export async function actionSecretUserComment(responseData) {
-  return {
-    type: HANDLE_SECRET_USER_COMMENT,
-    payload: responseData,
-  };
-}
 
 export async function actionPostUserReply(responseData) {
   return {
@@ -72,41 +52,52 @@ export async function actionDeleteUserReply(responseData) {
   };
 }
 
-export async function actionPatchUserReply(responseData) {
-  const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
-  const { id, postId: user_id, parent_id, editContent, comment } = responseData;
-  const editiedComment = {
-    ...comment,
-    id,
-    parent_id,
-    user_id,
-    content: editContent,
-    updatedAt,
+export async function actionDeleteUserComment(responseData) {
+  const { id } = responseData;
+  return {
+    type: DELETE_USER_COMMENT,
+    payload: id,
   };
+}
+
+export async function actionPatchUserReply(responseData) {
   return {
     type: PATCH_USER_REPLY,
-    payload: editiedComment,
+    payload: responseData,
+  };
+}
+
+export async function actionPatchUserLike(responseData) {
+  return {
+    type: PATCH_USER_LIKE,
+    payload: responseData,
+  };
+}
+
+export async function actionPatchUserCommentLike(responseData) {
+  return {
+    type: PATCH_USER_COMMENT_LIKE,
+    payload: responseData,
+  };
+}
+
+export async function actionPatchUserComment(responseData) {
+  return {
+    type: PATCH_USER_COMMENT,
+    payload: responseData,
+  };
+}
+
+export async function actionSecretUserComment(responseData) {
+  return {
+    type: HANDLE_SECRET_USER_COMMENT,
+    payload: responseData,
   };
 }
 
 export async function actionSecretUserReply(responseData) {
-  const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
   return {
     type: HANDLE_SECRET_USER_REPLY,
     payload: responseData,
   };
 }
-const commentObj = {
-  user_id: null,
-  id: null,
-  writter_id: null,
-  users_like: [],
-  nickname: null,
-  isLike: false,
-  content: null,
-  img: 'https://user-images.githubusercontent.com/71386219/157435570-a48382a8-63e5-4d25-91f4-e506289424b5.png',
-  createdAt: null,
-  updatedAt: null,
-  isSecret: false,
-  replies: [],
-};

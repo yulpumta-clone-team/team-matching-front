@@ -12,6 +12,8 @@ import {
   actionDeleteUserReply,
   actionPatchUserReply,
   actionSecretUserReply,
+  actionPatchUserLike,
+  actionPatchUserCommentLike,
 } from '_actions/user_action';
 
 export function getUserList({ page }) {
@@ -56,47 +58,6 @@ export function postUserComment(dataToSubmit) {
   };
 }
 
-export function patchUserComment(dataToSubmit) {
-  return (dispatch) => {
-    const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
-    const { postId: user_id, id, editContent, comment } = dataToSubmit;
-    const editiedComment = {
-      ...comment,
-      id,
-      user_id,
-      content: editContent,
-      updatedAt,
-    };
-    return dispatch(actionPatchUserComment(editiedComment));
-    // return PATCH_USER_COMMENT
-    //   .POST_USER_COMMENT(newComment)
-    //   .then((response) => dispatch(actionPostUserComment(response)))
-    //   .catch((error) => dispatch(catchError(error)));
-  };
-}
-
-export function deleteUserComment(dataToSubmit) {
-  return (dispatch) => {
-    const { postId: user_id, id } = dataToSubmit;
-    return dispatch(actionDeleteUserReply(dataToSubmit));
-    // return userApi
-    //   .POST_USER_COMMENT(newComment)
-    //   .then((response) => dispatch(actionPostUserComment(response)))
-    //   .catch((error) => dispatch(catchError(error)));
-  };
-}
-
-export function handleSecretUserComment(dataToSubmit) {
-  return (dispatch) => {
-    const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
-    return dispatch(actionSecretUserComment({ ...dataToSubmit, updatedAt }));
-    // return userApi
-    //   .POST_USER_COMMENT(newComment)
-    //   .then((response) => dispatch(actionPostUserComment(response)))
-    //   .catch((error) => dispatch(catchError(error)));
-  };
-}
-
 export function postUserReply(dataToSubmit) {
   return (dispatch) => {
     const { postId: user_id, parent_id, nickname, content, writter_id } = dataToSubmit;
@@ -121,6 +82,17 @@ export function postUserReply(dataToSubmit) {
   };
 }
 
+export function deleteUserComment(dataToSubmit) {
+  return (dispatch) => {
+    const { postId: user_id, id } = dataToSubmit;
+    return dispatch(actionDeleteUserReply(dataToSubmit));
+    // return userApi
+    //   .POST_USER_COMMENT(newComment)
+    //   .then((response) => dispatch(actionPostUserComment(response)))
+    //   .catch((error) => dispatch(catchError(error)));
+  };
+}
+
 export function deleteUserReply(dataToSubmit) {
   return (dispatch) => {
     const { id, postId, parent_id } = dataToSubmit;
@@ -131,6 +103,43 @@ export function deleteUserReply(dataToSubmit) {
     //   .catch((error) => dispatch(catchError(error)));
   };
 }
+
+export function patchUserComment(dataToSubmit) {
+  return (dispatch) => {
+    const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
+    const { postId: user_id, id, editContent, comment } = dataToSubmit;
+    const editiedComment = {
+      ...comment,
+      id,
+      user_id,
+      content: editContent,
+      updatedAt,
+    };
+    return dispatch(actionPatchUserComment(editiedComment));
+    // return PATCH_USER_COMMENT
+    //   .POST_USER_COMMENT(newComment)
+    //   .then((response) => dispatch(actionPostUserComment(response)))
+    //   .catch((error) => dispatch(catchError(error)));
+  };
+}
+
+export function patchUserlike({ teamId }) {
+  return (dispatch) => {
+    return userApi
+      .PATCH_USER_LIKE({ team_id: teamId })
+      .then((response) => dispatch(actionPatchUserLike(response)))
+      .catch((error) => dispatch(catchError(error)));
+  };
+}
+
+// export function patchUserCommentlike({ teamId }) {
+//   return (dispatch) => {
+//     return userApi
+//       .PATCH_USER_LIKE({ team_id: teamId })
+//       .then((response) => dispatch(actionPatchUserCommentLike(response)))
+//       .catch((error) => dispatch(catchError(error)));
+//   };
+// }
 
 export function patchUserReply(dataToSubmit) {
   return (dispatch) => {
@@ -155,6 +164,17 @@ export function handleSecretUserReply(dataToSubmit) {
   return (dispatch) => {
     const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
     return dispatch(actionSecretUserReply({ ...dataToSubmit, updatedAt }));
+    // return userApi
+    //   .POST_USER_COMMENT(newComment)
+    //   .then((response) => dispatch(actionPostUserComment(response)))
+    //   .catch((error) => dispatch(catchError(error)));
+  };
+}
+
+export function handleSecretUserComment(dataToSubmit) {
+  return (dispatch) => {
+    const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
+    return dispatch(actionSecretUserComment({ ...dataToSubmit, updatedAt }));
     // return userApi
     //   .POST_USER_COMMENT(newComment)
     //   .then((response) => dispatch(actionPostUserComment(response)))

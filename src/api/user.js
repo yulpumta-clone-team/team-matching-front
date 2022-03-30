@@ -54,6 +54,13 @@ const userApi = {
       params: { user_id },
     });
   },
+  // PATCH_USER_LIKE_LIKE({ user_id }) {
+  //   return instance({
+  //     url: '/user/liking',
+  //     method: 'patch',
+  //     params: { user_id },
+  //   });
+  // },
   PATCH_USER_COMMENT(data) {
     return instance({
       url: '/user/comment',

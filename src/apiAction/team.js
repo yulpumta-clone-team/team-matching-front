@@ -14,6 +14,7 @@ import {
   actionDeleteTeamReply,
   actionPatchTeamReply,
   actionSecretTeamReply,
+  actionPatchTeamLike,
 } from '_actions/team_action';
 
 export function getTeamDetail(dataTosubmit) {
@@ -24,9 +25,9 @@ export function getTeamDetail(dataTosubmit) {
   };
 }
 
-export function getTeamList(count) {
+export function getTeamList({ page }) {
   return async (dispatch) => {
-    console.log('TeamBoard page count: ', count);
+    console.log('TeamBoard page count: ', page);
     const { data } = await axios.get('../_mockData/teams.json').then((response) => response.data);
     return dispatch(actionGetTeamList(data));
   };
@@ -48,47 +49,6 @@ export function postTeamComment(dataToSubmit) {
       updatedAt: newCommentCreateAt,
     };
     return dispatch(actionPostTeamComment(newComment));
-    // return teamApi
-    //   .POST_Team_COMMENT(newComment)
-    //   .then((response) => dispatch(actionPostTeamComment(response)))
-    //   .catch((error) => dispatch(catchError(error)));
-  };
-}
-
-export function patchTeamComment(dataToSubmit) {
-  return (dispatch) => {
-    const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
-    const { postId: team_id, id, editContent, comment } = dataToSubmit;
-    const editiedComment = {
-      ...comment,
-      id,
-      team_id,
-      content: editContent,
-      updatedAt,
-    };
-    return dispatch(actionPatchTeamComment(editiedComment));
-    // return PATCH_Team_COMMENT
-    //   .POST_Team_COMMENT(newComment)
-    //   .then((response) => dispatch(actionPostTeamComment(response)))
-    //   .catch((error) => dispatch(catchError(error)));
-  };
-}
-
-export function deleteTeamComment(dataToSubmit) {
-  return (dispatch) => {
-    const { postId: team_id, id } = dataToSubmit;
-    return dispatch(actionDeleteTeamComment(id));
-    // return teamApi
-    //   .POST_Team_COMMENT(newComment)
-    //   .then((response) => dispatch(actionPostTeamComment(response)))
-    //   .catch((error) => dispatch(catchError(error)));
-  };
-}
-
-export function handleSecretTeamComment(dataToSubmit) {
-  return (dispatch) => {
-    const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
-    return dispatch(actionSecretTeamComment({ ...dataToSubmit, updatedAt }));
     // return teamApi
     //   .POST_Team_COMMENT(newComment)
     //   .then((response) => dispatch(actionPostTeamComment(response)))
@@ -120,6 +80,17 @@ export function postTeamReply(dataToSubmit) {
   };
 }
 
+export function deleteTeamComment(dataToSubmit) {
+  return (dispatch) => {
+    const { postId: team_id, id } = dataToSubmit;
+    return dispatch(actionDeleteTeamComment(id));
+    // return teamApi
+    //   .POST_Team_COMMENT(newComment)
+    //   .then((response) => dispatch(actionPostTeamComment(response)))
+    //   .catch((error) => dispatch(catchError(error)));
+  };
+}
+
 export function deleteTeamReply(dataToSubmit) {
   return (dispatch) => {
     const { id, postId, parent_id } = dataToSubmit;
@@ -128,6 +99,34 @@ export function deleteTeamReply(dataToSubmit) {
     //   .POST_Team_COMMENT(newComment)
     //   .then((response) => dispatch(actionPostTeamComment(response)))
     //   .catch((error) => dispatch(catchError(error)));
+  };
+}
+
+export function patchTeamComment(dataToSubmit) {
+  return (dispatch) => {
+    const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
+    const { postId: team_id, id, editContent, comment } = dataToSubmit;
+    const editiedComment = {
+      ...comment,
+      id,
+      team_id,
+      content: editContent,
+      updatedAt,
+    };
+    return dispatch(actionPatchTeamComment(editiedComment));
+    // return PATCH_Team_COMMENT
+    //   .POST_Team_COMMENT(newComment)
+    //   .then((response) => dispatch(actionPostTeamComment(response)))
+    //   .catch((error) => dispatch(catchError(error)));
+  };
+}
+
+export function patchTeamlike({ teamId }) {
+  return (dispatch) => {
+    return teamApi
+      .PATCH_TEAM_LIKE({ team_id: teamId })
+      .then((response) => dispatch(actionPatchTeamLike(response)))
+      .catch((error) => dispatch(catchError(error)));
   };
 }
 
@@ -154,6 +153,17 @@ export function handleSecretTeamReply(dataToSubmit) {
   return (dispatch) => {
     const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
     return dispatch(actionSecretTeamReply({ ...dataToSubmit, updatedAt }));
+    // return teamApi
+    //   .POST_Team_COMMENT(newComment)
+    //   .then((response) => dispatch(actionPostTeamComment(response)))
+    //   .catch((error) => dispatch(catchError(error)));
+  };
+}
+
+export function handleSecretTeamComment(dataToSubmit) {
+  return (dispatch) => {
+    const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss.ssssss');
+    return dispatch(actionSecretTeamComment({ ...dataToSubmit, updatedAt }));
     // return teamApi
     //   .POST_Team_COMMENT(newComment)
     //   .then((response) => dispatch(actionPostTeamComment(response)))
