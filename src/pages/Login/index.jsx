@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { OAUTH_URL } from 'constant/route';
-import { handleLogin } from '_actions/auth_action';
+import { isStatusOk } from 'constant/serverStatus';
+import { handleLogin } from 'apiAction/auth';
 
 function Login() {
   const dispatch = useDispatch();
@@ -22,10 +23,13 @@ function Login() {
     if (password !== verifiedPassword) {
       setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
     }
-    // fetch
-    console.log(submitData);
-    await dispatch(handleLogin(submitData));
-    navigate('/callback');
+    const {
+      payload: { status, code, data, message },
+    } = await dispatch(handleLogin(submitData));
+    console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
+    if (isStatusOk(status)) {
+      navigate('/callback');
+    }
   };
   return (
     <div>

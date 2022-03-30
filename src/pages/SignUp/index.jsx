@@ -1,8 +1,9 @@
+import { handleSignUp } from 'apiAction/auth';
+import { isStatusOk } from 'constant/serverStatus';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { handleSignUp } from '_actions/auth_action';
 
 function SignUp() {
   const dispatch = useDispatch();
@@ -21,17 +22,13 @@ function SignUp() {
     if (password !== verifiedPassword) {
       setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
     }
-    // fetch
-    // const reponse = await dispatch(handleSignUp(submitData));
-    // console.log(reponse);
     const {
       payload: { status, code, data, message },
     } = await dispatch(handleSignUp(submitData));
     console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
-    if (status === 'OK') {
+    if (isStatusOk(status)) {
       navigate('/login');
     }
-    // setError('extraError', { message: 'Server offLine.' });
   };
   return (
     <div>

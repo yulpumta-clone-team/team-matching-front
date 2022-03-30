@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTeamArr } from '_actions/team_action';
+import { getTeamList } from 'apiAction/team';
 import Loader from 'pages/Loader';
 import TeamCard from 'components/TeamCard';
 import UpperButton from 'components/UpperButton';
@@ -11,6 +11,7 @@ import useScrollLock from 'hooks/useScrollLock';
 import useFilter from 'hooks/useFilter';
 import useOrder from 'hooks/useOrder';
 import uuid from 'react-uuid';
+import { isStatusOk } from 'constant/serverStatus';
 
 import { BoardWrapper } from './style';
 
@@ -21,9 +22,17 @@ function TeamBoard() {
   const [filteredLength, setFilteredLength] = useState(0);
   const fetchData = async (page) => {
     setLoading(true);
-    const { payload } = await dispatch(getTeamArr(page));
+    const { payload } = await dispatch(getTeamList({ page }));
     setTeamList((prev) => [...prev, ...payload]);
-    setLoading(false);
+    // const {
+    //   payload: { status, code, data, message },
+    // } = await dispatch(getTeamList({ page }));
+    // if (isStatusOk(status)) {
+    //   !data || data?.length === 0
+    //     ? setTeamList((prev) => [...prev])
+    //     : setTeamList((prev) => [...prev, ...data]);
+    //   setLoading(false);
+    // }
   };
   const [target, loading, setLoading] = useInfiniteScroll({ fetchData });
   const [checked, setChecked, handleFilter] = useFilter();

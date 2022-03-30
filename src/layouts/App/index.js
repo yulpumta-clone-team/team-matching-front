@@ -42,7 +42,7 @@ function App() {
         <Navigation />
         {isOpen && (
           <WindowModal show={isOpen}>
-            {errorContent ? <ErrorModal msg={errorContent} /> : modalContent}
+            {errorContent ? <ErrorModal errorContent={errorContent} /> : modalContent}
           </WindowModal>
         )}
         <Routes>
