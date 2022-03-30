@@ -1,9 +1,9 @@
+import { handleSignUp } from 'apiAction/auth';
 import { isStatusOk } from 'constant/serverStatus';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { handleSignUp } from '_actions/auth_action';
 
 function SignUp() {
   const dispatch = useDispatch();
