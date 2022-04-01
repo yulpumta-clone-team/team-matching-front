@@ -1,5 +1,11 @@
 import { USER } from 'constant';
 import {
+  deleteTeamComment,
+  handleSecretTeamComment,
+  patchTeamComment,
+  postTeamComment,
+} from '_actions/team_action';
+import {
   deleteUserComment,
   deleteUserReply,
   handleSecretUserComment,
@@ -130,13 +136,16 @@ export function handleCommentReducer(target) {
       });
     },
     handleSecret(dataToSubmit) {
-      isUser ? dispatch(handleSecretUserComment(dataToSubmit)) : null;
+      isUser
+        ? dispatch(handleSecretUserComment(dataToSubmit))
+        : dispatch(handleSecretTeamComment(dataToSubmit));
     },
   };
 }
 
 export function handleCommentReducer(target) {
   const targetElement = target;
+  console.log(targetElement);
   return {
     postComment(payload) {
       return [...[...targetElement.comments], payload];

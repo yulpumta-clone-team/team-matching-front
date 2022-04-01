@@ -26,6 +26,7 @@ function TeamPost() {
   const dispatch = useDispatch();
   const dispatchComment = handleComment(TEAM, dispatch);
   const navigate = useNavigate();
+  const [commentValue, commentHander, setCommentValue] = useInput('');
   const onClickback = () => {
     navigate(-1);
   };
