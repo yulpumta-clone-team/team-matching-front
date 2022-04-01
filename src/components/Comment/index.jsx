@@ -2,6 +2,7 @@ import React, { memo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 import useHandlePublishedDate from 'hooks/useHandlePublichedDate';
 import { setDefaultProfileImage } from 'utils/constant';
 import { getCookie } from 'utils/cookie';
@@ -61,10 +62,22 @@ function Comment({ postId, comment, dispatchComment }) {
     parent_id
       ? dispatchComment.handleSecretReply({ id, postId, parent_id })
       : dispatchComment.handleSecret({ id, postId });
+=======
+import dayjs from 'dayjs';
+import useInput from 'hooks/useInput';
+
+function Comment({ comment, dispatchComment }) {
+  const { id, nickname, content, createdAt } = comment;
+  const [editValue, editValueHandler, setEditValue] = useInput('');
+  const [activeEditForm, setActiveEditForm] = useState(null);
+  const deleteComment = ({ id }) => {
+    dispatchComment.deleteComment({ id });
+>>>>>>> d32d328 (Feat: user와 team에서 동시에 쓸 수 있는  handleComment함수를 분리)
   };
   const handleReply = () => {
     setShowReplyBox((prev) => !prev);
   };
+<<<<<<< HEAD
   const postReply = ({ replyContent }) => {
     isLogInUser();
     dispatchComment.postReply({
@@ -75,6 +88,12 @@ function Comment({ postId, comment, dispatchComment }) {
       writter_id: myId,
     });
     setValue('replyContent', '');
+=======
+  const editComment = ({ event, id }) => {
+    event.preventDefault();
+    dispatchComment.patchComment({ id, editValue });
+    setActiveEditForm(null);
+>>>>>>> d32d328 (Feat: user와 team에서 동시에 쓸 수 있는  handleComment함수를 분리)
   };
   return (
     <div>
@@ -155,7 +174,10 @@ function Comment({ postId, comment, dispatchComment }) {
 }
 
 Comment.propTypes = {
+<<<<<<< HEAD
   postId: PropTypes.number.isRequired,
+=======
+>>>>>>> d32d328 (Feat: user와 team에서 동시에 쓸 수 있는  handleComment함수를 분리)
   dispatchComment: PropTypes.object.isRequired,
   comment: PropTypes.shape({
     id: PropTypes.string.isRequired,
