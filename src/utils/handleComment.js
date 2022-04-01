@@ -134,3 +134,33 @@ export function handleCommentReducer(target) {
     },
   };
 }
+
+export function handleCommentReducer(target) {
+  const targetElement = target;
+  return {
+    postComment(payload) {
+      return [...[...targetElement.comments], payload];
+    },
+    deleteComment(payload) {
+      return [...targetElement.comments].filter((comment) => comment.id !== payload);
+    },
+    patchComment(payload) {
+      const { id, editValue, updatedAt } = payload;
+      return [...targetElement.comments].map((comment) => {
+        if (comment.id === id) {
+          return { ...comment, content: editValue, updatedAt };
+        }
+        return comment;
+      });
+    },
+    handleSecret(payload) {
+      const { id, updatedAt } = payload;
+      return [...targetElement.comments].map((comment) => {
+        if (comment.id === id) {
+          return { ...comment, isSecret: !comment.isSecret, updatedAt };
+        }
+        return comment;
+      });
+    },
+  };
+}
