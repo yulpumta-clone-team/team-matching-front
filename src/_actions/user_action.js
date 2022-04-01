@@ -18,7 +18,7 @@ export async function actionGetUserDetail(responseData) {
   return {
     // request변수로 받은 data를 reducer로 넘겨주기
     type: GET_USER_DETAIL,
-    payload: data,
+    payload: { ...data, user_id: dataTosubmit },
   };
 }
 
