@@ -65,18 +65,3 @@ function UserBoard() {
 }
 
 export default UserBoard;
-
-const filterObj = {
-  100: 'front',
-  101: 'react',
-  102: 'js',
-  103: 'ts',
-  104: 'vue',
-  200: 'back',
-  201: 'nodejs',
-  202: 'java',
-  203: 'spring',
-  300: 'design',
-  301: 'xd',
-  302: 'figma',
-};
