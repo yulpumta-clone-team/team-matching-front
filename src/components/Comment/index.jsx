@@ -76,7 +76,6 @@ function Comment({ postId, comment, dispatchComment }) {
     });
     setValue('replyContent', '');
   };
-  console.log('해당포스트 id', postId);
   return (
     <div>
       {isSecret && !isMine ? (
