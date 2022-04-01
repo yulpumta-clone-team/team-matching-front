@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 const useScrollLock = () => {
   const [isLock, setIsLock] = useState(false);
   const lockScroll = useCallback(() => {
+    console.log(1);
     document.body.style.overflow = 'hidden';
     document.body.style.paddingRight = '17px';
   }, []);
