@@ -41,6 +41,7 @@ function UserBoard() {
   useEffect(() => {
     setIsLock(filteredLength === 0);
   }, [filteredLength]);
+
   return (
     <>
       <CheckBox

@@ -21,7 +21,6 @@
       "skills": ["nodejs", "java", "spring"],
       "job": "student",
       "comment_cnt": 0,
-
       "like_cnt": 3,
       "status": true
     },
