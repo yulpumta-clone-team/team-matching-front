@@ -16,6 +16,21 @@ export const Content = styled.div`
     color: #606060;
     font-size: 12px;
   }
+  div {
+    display: flex;
+    flex-direction: column;
+    > h3 {
+      font-weight: bolder;
+      margin-bottom: 5px;
+    }
+    > span {
+      padding-bottom: 5px;
+    }
+    > span:last-child {
+      color: #606060;
+      font-size: 12px;
+    }
+  }
 `;
 
 export const ButtonContainer = styled.div`
