@@ -129,5 +129,8 @@ export function handleCommentReducer(target) {
         return comment;
       });
     },
+    handleSecret(dataToSubmit) {
+      isUser ? dispatch(handleSecretUserComment(dataToSubmit)) : null;
+    },
   };
 }

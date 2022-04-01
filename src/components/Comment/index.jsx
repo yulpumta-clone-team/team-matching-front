@@ -76,6 +76,9 @@ function Comment({ postId, comment, dispatchComment }) {
     });
     setValue('replyContent', '');
   };
+  const handleSecret = ({ id }) => {
+    dispatchComment.handleSecret({ id });
+  };
   return (
     <div>
       {isSecret && !isMine ? (
